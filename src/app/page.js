@@ -52,7 +52,7 @@ export default function HomePage() {
             {/* Texte à gauche */}
             <div className="space-y-6 sm:space-y-8">
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight">
-                <span className="text-blue-600">Créez</span> des <span className="text-gray-900">factures</span> <span className="text-blue-600">professionnelles</span> en <span className="text-gray-900">quelques</span> <span className="text-blue-600">minutes</span>.
+                <span className="text-blue-600">Créez</span> <span className="text-gray-900">des</span> <span className="text-gray-900">factures</span> <span className="text-blue-600">professionnelles</span> <span className="text-gray-900">en</span> <span className="text-gray-900">quelques</span> <span className="text-blue-600">minutes</span>.
               </h1>
               <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed">
                 Billio est la solution de facturation en ligne conçue pour freelances et petites entreprises en Afrique.
