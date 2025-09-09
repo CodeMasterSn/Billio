@@ -10,14 +10,14 @@ export default function Document() {
         <link rel="apple-touch-icon" href="/favicons/favicon.png" />
         
         {/* Google Analytics 4 */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y0MP42KQS"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4D2F0SLXGD"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-8Y0MP42KQS');
+              gtag('config', 'G-4D2F0SLXGD');
             `,
           }}
         />
