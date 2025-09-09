@@ -312,7 +312,7 @@ export default function InvoicePreview({ invoiceData }) {
                 className="h-12 w-auto mb-3 object-contain"
               />
             )}
-            <div className="text-lg sm:text-xl font-bold mb-2">
+            <div className="text-lg sm:text-xl font-bold mb-2 text-gray-900">
               {invoiceData.company?.name || 'Nom de l\'entreprise'}
             </div>
             <div className="text-sm space-y-1">
@@ -345,7 +345,7 @@ export default function InvoicePreview({ invoiceData }) {
               Facturé par
             </h3>
             <div className="text-sm space-y-1">
-              <div className="font-semibold">{invoiceData.company?.name || 'Nom de l\'entreprise'}</div>
+              <div className="font-semibold text-gray-900">{invoiceData.company?.name || 'Nom de l\'entreprise'}</div>
               {invoiceData.company?.address && <div>{invoiceData.company.address}</div>}
               {invoiceData.company?.phone && <div>Tél: {invoiceData.company.phone}</div>}
               {invoiceData.company?.email && <div>Email: {invoiceData.company.email}</div>}
@@ -356,7 +356,7 @@ export default function InvoicePreview({ invoiceData }) {
               Facturé à
             </h3>
             <div className="text-sm space-y-1">
-              <div className="font-semibold">{invoiceData.client?.name || 'Nom du client'}</div>
+              <div className="font-semibold text-gray-900">{invoiceData.client?.name || 'Nom du client'}</div>
               {invoiceData.client?.address && <div>{invoiceData.client.address}</div>}
               {invoiceData.client?.phone && <div>Tél: {invoiceData.client.phone}</div>}
               {invoiceData.client?.email && <div>Email: {invoiceData.client.email}</div>}

@@ -165,7 +165,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">
-              Des <span className="text-blue-600">factures</span> au <span className="text-gray-900">standard</span> <span className="text-blue-600">professionnel</span>
+              Des <span className="text-blue-600">factures</span> <span className="text-gray-900">au</span> <span className="text-gray-900">standard</span> <span className="text-blue-600">professionnel</span>
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-600">
               Interface moderne et intuitive pour une facturation efficace

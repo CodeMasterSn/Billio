@@ -201,13 +201,13 @@ export default function ContactPage() {
           {/* Formulaire de contact optimisé avec EmailJS */}
           <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 lg:p-8">
             <h2 className="text-3xl font-bold mb-6">
-              <span className="text-blue-600">Envoyez-nous</span> un Message
+              <span className="text-blue-600">Envoyez-nous</span> <span className="text-gray-900">un Message</span>
             </h2>
             
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               {/* Nom complet */}
               <div>
-                <label htmlFor="nom" className="block text-sm font-medium mb-2">
+                <label htmlFor="nom" className="block text-sm font-medium mb-2 text-gray-900">
                   Nom complet *
                 </label>
                 <input
@@ -217,7 +217,7 @@ export default function ContactPage() {
                   value={formData.nom}
                   onChange={handleChange}
                   placeholder="Ex: Amadou Diallo"
-                  className={`w-full px-4 py-3 border rounded-lg ${errors.nom ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500`}
+                  className={`w-full px-4 py-3 border rounded-lg text-gray-900 placeholder-gray-600 ${errors.nom ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500`}
                   required
                 />
                 {errors.nom && <p className="text-red-500 text-sm mt-1">{errors.nom}</p>}
@@ -225,7 +225,7 @@ export default function ContactPage() {
 
               {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2">
+                <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-900">
                   Email *
                 </label>
                 <input
@@ -235,7 +235,7 @@ export default function ContactPage() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="votre.email@exemple.com"
-                  className={`w-full px-4 py-3 border rounded-lg ${errors.email ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500`}
+                  className={`w-full px-4 py-3 border rounded-lg text-gray-900 placeholder-gray-600 ${errors.email ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500`}
                   required
                 />
                 {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
@@ -243,7 +243,7 @@ export default function ContactPage() {
 
               {/* Sujet */}
               <div>
-                <label htmlFor="sujet" className="block text-sm font-medium mb-2">
+                <label htmlFor="sujet" className="block text-sm font-medium mb-2 text-gray-900">
                   Sujet *
                 </label>
                 <select
@@ -251,7 +251,7 @@ export default function ContactPage() {
                   name="sujet"
                   value={formData.sujet}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg ${errors.sujet ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500`}
+                  className={`w-full px-4 py-3 border rounded-lg text-gray-900 ${errors.sujet ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500`}
                   required
                 >
                   <option value="">Sélectionnez un sujet</option>
@@ -267,7 +267,7 @@ export default function ContactPage() {
 
               {/* Message */}
               <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2">
+                <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-900">
                   Message *
                 </label>
                 <textarea
@@ -278,7 +278,7 @@ export default function ContactPage() {
                   placeholder="Décrivez votre demande en détail..."
                   rows={6}
                   maxLength={500}
-                  className={`w-full px-4 py-3 border rounded-lg ${errors.message ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500 resize-none`}
+                  className={`w-full px-4 py-3 border rounded-lg text-gray-900 placeholder-gray-600 ${errors.message ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500 resize-none`}
                   required
                 />
                 <div className="flex justify-between items-center mt-1">
@@ -402,7 +402,7 @@ export default function ContactPage() {
         <div className="mt-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">
-              <span className="text-blue-600">Questions</span> Fréquentes
+              <span className="text-blue-600">Questions</span> <span className="text-gray-900">Fréquentes</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Trouvez rapidement les réponses aux questions les plus courantes sur Billio.
