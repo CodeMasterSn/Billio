@@ -402,9 +402,9 @@ export default function InvoicePreview({ invoiceData }) {
       {/* Totaux */}
       <div className="p-4 sm:p-6 bg-blue-50 border-t-2 border-blue-200">
         <div className="space-y-2">
-          <div className="flex justify-between text-sm text-gray-900">
-            <span>SOUS-TOTAL</span>
-            <span className="font-medium">{(invoiceData.total || 0).toLocaleString('fr-FR')} FCFA</span>
+          <div className="flex justify-between text-sm">
+            <span className="text-gray-900">SOUS-TOTAL</span>
+            <span className="font-medium text-gray-900">{(invoiceData.total || 0).toLocaleString('fr-FR')} FCFA</span>
           </div>
           <div className="bg-blue-600 text-white p-4 rounded-lg">
             <div className="flex justify-between text-lg font-bold">
