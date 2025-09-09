@@ -345,10 +345,10 @@ export default function InvoicePreview({ invoiceData }) {
               Facturé par
             </h3>
             <div className="text-sm space-y-1">
-              <div className="font-semibold text-gray-900">{invoiceData.company?.name || 'Nom de l\'entreprise'}</div>
-              {invoiceData.company?.address && <div className="text-gray-900">{invoiceData.company.address}</div>}
-              {invoiceData.company?.phone && <div className="text-gray-900">Tél: {invoiceData.company.phone}</div>}
-              {invoiceData.company?.email && <div className="text-gray-900">Email: {invoiceData.company.email}</div>}
+              <div className="font-semibold text-gray-900 sm:text-inherit">{invoiceData.company?.name || 'Nom de l\'entreprise'}</div>
+              {invoiceData.company?.address && <div className="text-gray-900 sm:text-inherit">{invoiceData.company.address}</div>}
+              {invoiceData.company?.phone && <div className="text-gray-900 sm:text-inherit">Tél: {invoiceData.company.phone}</div>}
+              {invoiceData.company?.email && <div className="text-gray-900 sm:text-inherit">Email: {invoiceData.company.email}</div>}
             </div>
           </div>
           <div>
@@ -356,10 +356,10 @@ export default function InvoicePreview({ invoiceData }) {
               Facturé à
             </h3>
             <div className="text-sm space-y-1">
-              <div className="font-semibold text-gray-900">{invoiceData.client?.name || 'Nom du client'}</div>
-              {invoiceData.client?.address && <div className="text-gray-900">{invoiceData.client.address}</div>}
-              {invoiceData.client?.phone && <div className="text-gray-900">Tél: {invoiceData.client.phone}</div>}
-              {invoiceData.client?.email && <div className="text-gray-900">Email: {invoiceData.client.email}</div>}
+              <div className="font-semibold text-gray-900 sm:text-inherit">{invoiceData.client?.name || 'Nom du client'}</div>
+              {invoiceData.client?.address && <div className="text-gray-900 sm:text-inherit">{invoiceData.client.address}</div>}
+              {invoiceData.client?.phone && <div className="text-gray-900 sm:text-inherit">Tél: {invoiceData.client.phone}</div>}
+              {invoiceData.client?.email && <div className="text-gray-900 sm:text-inherit">Email: {invoiceData.client.email}</div>}
             </div>
           </div>
         </div>
@@ -403,8 +403,8 @@ export default function InvoicePreview({ invoiceData }) {
       <div className="p-4 sm:p-6 bg-blue-50 border-t-2 border-blue-200">
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
-            <span className="text-gray-900">SOUS-TOTAL</span>
-            <span className="font-medium text-gray-900">{(invoiceData.total || 0).toLocaleString('fr-FR')} FCFA</span>
+            <span className="text-gray-900 sm:text-inherit">SOUS-TOTAL</span>
+            <span className="font-medium text-gray-900 sm:text-inherit">{(invoiceData.total || 0).toLocaleString('fr-FR')} FCFA</span>
           </div>
           <div className="bg-blue-600 text-white p-4 rounded-lg">
             <div className="flex justify-between text-lg font-bold">
