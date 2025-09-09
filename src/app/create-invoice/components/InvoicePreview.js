@@ -330,8 +330,8 @@ export default function InvoicePreview({ invoiceData }) {
           <div className="bg-white bg-opacity-80 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-blue-200 flex-shrink-0 w-full sm:w-64 sm:max-w-none">
             <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-2">FACTURE</div>
             <div className="text-sm space-y-1">
-              <div className="break-words overflow-wrap-anywhere hyphens-auto"><strong>Nom:</strong> {invoiceData.invoice?.name || 'Facture sans nom'}</div>
-              <div><strong>Date:</strong> {formatDate(invoiceData.invoice?.date)}</div>
+              <div className="break-words overflow-wrap-anywhere hyphens-auto text-gray-900"><strong>Nom:</strong> {invoiceData.invoice?.name || 'Facture sans nom'}</div>
+              <div><strong>Date:</strong> <span className="text-gray-900">{formatDate(invoiceData.invoice?.date)}</span></div>
             </div>
           </div>
         </div>
@@ -346,9 +346,9 @@ export default function InvoicePreview({ invoiceData }) {
             </h3>
             <div className="text-sm space-y-1">
               <div className="font-semibold text-gray-900">{invoiceData.company?.name || 'Nom de l\'entreprise'}</div>
-              {invoiceData.company?.address && <div>{invoiceData.company.address}</div>}
-              {invoiceData.company?.phone && <div>Tél: {invoiceData.company.phone}</div>}
-              {invoiceData.company?.email && <div>Email: {invoiceData.company.email}</div>}
+              {invoiceData.company?.address && <div className="text-gray-900">{invoiceData.company.address}</div>}
+              {invoiceData.company?.phone && <div className="text-gray-900">Tél: {invoiceData.company.phone}</div>}
+              {invoiceData.company?.email && <div className="text-gray-900">Email: {invoiceData.company.email}</div>}
             </div>
           </div>
           <div>
@@ -357,9 +357,9 @@ export default function InvoicePreview({ invoiceData }) {
             </h3>
             <div className="text-sm space-y-1">
               <div className="font-semibold text-gray-900">{invoiceData.client?.name || 'Nom du client'}</div>
-              {invoiceData.client?.address && <div>{invoiceData.client.address}</div>}
-              {invoiceData.client?.phone && <div>Tél: {invoiceData.client.phone}</div>}
-              {invoiceData.client?.email && <div>Email: {invoiceData.client.email}</div>}
+              {invoiceData.client?.address && <div className="text-gray-900">{invoiceData.client.address}</div>}
+              {invoiceData.client?.phone && <div className="text-gray-900">Tél: {invoiceData.client.phone}</div>}
+              {invoiceData.client?.email && <div className="text-gray-900">Email: {invoiceData.client.email}</div>}
             </div>
           </div>
         </div>
@@ -402,7 +402,7 @@ export default function InvoicePreview({ invoiceData }) {
       {/* Totaux */}
       <div className="p-4 sm:p-6 bg-blue-50 border-t-2 border-blue-200">
         <div className="space-y-2">
-          <div className="flex justify-between text-sm">
+          <div className="flex justify-between text-sm text-gray-900">
             <span>SOUS-TOTAL</span>
             <span className="font-medium">{(invoiceData.total || 0).toLocaleString('fr-FR')} FCFA</span>
           </div>
