@@ -1,8 +1,8 @@
-# 🚀 Guide de Déploiement Netlify - DABO LOGISTIQUES
+# 🚀 Guide de Déploiement Netlify - BILLIO
 
 ## ✅ Application Prête pour le Déploiement
 
-L'application DABO LOGISTIQUES a été **entièrement transformée** en version statique et est prête pour le déploiement sur Netlify.
+L'application BILLIO a été **entièrement transformée** en version statique et est prête pour le déploiement sur Netlify.
 
 ### 🔧 Modifications Effectuées
 
@@ -156,11 +156,11 @@ npm run build
 ## 📞 Support
 
 En cas de problème :
-- **Email** : dabotrans@gmail.com
+- **Email** : contact@billio.africa
 - **Téléphone** : +221 77 437 65 21
 
 ---
 
-**DABO LOGISTIQUES** - Transport, Maritime, Fret Aérien, Conseils
+**BILLIO** - Plateforme de Facturation en Ligne
 *Application de facturation moderne et efficace* 🚀
 

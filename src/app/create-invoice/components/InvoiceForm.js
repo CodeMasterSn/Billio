@@ -4,502 +4,489 @@ import { useState } from 'react'
 
 export default function InvoiceForm({ 
   invoiceData, 
-  onDataChange, 
-  onArrayChange, 
-  onAddArrayItem, 
-  onRemoveArrayItem,
+  onUpdate, 
+  onUpdateItem, 
+  onAddItem, 
+  onRemoveItem,
   onLogoUpload,
-  onRemoveLogo
+  onLogoRemove 
 }) {
-  const [activeSection, setActiveSection] = useState('company')
+  const [openSections, setOpenSections] = useState({
+    invoice: true,
+    company: true,
+    client: true,
+    items: true,
+    payment: true,
+    notes: true
+  })
 
-  const sections = [
-    { id: 'company', title: 'Informations Entreprise', icon: '🏢' },
-    { id: 'invoice', title: 'Informations Facture', icon: '📄' },
-    { id: 'client', title: 'Client', icon: '👤' },
-    { id: 'shipment', title: 'Expédition', icon: '📦' },
-    { id: 'debours', title: 'Débours (Sous-total I)', icon: '💰' },
-    { id: 'taxable', title: 'Interventions Taxables (Sous-total II)', icon: '🧾' }
-  ]
+  const [validationErrors, setValidationErrors] = useState({})
 
-  const renderSectionContent = () => {
-    switch (activeSection) {
-      case 'company':
-        return (
-          <div className="space-y-4">
-            {/* Section Logo */}
-            <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
-                             <h4 className="text-lg font-medium text-gray-900 mb-4">Logo de l&apos;entreprise</h4>
-              <div className="space-y-4">
-                {/* Aperçu du logo */}
-                <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center overflow-hidden">
-                    {invoiceData.customLogo ? (
-                      <img 
-                        src={invoiceData.customLogo} 
-                                                 alt="Logo DABO LOGISTIQUES" 
-                        className="w-full h-full object-contain"
-                      />
-                    ) : (
-                      <span className="text-white text-xl font-bold">DT</span>
-                    )}
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600 mb-2">Personnalisez le logo de votre entreprise. Si aucun logo n&apos;est fourni, les initiales &quot;DT&quot; seront affichées.</p>
-                    <div className="flex space-x-2">
-                      <label className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm">
-                        Changer le logo
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={onLogoUpload}
-                          className="hidden"
-                        />
-                      </label>
-                      {invoiceData.customLogo && (
-                        <button
-                          onClick={onRemoveLogo}
-                          className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-sm"
-                        >
-                          Supprimer
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+  const toggleSection = (section) => {
+    setOpenSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }))
+  }
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Nom de l&apos;entreprise</label>
-              <input
-                type="text"
-                value={invoiceData.company.name}
-                disabled
-                className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-              />
-              <p className="text-xs text-gray-500 mt-1">Pré-rempli et non modifiable</p>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Activité</label>
-              <input
-                type="text"
-                value={invoiceData.company.activity}
-                disabled
-                className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Adresse</label>
-              <input
-                type="text"
-                value={invoiceData.company.address}
-                disabled
-                className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
-                <input
-                  type="text"
-                  value={invoiceData.company.phone}
-                  disabled
-                  className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                <input
-                  type="text"
-                  value={invoiceData.company.email}
-                  disabled
-                  className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">NINEA</label>
-                <input
-                  type="text"
-                  value={invoiceData.company.ninea}
-                  disabled
-                  className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">RC</label>
-                <input
-                  type="text"
-                  value={invoiceData.company.rc}
-                  disabled
-                  className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Localisation</label>
-              <input
-                type="text"
-                value={invoiceData.company.location}
-                disabled
-                className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-              />
-            </div>
-          </div>
-        )
+  const validateField = (section, field, value) => {
+    const key = `${section}.${field}`
+    if (!value || value.toString().trim() === '') {
+      setValidationErrors(prev => ({ ...prev, [key]: true }))
+    } else {
+      setValidationErrors(prev => {
+        const newErrors = { ...prev }
+        delete newErrors[key]
+        return newErrors
+      })
+    }
+  }
 
-      case 'invoice':
-        return (
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Nom de la facture</label>
-              <input
-                type="text"
-                value={invoiceData.invoiceName || ''}
-                onChange={(e) => onDataChange('invoiceName', e.target.value)}
-                placeholder="Nom personnalisé de la facture"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-              />
-              <p className="text-xs text-gray-500 mt-1">Personnalisez le nom de votre facture</p>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Numéro de facture</label>
-              <input
-                type="text"
-                value={invoiceData.invoiceNumber}
-                disabled
-                className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-              />
-              <p className="text-xs text-gray-500 mt-1">Généré automatiquement</p>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Date de facture</label>
-              <input
-                type="date"
-                value={invoiceData.invoiceDate}
-                disabled
-                className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-              />
-              <p className="text-xs text-gray-500 mt-1">Date actuelle par défaut</p>
-            </div>
-          </div>
-        )
+  const handleInputChange = (section, field, value) => {
+    onUpdate(section, field, value)
+    validateField(section, field, value)
+  }
 
-      case 'client':
-        return (
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Nom du client *</label>
-              <input
-                type="text"
-                value={invoiceData.client.name || ''}
-                onChange={(e) => onDataChange('client', 'name', e.target.value)}
-                placeholder="Nom complet du client"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Adresse *</label>
-              <textarea
-                value={invoiceData.client.address || ''}
-                onChange={(e) => onDataChange('client', 'address', e.target.value)}
-                placeholder="Adresse complète du client"
-                rows="3"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                required
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Ville</label>
-                <input
-                  type="text"
-                  value={invoiceData.client.city || ''}
-                  onChange={(e) => onDataChange('client', 'city', e.target.value)}
-                  placeholder="Ville"
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Pays</label>
-                <input
-                  type="text"
-                  value={invoiceData.client.country || ''}
-                  onChange={(e) => onDataChange('client', 'country', e.target.value)}
-                  placeholder="Pays"
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                />
-              </div>
-            </div>
-          </div>
-        )
+  const handleItemChange = (index, field, value) => {
+    onUpdateItem(index, field, value)
+  }
 
-      case 'shipment':
-        return (
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Numéro Waybill</label>
-              <input
-                type="text"
-                value={invoiceData.shipment.waybillNumber || ''}
-                onChange={(e) => onDataChange('shipment', 'waybillNumber', e.target.value)}
-                placeholder="Numéro de waybill"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Marque/Désignation</label>
-              <input
-                type="text"
-                value={invoiceData.shipment.brand || ''}
-                onChange={(e) => onDataChange('shipment', 'brand', e.target.value)}
-                placeholder="Marque ou désignation"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Poids brut (kg)</label>
-              <input
-                type="number"
-                value={invoiceData.shipment.grossWeight || ''}
-                onChange={(e) => onDataChange('shipment', 'grossWeight', e.target.value)}
-                placeholder="Poids en kilogrammes"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-              />
-            </div>
-          </div>
-        )
-
-      case 'debours':
-        return (
-          <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <h4 className="text-lg font-medium text-gray-900">Liste des débours</h4>
-                             <button
-                 onClick={() => onAddArrayItem('debours')}
-                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm"
-               >
-                + Ajouter
-              </button>
-            </div>
-            
-            {invoiceData.debours.length === 0 ? (
-              <p className="text-gray-500 text-center py-8">Aucun débours ajouté</p>
-            ) : (
-              <div className="space-y-3">
-                {invoiceData.debours.map((item, index) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
-                    <div className="flex justify-between items-start mb-3">
-                      <h5 className="font-medium text-gray-900">Débours #{index + 1}</h5>
-                                             <button
-                         onClick={() => onRemoveArrayItem('debours', index)}
-                         className="text-red-600 hover:text-red-800 text-sm"
-                       >
-                        Supprimer
-                      </button>
-                    </div>
-                    <div className="space-y-3">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                        <input
-                          type="text"
-                          value={item.description || ''}
-                          onChange={(e) => onArrayChange('debours', index, 'description', e.target.value)}
-                          placeholder="Description du débours"
-                          className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Montant (FCFA)</label>
-                        <input
-                          type="number"
-                          value={item.amount || ''}
-                          onChange={(e) => onArrayChange('debours', index, 'amount', parseFloat(e.target.value) || 0)}
-                          placeholder="0"
-                          className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-            
-            <div className="bg-blue-50 p-3 rounded-lg">
-              <div className="text-right">
-                <span className="text-sm text-gray-600">Sous-total I: </span>
-                <span className="text-lg font-bold text-blue-600">{invoiceData.subtotal1.toLocaleString('fr-FR')} FCFA</span>
-              </div>
-            </div>
-          </div>
-        )
-
-      case 'taxable':
-        return (
-          <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <h4 className="text-lg font-medium text-gray-900">Interventions taxables</h4>
-                             <button
-                 onClick={() => onAddArrayItem('taxableInterventions')}
-                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm"
-               >
-                + Ajouter
-              </button>
-            </div>
-            
-            {invoiceData.taxableInterventions.length === 0 ? (
-              <p className="text-gray-500 text-center py-8">Aucune intervention ajoutée</p>
-            ) : (
-              <div className="space-y-3">
-                {invoiceData.taxableInterventions.map((item, index) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
-                    <div className="flex justify-between items-start mb-3">
-                      <h5 className="font-medium text-gray-900">Intervention #{index + 1}</h5>
-                                             <button
-                         onClick={() => onRemoveArrayItem('taxableInterventions', index)}
-                         className="text-red-600 hover:text-red-800 text-sm"
-                       >
-                        Supprimer
-                      </button>
-                    </div>
-                    <div className="space-y-3">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                        <input
-                          type="text"
-                          value={item.description || ''}
-                          onChange={(e) => onArrayChange('taxableInterventions', index, 'description', e.target.value)}
-                          placeholder="Description de l'intervention"
-                          className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                        />
-                      </div>
-                      <div className="grid grid-cols-3 gap-3">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Quantité</label>
-                          <input
-                            type="number"
-                            value={item.quantity || ''}
-                            onChange={(e) => onArrayChange('taxableInterventions', index, 'quantity', parseInt(e.target.value) || 1)}
-                            placeholder="1"
-                            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Prix unit. (FCFA)</label>
-                          <input
-                            type="number"
-                            value={item.unitPrice || ''}
-                            onChange={(e) => onArrayChange('taxableInterventions', index, 'unitPrice', parseFloat(e.target.value) || 0)}
-                            placeholder="0"
-                            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Total (FCFA)</label>
-                          <input
-                            type="number"
-                            value={((item.quantity || 1) * (item.unitPrice || 0)).toFixed(0)}
-                            disabled
-                            className="w-full p-2 border border-gray-300 rounded bg-gray-100 text-gray-600"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-            
-            <div className="bg-blue-50 p-3 rounded-lg">
-              <div className="text-right">
-                <span className="text-sm text-gray-600">Sous-total II: </span>
-                <span className="text-lg font-bold text-blue-600">{invoiceData.subtotal2.toLocaleString('fr-FR')} FCFA</span>
-              </div>
-            </div>
-          </div>
-        )
-
-      default:
-        return null
+  const handleLogoChange = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        onLogoUpload(e.target.result)
+      }
+      reader.readAsDataURL(file)
     }
   }
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">Détails de la facture</h2>
-      
-      {/* Navigation des sections */}
-      <div className="flex flex-wrap gap-2">
-        {sections.map((section) => (
-          <button
-            key={section.id}
-            onClick={() => setActiveSection(section.id)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              activeSection === section.id
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            <span className="mr-2">{section.icon}</span>
-            {section.title}
-          </button>
-        ))}
-      </div>
-
-      {/* Contenu de la section active */}
-      <div className="min-h-[400px]">
-        {renderSectionContent()}
-      </div>
-
-      {/* Résumé des totaux */}
-      <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-        <div className="text-center">
-          <div className="text-2xl font-bold text-blue-600 mb-2">
-            Total: {invoiceData.total.toLocaleString('fr-FR')} FCFA
+      {/* SECTION FACTURE */}
+      <div className="border border-gray-200 rounded-lg">
+        <button
+          onClick={() => toggleSection('invoice')}
+          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center"
+        >
+          <span>📄 FACTURE</span>
+          <span className="text-gray-500">{openSections.invoice ? '−' : '+'}</span>
+        </button>
+        
+        {openSections.invoice && (
+          <div className="p-4 space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Nom de facture *
+                </label>
+                <input
+                  type="text"
+                  value={invoiceData.invoice?.name || ''}
+                  onChange={(e) => handleInputChange('invoice', 'name', e.target.value)}
+                  placeholder="Ex: Facture Web Design - Janvier 2024"
+                  className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 ${
+                    validationErrors['invoice.name'] ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                  }`}
+                  required
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Date de facture *
+                </label>
+                <input
+                  type="date"
+                  value={invoiceData.invoice?.date || ''}
+                  onChange={(e) => handleInputChange('invoice', 'date', e.target.value)}
+                  className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 ${
+                    validationErrors['invoice.date'] ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                  }`}
+                  required
+                />
+              </div>
+            </div>
           </div>
-          <div className="text-sm text-gray-600">
-            {invoiceData.total > 0 && (
-              <span>Arrêté la présente facture à la somme de {numberToWords(invoiceData.total)} francs CFA</span>
+        )}
+      </div>
+
+      {/* SECTION MON ENTREPRISE */}
+      <div className="border border-gray-200 rounded-lg">
+        <button
+          onClick={() => toggleSection('company')}
+          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center"
+        >
+          <span>🏢 MON ENTREPRISE</span>
+          <span className="text-gray-500">{openSections.company ? '−' : '+'}</span>
+        </button>
+        
+        {openSections.company && (
+          <div className="p-4 space-y-4">
+            {/* Logo */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Logo (optionnel)
+              </label>
+              <div className="flex items-center space-x-4">
+                {invoiceData.company?.logo ? (
+                  <div className="flex items-center space-x-2">
+                    <img 
+                      src={invoiceData.company.logo} 
+                      alt="Logo" 
+                      className="w-16 h-16 object-contain border border-gray-300 rounded"
+                    />
+                    <button
+                      onClick={onLogoRemove}
+                      className="text-red-600 hover:text-red-800 text-sm"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                ) : (
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleLogoChange}
+                    className="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                  />
+                )}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Nom / Raison sociale *
+                </label>
+                <input
+                  type="text"
+                  value={invoiceData.company?.name || ''}
+                  onChange={(e) => handleInputChange('company', 'name', e.target.value)}
+                  placeholder="Nom de votre entreprise"
+                  className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 ${
+                    validationErrors['company.name'] ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                  }`}
+                  required
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Téléphone *
+                </label>
+                <input
+                  type="tel"
+                  value={invoiceData.company?.phone || ''}
+                  onChange={(e) => handleInputChange('company', 'phone', e.target.value)}
+                  placeholder="77 123 45 67"
+                  className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 ${
+                    validationErrors['company.phone'] ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                  }`}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Email (optionnel)
+                </label>
+                <input
+                  type="email"
+                  value={invoiceData.company?.email || ''}
+                  onChange={(e) => handleInputChange('company', 'email', e.target.value)}
+                  placeholder="contact@entreprise.com"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Adresse
+                </label>
+                <input
+                  type="text"
+                  value={invoiceData.company?.address || ''}
+                  onChange={(e) => handleInputChange('company', 'address', e.target.value)}
+                  placeholder="Avenue Léopold Sédar Senghor, Dakar"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* SECTION CLIENT */}
+      <div className="border border-gray-200 rounded-lg">
+        <button
+          onClick={() => toggleSection('client')}
+          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center"
+        >
+          <span>👤 CLIENT</span>
+          <span className="text-gray-500">{openSections.client ? '−' : '+'}</span>
+        </button>
+        
+        {openSections.client && (
+          <div className="p-4 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Nom du client *
+              </label>
+              <input
+                type="text"
+                value={invoiceData.client?.name || ''}
+                onChange={(e) => handleInputChange('client', 'name', e.target.value)}
+                placeholder="Nom complet du client"
+                className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 ${
+                  validationErrors['client.name'] ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                }`}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Adresse du client
+              </label>
+              <input
+                type="text"
+                value={invoiceData.client?.address || ''}
+                onChange={(e) => handleInputChange('client', 'address', e.target.value)}
+                placeholder="Adresse complète du client"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Téléphone (optionnel)
+                </label>
+                <input
+                  type="tel"
+                  value={invoiceData.client?.phone || ''}
+                  onChange={(e) => handleInputChange('client', 'phone', e.target.value)}
+                  placeholder="77 123 45 67"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Email (optionnel)
+                </label>
+                <input
+                  type="email"
+                  value={invoiceData.client?.email || ''}
+                  onChange={(e) => handleInputChange('client', 'email', e.target.value)}
+                  placeholder="client@email.com"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* SECTION PRODUITS */}
+      <div className="border border-gray-200 rounded-lg">
+        <button
+          onClick={() => toggleSection('items')}
+          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center"
+        >
+          <span>📦 PRODUITS / SERVICES</span>
+          <span className="text-gray-500">{openSections.items ? '−' : '+'}</span>
+        </button>
+        
+        {openSections.items && (
+          <div className="p-4 space-y-4">
+            <div className="flex justify-between items-center">
+              <h4 className="text-lg font-semibold text-gray-900">Articles facturés</h4>
+              <button
+                onClick={onAddItem}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium transition-colors"
+              >
+                + Ajouter un produit
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              {invoiceData.invoice?.items?.map((item, index) => (
+                <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                  <div className="flex justify-between items-start mb-4">
+                    <h5 className="font-semibold text-gray-900">Article #{index + 1}</h5>
+                    {invoiceData.invoice.items.length > 1 && (
+                      <button
+                        onClick={() => removeItem(index)}
+                        className="text-red-600 hover:text-red-800 text-sm font-medium transition-colors"
+                      >
+                        Supprimer
+                      </button>
+                    )}
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Désignation *</label>
+                      <input
+                        type="text"
+                        value={item?.description || ''}
+                        onChange={(e) => handleItemChange(index, 'description', e.target.value)}
+                        placeholder="Description du produit/service"
+                        className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 ${
+                          validationErrors[`items.${index}.description`] ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                        }`}
+                        required
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Quantité</label>
+                      <input
+                        type="text"
+                        value={item?.quantity || ''}
+                        onChange={(e) => {
+                          const value = e.target.value
+                          if (value === '') {
+                            handleItemChange(index, 'quantity', '')
+                          } else {
+                            const numValue = parseInt(value.replace(/[^0-9]/g, ''))
+                            if (!isNaN(numValue) && numValue > 0) {
+                              handleItemChange(index, 'quantity', numValue)
+                            }
+                          }
+                        }}
+                        placeholder="Ex: 2"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Prix unitaire (FCFA)</label>
+                      <input
+                        type="text"
+                        value={item?.price || ''}
+                        onChange={(e) => {
+                          const value = e.target.value
+                          if (value === '') {
+                            handleItemChange(index, 'price', 0)
+                          } else {
+                            const numValue = parseFloat(value.replace(/[^0-9.]/g, ''))
+                            if (!isNaN(numValue)) {
+                              handleItemChange(index, 'price', numValue)
+                            }
+                          }
+                        }}
+                        placeholder="Ex: 15000"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Total de la ligne */}
+                  <div className="mt-3 text-right">
+                    <span className="text-sm text-gray-600">Total ligne: </span>
+                    <span className="font-semibold text-gray-900">
+                      {((item?.price || 0) * (item?.quantity === '' ? 0 : (item?.quantity || 0))).toLocaleString('fr-FR')} FCFA
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Total général */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="text-right">
+                <span className="text-lg font-semibold text-gray-900">
+                  Total général: {(invoiceData.total || 0).toLocaleString('fr-FR')} FCFA
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* SECTION PAIEMENT */}
+      <div className="border border-gray-200 rounded-lg">
+        <button
+          onClick={() => toggleSection('payment')}
+          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center"
+        >
+          <span>💳 PAIEMENT</span>
+          <span className="text-gray-500">{openSections.payment ? '−' : '+'}</span>
+        </button>
+        
+        {openSections.payment && (
+          <div className="p-4 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Mode de paiement
+              </label>
+              <select
+                value={invoiceData.company?.mobileMoneyService || ''}
+                onChange={(e) => handleInputChange('company', 'mobileMoneyService', e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+              >
+                <option value="">Sélectionner un mode de paiement</option>
+                <option value="Orange Money">Orange Money</option>
+                <option value="Wave">Wave</option>
+                <option value="Paiement espèce">Paiement espèce</option>
+              </select>
+            </div>
+
+            {/* Numéro Mobile Money */}
+            {invoiceData.company?.mobileMoneyService && invoiceData.company.mobileMoneyService !== 'Paiement espèce' && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Numéro {invoiceData.company.mobileMoneyService}
+                </label>
+                <input
+                  type="tel"
+                  value={invoiceData.company?.mobileMoneyNumber || ''}
+                  onChange={(e) => handleInputChange('company', 'mobileMoneyNumber', e.target.value)}
+                  placeholder={invoiceData.company.mobileMoneyService === 'Orange Money' ? '77 123 45 67' : '70 123 45 67'}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                />
+              </div>
             )}
           </div>
-        </div>
+        )}
+      </div>
+
+      {/* SECTION NOTES */}
+      <div className="border border-gray-200 rounded-lg">
+        <button
+          onClick={() => toggleSection('notes')}
+          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center"
+        >
+          <span>📝 NOTES</span>
+          <span className="text-gray-500">{openSections.notes ? '−' : '+'}</span>
+        </button>
+        
+        {openSections.notes && (
+          <div className="p-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Message personnalisé
+              </label>
+              <textarea
+                value={invoiceData.invoice?.notes || ''}
+                onChange={(e) => handleInputChange('invoice', 'notes', e.target.value)}
+                placeholder="Ex: Merci pour votre confiance !"
+                rows="3"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Suggestions: "Merci pour votre confiance !", "Paiement sous 30 jours", "Contactez-nous pour toute question"
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
 }
-
-// Fonction utilitaire pour convertir les nombres en lettres françaises
-function numberToWords(num) {
-  if (num === 0) return 'zéro'
-  
-  const units = ['', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf']
-  const teens = ['dix', 'onze', 'douze', 'treize', 'quatorze', 'quinze', 'seize', 'dix-sept', 'dix-huit', 'dix-neuf']
-  const tens = ['', '', 'vingt', 'trente', 'quarante', 'cinquante', 'soixante', 'soixante-dix', 'quatre-vingt', 'quatre-vingt-dix']
-  
-  if (num < 10) return units[num]
-  if (num < 20) return teens[num - 10]
-  if (num < 100) {
-    if (num % 10 === 0) return tens[Math.floor(num / 10)]
-    if (num < 70) return tens[Math.floor(num / 10)] + (num % 10 === 1 ? ' et un' : '-' + units[num % 10])
-    if (num < 80) return 'soixante-' + (num % 10 === 1 ? 'et-onze' : teens[num % 10])
-    return tens[Math.floor(num / 10)] + (num % 10 === 0 ? '' : '-' + units[num % 10])
-  }
-  
-  if (num < 1000) {
-    if (num === 100) return 'cent'
-    if (num < 200) return 'cent ' + numberToWords(num % 100)
-    return units[Math.floor(num / 100)] + ' cent' + (num % 100 === 0 ? 's' : ' ' + numberToWords(num % 100))
-  }
-  
-  if (num < 1000000) {
-    if (num === 1000) return 'mille'
-    if (num < 2000) return 'mille ' + numberToWords(num % 1000)
-    return numberToWords(Math.floor(num / 1000)) + ' mille' + (num % 1000 === 0 ? '' : ' ' + numberToWords(num % 1000))
-  }
-  
-  return 'nombre trop grand'
-}
-

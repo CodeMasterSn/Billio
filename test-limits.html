@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Billio - Système de Limitation</title>
+</head>
+<body>
+    <h1>Test du Système de Limitation Billio</h1>
+    <div id="status"></div>
+    <button onclick="testLimits()">Tester les Limites</button>
+    <button onclick="testEmailCollection()">Tester la Collecte Email</button>
+    <button onclick="resetLimits()">Reset Limites</button>
+    
+    <script>
+        // Fonctions de test (copiées du code principal)
+        function getTodayLimitData() {
+            if (typeof window === 'undefined') {
+                return {
+                    date: new Date().toISOString().split('T')[0],
+                    countWithoutEmail: 0,
+                    countWithEmail: 0,
+                    userEmail: null,
+                    totalToday: 0,
+                    firstUseToday: true
+                }
+            }
+
+            const today = new Date().toISOString().split('T')[0]
+            let data
+            
+            try {
+                data = JSON.parse(localStorage.getItem('billio_daily_limit')) || {}
+            } catch (error) {
+                data = {}
+            }
+            
+            if (data.date !== today) {
+                data = {
+                    date: today,
+                    countWithoutEmail: 0,
+                    countWithEmail: 0,
+                    userEmail: data.userEmail || null,
+                    totalToday: 0,
+                    firstUseToday: true
+                }
+                localStorage.setItem('billio_daily_limit', JSON.stringify(data))
+            }
+            return data
+        }
+
+        function canCreateInvoice() {
+            if (typeof window === 'undefined') {
+                return { canCreate: true }
+            }
+
+            const data = getTodayLimitData()
+            
+            if (!data.userEmail && data.countWithoutEmail >= 3) {
+                return { 
+                    canCreate: false, 
+                    reason: 'email_required',
+                    message: 'Entrez votre email pour débloquer 7 factures supplémentaires'
+                }
+            }
+            
+            if (data.userEmail && data.totalToday >= 10) {
+                return { 
+                    canCreate: false, 
+                    reason: 'daily_limit',
+                    message: 'Limite de 10 factures/jour atteinte. Revenez demain !'
+                }
+            }
+            
+            return { canCreate: true }
+        }
+
+        function incrementInvoiceCount() {
+            if (typeof window === 'undefined') return
+
+            const data = getTodayLimitData()
+            
+            if (data.userEmail) {
+                data.countWithEmail += 1
+            } else {
+                data.countWithoutEmail += 1
+            }
+            
+            data.totalToday += 1
+            localStorage.setItem('billio_daily_limit', JSON.stringify(data))
+        }
+
+        function testLimits() {
+            const data = getTodayLimitData()
+            const status = canCreateInvoice()
+            
+            document.getElementById('status').innerHTML = `
+                <h3>Statut des Limites</h3>
+                <p><strong>Données actuelles:</strong></p>
+                <ul>
+                    <li>Date: ${data.date}</li>
+                    <li>Total aujourd'hui: ${data.totalToday}</li>
+                    <li>Sans email: ${data.countWithoutEmail}/3</li>
+                    <li>Avec email: ${data.countWithEmail}</li>
+                    <li>Email utilisateur: ${data.userEmail || 'Aucun'}</li>
+                </ul>
+                <p><strong>Peut créer:</strong> ${status.canCreate ? 'Oui' : 'Non'}</p>
+                ${!status.canCreate ? `<p><strong>Raison:</strong> ${status.reason}</p>` : ''}
+                ${!status.canCreate ? `<p><strong>Message:</strong> ${status.message}</p>` : ''}
+            `
+        }
+
+        function testEmailCollection() {
+            const email = prompt("Entrez un email de test:")
+            if (email) {
+                const data = getTodayLimitData()
+                data.userEmail = email
+                localStorage.setItem('billio_daily_limit', JSON.stringify(data))
+                alert(`Email ${email} enregistré ! Limite étendue à 10 factures/jour.`)
+                testLimits()
+            }
+        }
+
+        function resetLimits() {
+            localStorage.removeItem('billio_daily_limit')
+            alert('Limites réinitialisées !')
+            testLimits()
+        }
+
+        // Test automatique au chargement
+        window.onload = function() {
+            testLimits()
+        }
+    </script>
+</body>
+</html>
+

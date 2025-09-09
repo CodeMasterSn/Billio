@@ -12,261 +12,267 @@ export default function InvoicePreview({ invoiceData }) {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Facture ${invoiceData.invoiceNumber}</title>
+        <title>Invoice ${invoiceData.invoice?.name || 'Sans nom'}</title>
         <style>
           @media print {
             @page { margin: 0; size: A4; }
             body { margin: 0; padding: 0; }
             .no-print { display: none !important; }
+            * { -webkit-print-color-adjust: exact !important; color-adjust: exact !important; }
           }
           body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
             background: white;
-            color: #1f2937;
+            color: #333;
+            line-height: 1.4;
           }
-          .container {
+          .invoice-container {
             max-width: 800px;
             margin: 0 auto;
             background: white;
+            border: 2px solid #5C3DF2;
+            border-radius: 8px;
+            overflow: hidden;
           }
           .header {
+            background: linear-gradient(135deg, #5C3DF2 0%, #4C2BC7 100%);
+            color: white;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #2563eb;
-            padding-bottom: 20px;
           }
-          .company-info h1 {
-            margin: 0;
-            color: #1f2937;
+          .company-info {
+            flex: 1;
+            min-width: 0;
+          }
+          .company-name {
             font-size: 24px;
             font-weight: bold;
+            margin-bottom: 10px;
           }
-          .company-info p {
-            margin: 5px 0;
-            color: #6b7280;
+          .company-details {
             font-size: 14px;
+            line-height: 1.5;
           }
-          .logo {
-            width: 80px;
-            height: 80px;
-            background: #2563eb;
+          .invoice-info {
+            text-align: right;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            overflow: hidden;
+            backdrop-filter: blur(10px);
+            flex-shrink: 0;
+            width: 256px;
+            max-width: none;
           }
-          .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-          }
-          .logo span {
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-          }
-          .invoice-title h2 {
-            margin: 0;
-            color: #2563eb;
+          .invoice-title {
             font-size: 32px;
             font-weight: bold;
+            margin-bottom: 10px;
+            color: #5C3DF2;
           }
-          .invoice-title p {
-            margin: 5px 0;
+          .invoice-details {
             font-size: 14px;
-            color: #6b7280;
+            line-height: 1.5;
+            word-wrap: break-word;
+            overflow-wrap: anywhere;
+            hyphens: auto;
           }
-          .client-shipment {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
+          .parties-section {
+            padding: 20px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: space-between;
           }
-          .section h3 {
-            margin: 0 0 10px 0;
-            color: #1f2937;
+          .party-info {
+            flex: 1;
+            margin: 0 10px;
+          }
+          .party-title {
             font-size: 16px;
             font-weight: bold;
+            color: #5C3DF2;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #5C3DF2;
           }
-          .section p {
-            margin: 5px 0;
-            color: #6b7280;
-            font-size: 12px;
+          .party-details {
+            font-size: 14px;
+            line-height: 1.5;
           }
-          .section p strong {
-            color: #1f2937;
+          .items-section {
+            padding: 20px;
           }
-          table {
+          .items-table {
             width: 100%;
             border-collapse: collapse;
-            border: 1px solid #d1d5db;
             margin-bottom: 20px;
           }
-          th, td {
-            border: 1px solid #d1d5db;
-            padding: 12px;
+          .items-table th {
+            background: #5C3DF2;
+            color: white;
+            padding: 12px 8px;
             text-align: left;
-            color: #1f2937;
-          }
-          th {
-            background: #f9fafb;
             font-weight: bold;
+            font-size: 14px;
           }
-          tfoot tr {
-            background: #f3f4f6;
-            font-weight: bold;
+          .items-table td {
+            padding: 12px 8px;
+            border-bottom: 1px solid #e5e5e5;
+            font-size: 14px;
           }
-          .totals {
-            margin-bottom: 30px;
+          .items-table tr:nth-child(even) {
+            background: #f8f9fa;
+          }
+          .total-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-top: 2px solid #5C3DF2;
           }
           .total-row {
             display: flex;
             justify-content: space-between;
             margin-bottom: 10px;
-            font-weight: bold;
+            font-size: 14px;
           }
-          .grand-total {
-            padding: 15px;
-            background: #2563eb;
+          .total-final {
+            background: #5C3DF2;
             color: white;
+            padding: 15px;
             border-radius: 8px;
-            font-size: 16px;
-          }
-          .amount-in-words {
-            margin-bottom: 30px;
-            padding: 20px;
-            background: #f8fafc;
-            border-radius: 8px;
-            border-left: 4px solid #2563eb;
-          }
-          .amount-in-words p {
-            margin: 0 0 10px 0;
+            font-size: 18px;
             font-weight: bold;
-            color: #1f2937;
-          }
-          .amount-in-words p:last-child {
-            color: #2563eb;
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
           }
           .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #e5e7eb;
-          }
-          .footer-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-          }
-          .footer-grid p {
-            margin: 5px 0;
-            color: #6b7280;
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e5e5e5;
             font-size: 12px;
+            color: #666;
           }
-          .footer-center {
+          .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+          }
+          .payment-info {
+            flex: 1;
+          }
+          .branding {
             text-align: center;
-          }
-          .footer-center p {
-            margin: 0;
-            color: #6b7280;
-            font-size: 14px;
-            font-style: italic;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #5C3DF2;
+            font-weight: bold;
           }
         </style>
       </head>
       <body>
-        <div class="container">
+        <div class="invoice-container">
           <!-- En-tête -->
           <div class="header">
             <div class="company-info">
-              <div class="logo">
-                ${invoiceData.customLogo ? `<img src="${invoiceData.customLogo}" alt="Logo DABO LOGISTIQUES" />` : '<span>DL</span>'}
+              ${invoiceData.company?.logo ? `<img src="${invoiceData.company.logo}" alt="Logo" style="max-height: 60px; margin-bottom: 10px;">` : ''}
+              <div class="company-name">${invoiceData.company?.name || 'Nom de l\'entreprise'}</div>
+              <div class="company-details">
+                ${invoiceData.company?.address ? `<div>${invoiceData.company.address}</div>` : ''}
+                ${invoiceData.company?.phone ? `<div>Tél: ${invoiceData.company.phone}</div>` : ''}
+                ${invoiceData.company?.email ? `<div>Email: ${invoiceData.company.email}</div>` : ''}
               </div>
-              <h1>${invoiceData.company.name}</h1>
-              <p>${invoiceData.company.activity}</p>
-              <p><strong>Adresse:</strong> ${invoiceData.company.address} | <strong>Tél:</strong> ${invoiceData.company.phone} | <strong>Email:</strong> ${invoiceData.company.email}</p>
-              <p>${invoiceData.company.location}</p>
             </div>
-            <div class="invoice-title">
-              <h2>${invoiceData.invoiceName || 'FACTURE'}</h2>
-              <p><strong>N° ${invoiceData.invoiceNumber}</strong></p>
-              <p>Date: ${formatDate(invoiceData.invoiceDate)}</p>
+            <div class="invoice-info">
+              <div class="invoice-title">FACTURE</div>
+              <div class="invoice-details">
+                <div><strong>Nom:</strong> ${invoiceData.invoice?.name || 'Facture sans nom'}</div>
+                <div><strong>Date:</strong> ${formatDate(invoiceData.invoice?.date)}</div>
+              </div>
             </div>
           </div>
-          <!-- Client et Expédition -->
-          <div class="client-shipment">
-            <div class="section">
-              <h3>Facturé à :</h3>
-              ${invoiceData.client.name ? `
-                <p><strong>${invoiceData.client.name}</strong></p>
-                <p>${invoiceData.client.address}</p>
-                <p>${invoiceData.client.city}, ${invoiceData.client.country}</p>
-              ` : '<p><em>Informations client non renseignées</em></p>'}
+
+          <!-- Parties -->
+          <div class="parties-section">
+            <div class="party-info">
+              <div class="party-title">Facturé par</div>
+              <div class="party-details">
+                <div><strong>${invoiceData.company?.name || 'Nom de l\'entreprise'}</strong></div>
+                ${invoiceData.company?.address ? `<div>${invoiceData.company.address}</div>` : ''}
+                ${invoiceData.company?.phone ? `<div>Tél: ${invoiceData.company.phone}</div>` : ''}
+                ${invoiceData.company?.email ? `<div>Email: ${invoiceData.company.email}</div>` : ''}
+              </div>
             </div>
-            <div class="section">
-              <h3>Expédition :</h3>
-              ${invoiceData.shipment.waybillNumber ? `
-                <p>Waybill: <strong>${invoiceData.shipment.waybillNumber}</strong></p>
-                <p>Marque: <strong>${invoiceData.shipment.brand}</strong></p>
-                <p>Poids: <strong>${invoiceData.shipment.grossWeight} kg</strong></p>
-              ` : '<p><em>Informations expédition non renseignées</em></p>'}
+            <div class="party-info">
+              <div class="party-title">Facturé à</div>
+              <div class="party-details">
+                <div><strong>${invoiceData.client?.name || 'Nom du client'}</strong></div>
+                ${invoiceData.client?.address ? `<div>${invoiceData.client.address}</div>` : ''}
+                ${invoiceData.client?.phone ? `<div>Tél: ${invoiceData.client.phone}</div>` : ''}
+                ${invoiceData.client?.email ? `<div>Email: ${invoiceData.client.email}</div>` : ''}
+              </div>
             </div>
           </div>
-          <!-- Tableau des débours -->
-          ${invoiceData.debours.length > 0 ? `
-            <div class="section">
-              <h3>Débours (Sous-total I)</h3>
-              <table>
-                <thead><tr><th>Description</th><th style="text-align: right;">Montant</th></tr></thead>
-                <tbody>
-                  ${invoiceData.debours.map(item => `<tr><td>${item.description}</td><td style="text-align: right;">${item.amount.toLocaleString('fr-FR')} FCFA</td></tr>`).join('')}
-                </tbody>
-                <tfoot><tr><td><strong>Sous-total I</strong></td><td style="text-align: right;"><strong>${invoiceData.subtotal1.toLocaleString('fr-FR')} FCFA</strong></td></tr></tfoot>
-              </table>
-            </div>
-          ` : ''}
-          <!-- Tableau des interventions taxables -->
-          ${invoiceData.taxableInterventions.length > 0 ? `
-            <div class="section">
-              <h3>Interventions Taxables (Sous-total II)</h3>
-              <table>
-                <thead><tr><th>Description</th><th style="text-align: center;">Qté</th><th style="text-align: right;">Prix unit.</th><th style="text-align: right;">Montant</th></tr></thead>
-                <tbody>
-                  ${invoiceData.taxableInterventions.map(item => `<tr><td>${item.description}</td><td style="text-align: center;">${item.quantity}</td><td style="text-align: right;">${item.unitPrice.toLocaleString('fr-FR')} FCFA</td><td style="text-align: right;">${(item.quantity * item.unitPrice).toLocaleString('fr-FR')} FCFA</td></tr>`).join('')}
-                </tbody>
-                <tfoot><tr><td colspan="3"><strong>Sous-total II</strong></td><td style="text-align: right;"><strong>${invoiceData.subtotal2.toLocaleString('fr-FR')} FCFA</strong></td></tr></tfoot>
-              </table>
-            </div>
-          ` : ''}
+
+          <!-- Articles -->
+          <div class="items-section">
+            <table class="items-table" style="table-layout: fixed; width: 100%;">
+              <thead>
+                <tr>
+                  <th style="width: 40%;">Désignation</th>
+                  <th style="width: 20%;">Prix unitaire</th>
+                  <th style="width: 20%;">Qté</th>
+                  <th style="width: 20%;">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${invoiceData.invoice?.items?.map((item, index) => `
+                  <tr>
+                    <td style="word-wrap: break-word; overflow-wrap: anywhere;">${item.description || 'Non renseigné'}</td>
+                    <td style="text-align: right;">${(item.price || 0).toLocaleString('fr-FR')} FCFA</td>
+                    <td style="text-align: right;">${item.quantity === '' ? '-' : (item.quantity || '-')}</td>
+                    <td style="text-align: right;">${((item.price || 0) * (item.quantity === '' ? 0 : (item.quantity || 0))).toLocaleString('fr-FR')} FCFA</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+
           <!-- Totaux -->
-          <div class="totals">
-            <div class="total-row"><span>Sous-total I:</span><span>${invoiceData.subtotal1.toLocaleString('fr-FR')} FCFA</span></div>
-            <div class="total-row"><span>Sous-total II:</span><span>${invoiceData.subtotal2.toLocaleString('fr-FR')} FCFA</span></div>
-            <div class="total-row grand-total"><span>Total:</span><span>${invoiceData.total.toLocaleString('fr-FR')} FCFA</span></div>
-          </div>
-          <!-- Montant en lettres -->
-          ${invoiceData.total > 0 ? `
-            <div class="amount-in-words">
-              <p><strong>Arrêté la présente facture à la somme de :</strong></p>
-              <p style="color: #2563eb; font-size: 16px; margin-top: 10px;">${numberToWords(invoiceData.total)} francs CFA</p>
+          <div class="total-section">
+            <div class="total-row">
+              <span>SOUS-TOTAL</span>
+              <span>${(invoiceData.total || 0).toLocaleString('fr-FR')} FCFA</span>
             </div>
-          ` : ''}
+            <div class="total-final">
+              <span>TOTAL DÛ</span>
+              <span>${(invoiceData.total || 0).toLocaleString('fr-FR')} FCFA</span>
+            </div>
+          </div>
+
           <!-- Pied de page -->
           <div class="footer">
-            <div class="footer-grid">
-              <div><p><strong>NINEA:</strong> ${invoiceData.company.ninea}</p><p><strong>RC:</strong> ${invoiceData.company.rc}</p></div>
-              <div><p><strong>Tél:</strong> ${invoiceData.company.phone}</p><p><strong>Email:</strong> ${invoiceData.company.email}</p></div>
+            <div class="footer-content">
+              <div class="payment-info">
+                <div><strong>Informations de paiement</strong></div>
+                ${invoiceData.company?.mobileMoneyService && invoiceData.company.mobileMoneyService !== 'Paiement espèce' && invoiceData.company.mobileMoneyNumber ? 
+                  `<div>Paiement avec ${invoiceData.company.mobileMoneyService}: ${invoiceData.company.mobileMoneyNumber}</div>` : ''}
+                ${invoiceData.company?.mobileMoneyService === 'Paiement espèce' ? 
+                  `<div>Paiement en espèce</div>` : ''}
+                ${invoiceData.invoice?.notes ? `
+                  <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e5e5;">
+                    <p style="margin: 0;">${invoiceData.invoice.notes}</p>
+                  </div>
+                ` : ''}
+              </div>
+              <div style="text-align: right;">
+                <div><strong>Merci pour votre confiance !</strong></div>
+              </div>
             </div>
-            <div class="footer-center"><p>Merci de votre confiance</p></div>
+            <div class="branding">
+              Créé avec Billio
+            </div>
           </div>
         </div>
       </body>
@@ -274,195 +280,161 @@ export default function InvoicePreview({ invoiceData }) {
     `
     printWindow.document.write(printHTML)
     printWindow.document.close()
-    printWindow.onload = () => {
+    printWindow.focus()
+    setTimeout(() => {
       printWindow.print()
-      printWindow.onafterprint = () => { printWindow.close() }
-    }
+      printWindow.close()
+    }, 500)
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900">Aperçu de la facture</h2>
-        <div className="flex space-x-2">
-          <button 
-            onClick={handlePrint}
-            className="px-3 py-2 text-sm bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 flex items-center"
-          >
-            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-            </svg>
-            Imprimer
-          </button>
+    <div className="bg-white border-2 border-blue-200 rounded-lg overflow-hidden relative">
+      {/* Motifs décoratifs aux coins */}
+      <div className="absolute top-0 left-0 w-8 h-8 border-l-4 border-t-4 border-blue-500 rounded-tl-lg"></div>
+      <div className="absolute top-0 right-0 w-8 h-8 border-r-4 border-t-4 border-blue-500 rounded-tr-lg"></div>
+      <div className="absolute bottom-0 left-0 w-8 h-8 border-l-4 border-b-4 border-blue-500 rounded-bl-lg"></div>
+      <div className="absolute bottom-0 right-0 w-8 h-8 border-r-4 border-b-4 border-blue-500 rounded-br-lg"></div>
+      
+      {/* Motifs décoratifs sur les côtés */}
+      <div className="absolute top-1/2 left-0 w-6 h-6 border-l-2 border-blue-300 rounded-full transform -translate-y-1/2"></div>
+      <div className="absolute top-1/2 right-0 w-6 h-6 border-r-2 border-blue-300 rounded-full transform -translate-y-1/2"></div>
+      <div className="absolute top-0 left-1/2 w-6 h-6 border-t-2 border-blue-300 rounded-full transform -translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-1/2 w-6 h-6 border-b-2 border-blue-300 rounded-full transform -translate-x-1/2"></div>
+
+      {/* En-tête */}
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 text-gray-800 p-4 sm:p-6 border-b border-blue-200">
+        <div className="flex flex-col sm:flex-row justify-between items-start space-y-4 sm:space-y-0">
+          <div className="flex-1 min-w-0">
+            {invoiceData.company?.logo && (
+              <img 
+                src={invoiceData.company.logo} 
+                alt="Logo" 
+                className="h-12 w-auto mb-3 object-contain"
+              />
+            )}
+            <div className="text-lg sm:text-xl font-bold mb-2">
+              {invoiceData.company?.name || 'Nom de l\'entreprise'}
+            </div>
+            <div className="text-sm space-y-1">
+              {invoiceData.company?.address && (
+                <div>{invoiceData.company.address}</div>
+              )}
+              {invoiceData.company?.phone && (
+                <div>Tél: {invoiceData.company.phone}</div>
+              )}
+              {invoiceData.company?.email && (
+                <div>Email: {invoiceData.company.email}</div>
+              )}
+            </div>
+          </div>
+          <div className="bg-white bg-opacity-80 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-blue-200 flex-shrink-0 w-full sm:w-64 sm:max-w-none">
+            <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-2">FACTURE</div>
+            <div className="text-sm space-y-1">
+              <div className="break-words overflow-wrap-anywhere hyphens-auto"><strong>Nom:</strong> {invoiceData.invoice?.name || 'Facture sans nom'}</div>
+              <div><strong>Date:</strong> {formatDate(invoiceData.invoice?.date)}</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Aperçu de la facture */}
-      <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm invoice-preview">
-        {/* En-tête */}
-        <div className="border-b border-gray-200 pb-4 mb-6">
-          <div className="flex justify-between items-start">
-            <div>
-              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mb-3 overflow-hidden">
-                {invoiceData.customLogo ? (
-                  <img 
-                    src={invoiceData.customLogo} 
-                    alt="Logo DABO LOGISTIQUES" 
-                    className="w-full h-full object-contain"
-                  />
-                ) : (
-                  <span className="text-white text-xl font-bold">DL</span>
-                )}
-              </div>
-              <h1 className="text-2xl font-bold text-gray-900">{invoiceData.company.name}</h1>
-              <p className="text-gray-600">{invoiceData.company.activity}</p>
-              <p className="text-sm text-gray-500"><strong>Adresse:</strong> {invoiceData.company.address} | <strong>Tél:</strong> {invoiceData.company.phone} | <strong>Email:</strong> {invoiceData.company.email}</p>
-              <p className="text-sm text-gray-500">{invoiceData.company.location}</p>
-            </div>
-            <div className="text-right">
-              <h2 className="text-3xl font-bold text-blue-600 mb-2">{invoiceData.invoiceName || 'FACTURE'}</h2>
-              <div className="text-sm text-gray-600">
-                <p><strong>N° {invoiceData.invoiceNumber}</strong></p>
-                <p>Date: {formatDate(invoiceData.invoiceDate)}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Informations client et expédition */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      {/* Parties */}
+      <div className="p-4 sm:p-6 bg-blue-50 border-b border-blue-100">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">Facturé à :</h3>
-            {invoiceData.client.name ? (
-              <div className="space-y-1">
-                <p className="font-medium">{invoiceData.client.name}</p>
-                <p className="text-sm text-gray-600">{invoiceData.client.address}</p>
-                <p className="text-sm text-gray-600">{invoiceData.client.city}, {invoiceData.client.country}</p>
-              </div>
-            ) : (
-              <p className="text-sm text-gray-400 italic">Informations client non renseignées</p>
-            )}
+            <h3 className="text-lg font-semibold text-blue-600 mb-3 pb-2 border-b-2 border-blue-600">
+              Facturé par
+            </h3>
+            <div className="text-sm space-y-1">
+              <div className="font-semibold">{invoiceData.company?.name || 'Nom de l\'entreprise'}</div>
+              {invoiceData.company?.address && <div>{invoiceData.company.address}</div>}
+              {invoiceData.company?.phone && <div>Tél: {invoiceData.company.phone}</div>}
+              {invoiceData.company?.email && <div>Email: {invoiceData.company.email}</div>}
+            </div>
           </div>
-          
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">Expédition :</h3>
-            {invoiceData.shipment.waybillNumber ? (
-              <div className="space-y-1">
-                <p className="text-sm text-gray-600">Waybill: <span className="font-medium">{invoiceData.shipment.waybillNumber}</span></p>
-                <p className="text-sm text-gray-600">Marque: <span className="font-medium">{invoiceData.shipment.brand}</span></p>
-                <p className="text-sm text-gray-600">Poids: <span className="font-medium">{invoiceData.shipment.grossWeight} kg</span></p>
-              </div>
-            ) : (
-              <p className="text-sm text-gray-400 italic">Informations expédition non renseignées</p>
-            )}
+            <h3 className="text-lg font-semibold text-blue-600 mb-3 pb-2 border-b-2 border-blue-600">
+              Facturé à
+            </h3>
+            <div className="text-sm space-y-1">
+              <div className="font-semibold">{invoiceData.client?.name || 'Nom du client'}</div>
+              {invoiceData.client?.address && <div>{invoiceData.client.address}</div>}
+              {invoiceData.client?.phone && <div>Tél: {invoiceData.client.phone}</div>}
+              {invoiceData.client?.email && <div>Email: {invoiceData.client.email}</div>}
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Tableau des débours */}
-        {invoiceData.debours.length > 0 && (
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">Débours (Sous-total I)</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse border border-gray-200">
-                <thead>
-                  <tr className="bg-gray-50">
-                    <th className="border border-gray-200 px-4 py-2 text-left font-semibold">Description</th>
-                    <th className="border border-gray-200 px-4 py-2 text-right font-semibold">Montant</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {invoiceData.debours.map((item, index) => (
-                    <tr key={index}>
-                      <td className="border border-gray-200 px-4 py-2">{item.description}</td>
-                      <td className="border border-gray-200 px-4 py-2 text-right">{item.amount.toLocaleString('fr-FR')} FCFA</td>
-                    </tr>
-                  ))}
-                </tbody>
-                <tfoot>
-                  <tr className="bg-gray-100">
-                    <td className="border border-gray-200 px-4 py-2 font-semibold">Sous-total I</td>
-                    <td className="border border-gray-200 px-4 py-2 text-right font-semibold">{invoiceData.subtotal1.toLocaleString('fr-FR')} FCFA</td>
-                  </tr>
-                </tfoot>
-              </table>
+      {/* Articles */}
+      <div className="p-4 sm:p-6">
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse table-fixed">
+            <thead>
+              <tr className="bg-blue-600 text-white">
+                <th className="border-0 px-2 py-3 text-left font-semibold text-white text-xs sm:text-sm w-2/5">Désignation</th>
+                <th className="border-0 px-2 py-3 text-right font-semibold text-white text-xs sm:text-sm w-1/5">Prix unitaire</th>
+                <th className="border-0 px-2 py-3 text-right font-semibold text-white text-xs sm:text-sm w-1/5">Qté</th>
+                <th className="border-0 px-2 py-3 text-right font-semibold text-white text-xs sm:text-sm w-1/5">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {invoiceData.invoice?.items?.map((item, index) => (
+                <tr key={index} className={index % 2 === 0 ? "bg-blue-50" : "bg-blue-100"}>
+                  <td className="border-0 px-2 py-3 text-gray-900 text-xs sm:text-sm break-words overflow-wrap-anywhere">
+                    {item.description || 'Non renseigné'}
+                  </td>
+                  <td className="border-0 px-2 py-3 text-right text-gray-900 text-xs whitespace-nowrap">
+                    {(item.price || 0).toLocaleString('fr-FR')} FCFA
+                  </td>
+                  <td className="border-0 px-2 py-3 text-right text-gray-900 text-xs sm:text-sm whitespace-nowrap">
+                    {item.quantity === '' ? '-' : (item.quantity || '-')}
+                  </td>
+                  <td className="border-0 px-2 py-3 text-right font-semibold text-gray-900 text-xs whitespace-nowrap">
+                    {((item.price || 0) * (item.quantity === '' ? 0 : (item.quantity || 0))).toLocaleString('fr-FR')} FCFA
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Totaux */}
+      <div className="p-4 sm:p-6 bg-blue-50 border-t-2 border-blue-200">
+        <div className="space-y-2">
+          <div className="flex justify-between text-sm">
+            <span>SOUS-TOTAL</span>
+            <span className="font-medium">{(invoiceData.total || 0).toLocaleString('fr-FR')} FCFA</span>
+          </div>
+          <div className="bg-blue-600 text-white p-4 rounded-lg">
+            <div className="flex justify-between text-lg font-bold">
+              <span>TOTAL DÛ</span>
+              <span>{(invoiceData.total || 0).toLocaleString('fr-FR')} FCFA</span>
             </div>
-          </div>
-        )}
-
-        {/* Tableau des interventions taxables */}
-        {invoiceData.taxableInterventions.length > 0 && (
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">Interventions Taxables (Sous-total II)</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse border border-gray-200">
-                <thead>
-                  <tr className="bg-gray-50">
-                    <th className="border border-gray-200 px-4 py-2 text-left font-semibold">Description</th>
-                    <th className="border border-gray-200 px-4 py-2 text-center font-semibold">Qté</th>
-                    <th className="border border-gray-200 px-4 py-2 text-right font-semibold">Prix unit.</th>
-                    <th className="border border-gray-200 px-4 py-2 text-right font-semibold">Montant</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {invoiceData.taxableInterventions.map((item, index) => (
-                    <tr key={index}>
-                      <td className="border border-gray-200 px-4 py-2">{item.description}</td>
-                      <td className="border border-gray-200 px-4 py-2 text-center">{item.quantity}</td>
-                      <td className="border border-gray-200 px-4 py-2 text-right">{item.unitPrice.toLocaleString('fr-FR')} FCFA</td>
-                      <td className="border border-gray-200 px-4 py-2 text-right">{(item.quantity * item.unitPrice).toLocaleString('fr-FR')} FCFA</td>
-                    </tr>
-                  ))}
-                </tbody>
-                <tfoot>
-                  <tr className="bg-gray-100">
-                    <td colSpan="3" className="border border-gray-200 px-4 py-2 font-semibold">Sous-total II</td>
-                    <td className="border border-gray-200 px-4 py-2 text-right font-semibold">{invoiceData.subtotal2.toLocaleString('fr-FR')} FCFA</td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </div>
-        )}
-
-        {/* Totaux */}
-        <div className="mb-6">
-          <div className="flex justify-between mb-2">
-            <span className="font-semibold">Sous-total I:</span>
-            <span className="font-semibold">{invoiceData.subtotal1.toLocaleString('fr-FR')} FCFA</span>
-          </div>
-          <div className="flex justify-between mb-2">
-            <span className="font-semibold">Sous-total II:</span>
-            <span className="font-semibold">{invoiceData.subtotal2.toLocaleString('fr-FR')} FCFA</span>
-          </div>
-          <div className="flex justify-between p-4 bg-blue-600 text-white rounded-lg">
-            <span className="font-bold text-lg">Total:</span>
-            <span className="font-bold text-lg">{invoiceData.total.toLocaleString('fr-FR')} FCFA</span>
           </div>
         </div>
+      </div>
 
-        {/* Montant en lettres */}
-        {invoiceData.total > 0 && (
-          <div className="mb-6 p-5 bg-gray-50 rounded-lg border-l-4 border-blue-600">
-            <p className="font-semibold mb-2">Arrêté la présente facture à la somme de :</p>
-            <p className="text-blue-600 text-lg font-bold">{numberToWords(invoiceData.total)} francs CFA</p>
-          </div>
-        )}
-
-        {/* Pied de page */}
-        <div className="border-t border-gray-200 pt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div>
-              <p className="text-sm text-gray-600"><strong>NINEA:</strong> {invoiceData.company.ninea}</p>
-              <p className="text-sm text-gray-600"><strong>RC:</strong> {invoiceData.company.rc}</p>
+      {/* Pied de page */}
+      <div className="p-4 sm:p-6 bg-blue-50 border-t border-blue-100">
+        <div>
+          <div className="text-sm font-semibold text-gray-900 mb-2">Informations de paiement</div>
+          {invoiceData.company?.mobileMoneyService && invoiceData.company.mobileMoneyService !== 'Paiement espèce' && invoiceData.company.mobileMoneyNumber && (
+            <p className="text-gray-900 text-xs sm:text-sm">
+              Paiement avec {invoiceData.company.mobileMoneyService}: {invoiceData.company.mobileMoneyNumber}
+            </p>
+          )}
+          {invoiceData.company?.mobileMoneyService === 'Paiement espèce' && (
+            <p className="text-gray-900 text-xs sm:text-sm">Paiement en espèce</p>
+          )}
+          {invoiceData.invoice?.notes && (
+            <div className="mt-3 pt-3 border-t border-gray-200">
+              <p className="text-gray-900 text-xs sm:text-sm break-words">{invoiceData.invoice.notes}</p>
             </div>
-            <div>
-              <p className="text-sm text-gray-600"><strong>Tél:</strong> {invoiceData.company.phone}</p>
-              <p className="text-sm text-gray-600"><strong>Email:</strong> {invoiceData.company.email}</p>
-            </div>
-          </div>
-          <div className="text-center">
-            <p className="text-sm text-gray-500 italic">Merci de votre confiance</p>
-          </div>
+          )}
+        </div>
+        <div className="text-center mt-4 pt-4 border-t border-gray-200">
+          <div className="text-xs font-bold text-blue-600">Créé avec Billio</div>
         </div>
       </div>
     </div>

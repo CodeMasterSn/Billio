@@ -52,9 +52,9 @@ export const generatePDF = async (invoiceData) => {
     tempDiv.style.width = '800px'
     tempDiv.style.backgroundColor = 'white'
     tempDiv.style.padding = '40px'
-    tempDiv.style.fontFamily = 'Arial, sans-serif'
+    tempDiv.style.fontFamily = 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif'
     tempDiv.style.fontSize = '12px'
-    tempDiv.style.lineHeight = '1.4'
+    tempDiv.style.lineHeight = '1.6'
     
     // Générer le HTML de la facture
     const invoiceHTML = generateInvoiceHTML(invoiceData)
@@ -98,163 +98,152 @@ export const generatePDF = async (invoiceData) => {
       heightLeft -= pdfHeight
     }
     
-    return pdf
+    // Retourner le PDF sous forme de blob
+    const pdfBlob = pdf.output('blob')
+    return pdfBlob
   } catch (error) {
     console.error('Erreur lors de la génération du PDF:', error)
     throw new Error('Erreur lors de la génération du PDF')
   }
 }
 
-// Fonction pour générer l'HTML de la facture
+// Fonction pour générer l'HTML de la facture - Identique à l'aperçu et l'impression
 const generateInvoiceHTML = (invoiceData) => {
   return `
-    <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; background: white;">
-      <!-- En-tête -->
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; border-bottom: 2px solid #2563eb; padding-bottom: 20px;">
-        <div>
-          <div style="width: 80px; height: 80px; background: #2563eb; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; overflow: hidden;">
-            ${invoiceData.customLogo ? 
-              `<img src="${invoiceData.customLogo}" alt="Logo DABO LOGISTIQUES" style="width: 100%; height: 100%; object-fit: contain;" />` : 
-              '<span style="color: white; font-size: 24px; font-weight: bold;">DL</span>'
-            }
+    <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 800px; margin: 0 auto; background: white; line-height: 1.4; color: #333; position: relative;">
+      <!-- Motifs décoratifs identiques à l'aperçu -->
+      <div style="position: absolute; top: 0; left: 0; width: 32px; height: 32px; border-left: 4px solid #2563eb; border-top: 4px solid #2563eb; border-radius: 8px 0 0 0;"></div>
+      <div style="position: absolute; top: 0; right: 0; width: 32px; height: 32px; border-right: 4px solid #2563eb; border-top: 4px solid #2563eb; border-radius: 0 8px 0 0;"></div>
+      <div style="position: absolute; bottom: 0; left: 0; width: 32px; height: 32px; border-left: 4px solid #2563eb; border-bottom: 4px solid #2563eb; border-radius: 0 0 0 8px;"></div>
+      <div style="position: absolute; bottom: 0; right: 0; width: 32px; height: 32px; border-right: 4px solid #2563eb; border-bottom: 4px solid #2563eb; border-radius: 0 0 8px 0;"></div>
+      
+      <!-- Motifs décoratifs sur les côtés -->
+      <div style="position: absolute; top: 50%; left: 0; width: 24px; height: 24px; border-left: 2px solid #93c5fd; border-radius: 50%; transform: translateY(-50%);"></div>
+      <div style="position: absolute; top: 50%; right: 0; width: 24px; height: 24px; border-right: 2px solid #93c5fd; border-radius: 50%; transform: translateY(-50%);"></div>
+      <div style="position: absolute; top: 0; left: 50%; width: 24px; height: 24px; border-top: 2px solid #93c5fd; border-radius: 50%; transform: translateX(-50%);"></div>
+      <div style="position: absolute; bottom: 0; left: 50%; width: 24px; height: 24px; border-bottom: 2px solid #93c5fd; border-radius: 50%; transform: translateX(-50%);"></div>
+
+      <div style="padding: 40px; position: relative; z-index: 10;">
+        <!-- En-tête -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px;">
+          <div style="flex: 1;">
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+              <div style="width: 60px; height: 60px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                ${invoiceData.company?.logo ? 
+                  `<img src="${invoiceData.company.logo}" alt="Logo entreprise" style="width: 100%; height: 100%; object-fit: contain;" />` : 
+                  `<span style="color: #333; font-size: 16px; font-weight: bold;">${invoiceData.company?.name ? invoiceData.company.name.substring(0, 2).toUpperCase() : 'LO'}</span>`
+                }
+              </div>
+              <h1 style="margin: 0; color: #333; font-size: 18px; font-weight: 600;">${invoiceData.company?.name || 'Votre Entreprise'}</h1>
+            </div>
+            <p style="margin: 3px 0; color: #333; font-size: 13px;">${invoiceData.company?.address || 'Adresse non renseignée'}</p>
+            <p style="margin: 3px 0; color: #333; font-size: 13px;">${invoiceData.company?.phone || 'Téléphone non renseigné'}</p>
+            <p style="margin: 3px 0; color: #333; font-size: 13px;">${invoiceData.company?.email || 'Email non renseigné'}</p>
           </div>
-          <h1 style="margin: 0; color: #1f2937; font-size: 24px; font-weight: bold;">${invoiceData.company.name}</h1>
-          <p style="margin: 5px 0; color: #6b7280; font-size: 14px;">${invoiceData.company.activity}</p>
-          <p style="margin: 5px 0; color: #6b7280; font-size: 12px;"><strong>Adresse:</strong> ${invoiceData.company.address} | <strong>Tél:</strong> ${invoiceData.company.phone} | <strong>Email:</strong> ${invoiceData.company.email}</p>
-          <p style="margin: 5px 0; color: #6b7280; font-size: 12px;">${invoiceData.company.location}</p>
+          
+          <div style="text-align: right; flex-shrink: 0; width: 256px; max-width: none;">
+            <h2 style="font-size: 32px; font-weight: bold; color: #2563eb; margin: 0 0 24px 0;">FACTURE</h2>
+            
+            <!-- Informations facture avec cadre esthétique -->
+            <div style="position: relative; margin-bottom: 20px;">
+              <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: #eff6ff; border-radius: 8px; z-index: 1;"></div>
+              <div style="position: absolute; top: 0; left: 10px; bottom: 0; width: 4px; background-color: #2563eb; border-radius: 0 2px 2px 0; z-index: 2;"></div>
+              <div style="position: relative; z-index: 3; padding: 16px 16px 16px 25px; text-align: left;">
+                <div style="margin-bottom: 8px;">
+                  <strong style="color: #2563eb; font-size: 14px;">Nom de facture:</strong>
+                  <strong style="color: #2563eb; font-size: 14px; margin-left: 30px;">Date:</strong>
+                </div>
+                <div style="word-wrap: break-word; overflow-wrap: anywhere; hyphens: auto;">
+                  <span style="color: #000; font-size: 14px;">${invoiceData.invoice?.name || 'Facture sans nom'}</span>
+                  <span style="color: #000; font-size: 14px; margin-left: 30px;">${formatDate(invoiceData.invoice?.date)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div style="text-align: right;">
-          <h2 style="margin: 0; color: #2563eb; font-size: 32px; font-weight: bold;">${invoiceData.invoiceName || 'FACTURE'}</h2>
-          <div style="margin-top: 10px; font-size: 14px; color: #6b7280;">
-            <p style="margin: 5px 0;"><strong>N° ${invoiceData.invoiceNumber}</strong></p>
-            <p style="margin: 5px 0;">Date: ${formatDate(invoiceData.invoiceDate)}</p>
-          </div>
+
+      <!-- Informations parties prenantes -->
+      <div style="margin-bottom: 40px;">
+        <div>
+          <h3 style="margin: 0 0 12px 0; color: #333; font-size: 14px; font-weight: 600;">Facturé à</h3>
+          ${invoiceData.client?.name ? `
+            <p style="margin: 4px 0; color: #333; font-size: 13px; font-weight: 600;">${invoiceData.client.name}</p>
+            <p style="margin: 4px 0; color: #333; font-size: 13px;">${invoiceData.client.address || 'Adresse non renseignée'}</p>
+            ${invoiceData.client.phone ? `<p style="margin: 4px 0; color: #333; font-size: 13px;">${invoiceData.client.phone}</p>` : ''}
+          ` : '<p style="margin: 4px 0; color: #999; font-style: italic; font-size: 13px;">Informations client non renseignées</p>'}
         </div>
       </div>
 
-      <!-- Client et Expédition -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
-        <div>
-          <h3 style="margin: 0 0 10px 0; color: #1f2937; font-size: 16px; font-weight: bold;">Facturé à :</h3>
-          ${invoiceData.client.name ? `
-            <p style="margin: 5px 0; font-weight: bold; color: #1f2937;">${invoiceData.client.name}</p>
-            <p style="margin: 5px 0; color: #6b7280; font-size: 12px;">${invoiceData.client.address}</p>
-            <p style="margin: 5px 0; color: #6b7280; font-size: 12px;">${invoiceData.client.city}, ${invoiceData.client.country}</p>
-          ` : '<p style="margin: 5px 0; color: #9ca3af; font-style: italic; font-size: 12px;">Informations client non renseignées</p>'}
-        </div>
-        <div>
-          <h3 style="margin: 0 0 10px 0; color: #1f2937; font-size: 16px; font-weight: bold;">Expédition :</h3>
-          ${invoiceData.shipment.waybillNumber ? `
-            <p style="margin: 5px 0; color: #6b7280; font-size: 12px;">Waybill: <span style="font-weight: bold; color: #1f2937;">${invoiceData.shipment.waybillNumber}</span></p>
-            <p style="margin: 5px 0; color: #6b7280; font-size: 12px;">Marque: <span style="font-weight: bold; color: #1f2937;">${invoiceData.shipment.brand}</span></p>
-            <p style="margin: 5px 0; color: #6b7280; font-size: 12px;">Poids: <span style="font-weight: bold; color: #1f2937;">${invoiceData.shipment.grossWeight} kg</span></p>
-          ` : '<p style="margin: 5px 0; color: #9ca3af; font-style: italic; font-size: 12px;">Informations expédition non renseignées</p>'}
-        </div>
-      </div>
-
-      <!-- Tableau des débours -->
-      ${invoiceData.debours.length > 0 ? `
-        <div style="margin-bottom: 30px;">
-          <h3 style="margin: 0 0 15px 0; color: #1f2937; font-size: 16px; font-weight: bold;">Débours (Sous-total I)</h3>
-          <table style="width: 100%; border-collapse: collapse; border: 1px solid #d1d5db;">
-            <thead>
-              <tr style="background: #f9fafb;">
-                <th style="border: 1px solid #d1d5db; padding: 12px; text-align: left; font-weight: bold; color: #1f2937;">Description</th>
-                <th style="border: 1px solid #d1d5db; padding: 12px; text-align: right; font-weight: bold; color: #1f2937;">Montant</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${invoiceData.debours.map(item => `
-                <tr>
-                  <td style="border: 1px solid #d1d5db; padding: 12px; color: #1f2937;">${item.description}</td>
-                  <td style="border: 1px solid #d1d5db; padding: 12px; text-align: right; color: #1f2937;">${item.amount.toLocaleString('fr-FR')} FCFA</td>
+        <!-- Tableau des articles/services -->
+        ${invoiceData.invoice?.items && invoiceData.invoice.items.length > 0 ? `
+          <div style="margin-bottom: 30px;">
+            <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+              <thead>
+                <tr style="background: #2563eb; color: white;">
+                  <th style="border: 0; padding: 12px 8px; text-align: left; font-weight: 600; font-size: 13px; width: 40%;">Désignation</th>
+                  <th style="border: 0; padding: 12px 8px; text-align: right; font-weight: 600; font-size: 13px; width: 20%;">Prix unitaire</th>
+                  <th style="border: 0; padding: 12px 8px; text-align: right; font-weight: 600; font-size: 13px; width: 20%;">Qté</th>
+                  <th style="border: 0; padding: 12px 8px; text-align: right; font-weight: 600; font-size: 13px; width: 20%;">Total</th>
                 </tr>
-              `).join('')}
-            </tbody>
-            <tfoot>
-              <tr style="background: #f3f4f6;">
-                <td style="border: 1px solid #d1d5db; padding: 12px; font-weight: bold; color: #1f2937;">Sous-total I</td>
-                <td style="border: 1px solid #d1d5db; padding: 12px; text-align: right; font-weight: bold; color: #1f2937;">${invoiceData.subtotal1.toLocaleString('fr-FR')} FCFA</td>
+              </thead>
+              <tbody>
+                ${invoiceData.invoice.items.map((item, index) => `
+                  <tr style="background: ${index % 2 === 0 ? '#eff6ff' : '#dbeafe'};">
+                    <td style="border: 0; padding: 12px 8px; color: #333; font-size: 13px; word-wrap: break-word; overflow-wrap: anywhere;">${item.description || 'Non renseigné'}</td>
+                    <td style="border: 0; padding: 12px 8px; text-align: right; color: #333; font-size: 13px;">${(item.price || 0).toLocaleString('fr-FR')} FCFA</td>
+                    <td style="border: 0; padding: 12px 8px; text-align: right; color: #333; font-size: 13px;">${item.quantity === '' ? '-' : (item.quantity || '-')}</td>
+                    <td style="border: 0; padding: 12px 8px; text-align: right; font-weight: 600; color: #333; font-size: 13px;">${((item.price || 0) * (item.quantity === '' ? 0 : (item.quantity || 0))).toLocaleString('fr-FR')} FCFA</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        ` : ''}
+
+      <!-- Résumé des montants -->
+      <div style="margin-bottom: 30px; display: flex; justify-content: flex-end;">
+        <div style="width: 250px;">
+          <table style="width: 100%;">
+            <tbody>
+              <tr>
+                <td style="padding: 6px 8px; font-size: 13px; color: #333;">SOUS-TOTAL</td>
+                <td style="padding: 6px 8px; text-align: right; font-weight: 500; color: #333; font-size: 13px;">${(invoiceData.total || 0).toLocaleString('fr-FR')} FCFA</td>
               </tr>
-            </tfoot>
+                  <tr style="background: #2563eb; color: white;">
+                    <td style="padding: 12px 8px; font-weight: 700; font-size: 14px; color: white;">TOTAL DÛ</td>
+                    <td style="padding: 12px 8px; text-align: right; font-weight: 700; font-size: 14px; color: white;">${(invoiceData.total || 0).toLocaleString('fr-FR')} FCFA</td>
+                  </tr>
+            </tbody>
           </table>
         </div>
-      ` : ''}
-
-      <!-- Tableau des interventions taxables -->
-      ${invoiceData.taxableInterventions.length > 0 ? `
-        <div style="margin-bottom: 30px;">
-          <h3 style="margin: 0 0 15px 0; color: #1f2937; font-size: 16px; font-weight: bold;">Interventions Taxables (Sous-total II)</h3>
-          <table style="width: 100%; border-collapse: collapse; border: 1px solid #d1d5db;">
-            <thead>
-              <tr style="background: #f9fafb;">
-                <th style="border: 1px solid #d1d5db; padding: 12px; text-align: left; font-weight: bold; color: #1f2937;">Description</th>
-                <th style="border: 1px solid #d1d5db; padding: 12px; text-align: center; font-weight: bold; color: #1f2937;">Qté</th>
-                <th style="border: 1px solid #d1d5db; padding: 12px; text-align: right; font-weight: bold; color: #1f2937;">Prix unit.</th>
-                <th style="border: 1px solid #d1d5db; padding: 12px; text-align: right; font-weight: bold; color: #1f2937;">Montant</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${invoiceData.taxableInterventions.map(item => `
-                <tr>
-                  <td style="border: 1px solid #d1d5db; padding: 12px; color: #1f2937;">${item.description}</td>
-                  <td style="border: 1px solid #d1d5db; padding: 12px; text-align: center; color: #1f2937;">${item.quantity}</td>
-                  <td style="border: 1px solid #d1d5db; padding: 12px; text-align: right; color: #1f2937;">${item.unitPrice.toLocaleString('fr-FR')} FCFA</td>
-                  <td style="border: 1px solid #d1d5db; padding: 12px; text-align: right; color: #1f2937;">${(item.quantity * item.unitPrice).toLocaleString('fr-FR')} FCFA</td>
-                </tr>
-              `).join('')}
-            </tbody>
-            <tfoot>
-              <tr style="background: #f3f4f6;">
-                <td colspan="3" style="border: 1px solid #d1d5db; padding: 12px; font-weight: bold; color: #1f2937;">Sous-total II</td>
-                <td style="border: 1px solid #d1d5db; padding: 12px; text-align: right; font-weight: bold; color: #1f2937;">${invoiceData.subtotal2.toLocaleString('fr-FR')} FCFA</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-      ` : ''}
-
-      <!-- Totaux -->
-      <div style="margin-bottom: 30px;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-          <span style="color: #1f2937; font-weight: bold;">Sous-total I:</span>
-          <span style="color: #1f2937; font-weight: bold;">${invoiceData.subtotal1.toLocaleString('fr-FR')} FCFA</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-          <span style="color: #1f2937; font-weight: bold;">Sous-total II:</span>
-          <span style="color: #1f2937; font-weight: bold;">${invoiceData.subtotal2.toLocaleString('fr-FR')} FCFA</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; padding: 15px; background: #2563eb; color: white; border-radius: 8px;">
-          <span style="font-weight: bold; font-size: 16px;">Total:</span>
-          <span style="font-weight: bold; font-size: 16px;">${invoiceData.total.toLocaleString('fr-FR')} FCFA</span>
-        </div>
       </div>
-
-      <!-- Montant en lettres -->
-      ${invoiceData.total > 0 ? `
-        <div style="margin-bottom: 30px; padding: 20px; background: #f8fafc; border-radius: 8px; border-left: 4px solid #2563eb;">
-          <p style="margin: 0 0 10px 0; font-weight: bold; color: #1f2937;">Arrêté la présente facture à la somme de :</p>
-          <p style="margin: 0; color: #2563eb; font-size: 16px; font-weight: bold;">${numberToWords(invoiceData.total)} francs CFA</p>
-        </div>
-      ` : ''}
 
       <!-- Pied de page -->
-      <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #e5e7eb;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-          <div>
-            <p style="margin: 5px 0; color: #6b7280; font-size: 12px;"><strong>NINEA:</strong> ${invoiceData.company.ninea}</p>
-            <p style="margin: 5px 0; color: #6b7280; font-size: 12px;"><strong>RC:</strong> ${invoiceData.company.rc}</p>
-          </div>
-          <div>
-            <p style="margin: 5px 0; color: #6b7280; font-size: 12px;"><strong>Tél:</strong> ${invoiceData.company.phone}</p>
-            <p style="margin: 5px 0; color: #6b7280; font-size: 12px;"><strong>Email:</strong> ${invoiceData.company.email}</p>
-          </div>
-        </div>
-        <div style="text-align: center;">
-          <p style="margin: 0; color: #6b7280; font-size: 14px; font-style: italic;">Merci de votre confiance</p>
+      <div style="display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e5e5e5;">
+        <div style="font-size: 13px; color: #333;">
+          <p style="margin: 0 0 8px 0; font-weight: 600;">Informations de paiement</p>
+          ${invoiceData.company.bank ? `<p style="margin: 4px 0;">Banque: ${invoiceData.company.bank}</p>` : ''}
+          ${invoiceData.company.mobileMoneyService && invoiceData.company.mobileMoneyService !== 'Paiement espèce' && invoiceData.company.mobileMoneyNumber ? 
+            `<p style="margin: 4px 0;">Paiement fait avec ${invoiceData.company.mobileMoneyService}: ${invoiceData.company.mobileMoneyNumber}</p>` : ''}
+          ${invoiceData.company.mobileMoneyService === 'Paiement espèce' ? 
+            `<p style="margin: 4px 0;">Paiement fait en espèce</p>` : ''}
+          ${invoiceData.invoice?.notes ? `
+            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e5e5;">
+              <p style="margin: 0;">${invoiceData.invoice.notes}</p>
+            </div>
+          ` : ''}
         </div>
       </div>
-    </div>
-  `
-}
 
+          <!-- Branding Billio -->
+          <div style="text-align: center; margin-top: 30px; padding-top: 16px; border-top: 1px solid #e5e5e5;">
+            <p style="margin: 0; font-size: 12px; color: #6b7280;">
+              <span style="display: inline-flex; align-items: center;">
+                Créé avec <span style="color: #2563eb; font-weight: 600; font-family: 'Courier New', monospace; margin-left: 4px;">Billio</span>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    `
+  }

@@ -1,11 +1,17 @@
 import './globals.css'
+import '../styles/modal-animations.css'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'DABO LOGISTIQUES - Transport, Maritime, Fret Aérien, Conseils',
-  description: 'Solutions complètes de transit et logistique internationale. Gestion professionnelle de vos expéditions avec facturation automatisée.',
+  title: 'Billio - facturation en ligne',
+  description: 'Billio est la plateforme de facturation et de paiement pensée pour freelances et petites entreprises en Afrique. Créez vos factures et recevez vos paiements facilement.',
+  icons: {
+    icon: '/favicons/favicon.png',
+    shortcut: '/favicons/favicon.png',
+    apple: '/favicons/favicon.png',
+  },
 }
 
 export default function RootLayout({ children }) {

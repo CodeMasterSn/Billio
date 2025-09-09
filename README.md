@@ -1,6 +1,6 @@
-# DABO LOGISTIQUES - Application de Facturation
+# BILLIO - Application de Facturation
 
-Application web statique pour la génération de factures professionnelles pour DABO LOGISTIQUES.
+Application web statique pour la génération de factures professionnelles pour BILLIO.
 
 ## 🚀 Fonctionnalités
 
@@ -144,7 +144,7 @@ samatransit/
 - Le logo sera automatiquement redimensionné et affiché
 
 ### Informations légales
-Les informations de DABO LOGISTIQUES sont pré-remplies et peuvent être modifiées dans le code source :
+Les informations de BILLIO sont pré-remplies et peuvent être modifiées dans le code source :
 - Nom de l'entreprise
 - Adresse et contact
 - NINEA et RC
@@ -171,15 +171,15 @@ npm run build
 
 ## 📄 Licence
 
-Ce projet est développé pour DABO LOGISTIQUES. Tous droits réservés.
+Ce projet est développé pour BILLIO. Tous droits réservés.
 
 ## 🤝 Support
 
 Pour toute question ou problème :
-- Email : dabotrans@gmail.com
+- Email : contact@billio.africa
 - Téléphone : +221 77 437 65 21
 
 ---
 
-**DABO LOGISTIQUES** - Transport, Maritime, Fret Aérien, Conseils
+**BILLIO** - Plateforme de Facturation en Ligne
 *Zone Fret Aéroport International Blaise Diagne*
