@@ -12,16 +12,17 @@ export default function InvoiceForm({
   onLogoRemove 
 }) {
   const [openSections, setOpenSections] = useState({
-    invoice: true,
-    company: true,
-    client: true,
-    items: true,
-    payment: true,
-    notes: true
+    invoice: false, // Fermé par défaut sur mobile
+    company: false,
+    client: false,
+    items: false,
+    payment: false,
+    notes: false
   })
 
   const [validationErrors, setValidationErrors] = useState({})
   const [mobileError, setMobileError] = useState('')
+  const [isMobile, setIsMobile] = useState(false)
 
   // Gestionnaire d'événements tactiles optimisé pour iOS
   const handleTouchEvent = (e, callback) => {
@@ -76,6 +77,31 @@ export default function InvoiceForm({
     }
   }
 
+  // Détection mobile et gestion des sections
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768
+      setIsMobile(mobile)
+      
+      // Sur desktop, ouvrir toutes les sections par défaut
+      if (!mobile) {
+        setOpenSections({
+          invoice: true,
+          company: true,
+          client: true,
+          items: true,
+          payment: true,
+          notes: true
+        })
+      }
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   // Nettoyage automatique des erreurs mobiles
   useEffect(() => {
     if (mobileError) {
@@ -88,14 +114,36 @@ export default function InvoiceForm({
 
   return (
     <div className="space-y-6">
+      {/* Message d'aide pour mobile */}
+      {isMobile && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="flex items-start">
+            <div className="flex-shrink-0">
+              <span className="text-blue-600 text-lg">💡</span>
+            </div>
+            <div className="ml-3">
+              <h3 className="text-sm font-medium text-blue-800">
+                Astuce mobile
+              </h3>
+              <p className="mt-1 text-sm text-blue-700">
+                Appuyez sur les sections ci-dessous pour les ouvrir et remplir vos informations. 
+                Vous pouvez ouvrir/fermer chaque section selon vos besoins.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* SECTION FACTURE */}
       <div className="border border-gray-200 rounded-lg">
         <button
           onClick={() => toggleSection('invoice')}
-          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center"
+          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center touch-optimized"
         >
           <span>📄 FACTURE</span>
-          <span className="text-gray-500">{openSections.invoice ? '−' : '+'}</span>
+          <span className="text-gray-500 text-lg font-bold">
+            {openSections.invoice ? '−' : '+'}
+          </span>
         </button>
         
         {openSections.invoice && (
@@ -142,10 +190,12 @@ export default function InvoiceForm({
       <div className="border border-gray-200 rounded-lg">
         <button
           onClick={() => toggleSection('company')}
-          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center"
+          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center touch-optimized"
         >
           <span>🏢 MON ENTREPRISE</span>
-          <span className="text-gray-500">{openSections.company ? '−' : '+'}</span>
+          <span className="text-gray-500 text-lg font-bold">
+            {openSections.company ? '−' : '+'}
+          </span>
         </button>
         
         {openSections.company && (
@@ -262,10 +312,12 @@ export default function InvoiceForm({
       <div className="border border-gray-200 rounded-lg">
         <button
           onClick={() => toggleSection('client')}
-          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center"
+          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center touch-optimized"
         >
           <span>👤 CLIENT</span>
-          <span className="text-gray-500">{openSections.client ? '−' : '+'}</span>
+          <span className="text-gray-500 text-lg font-bold">
+            {openSections.client ? '−' : '+'}
+          </span>
         </button>
         
         {openSections.client && (
@@ -340,10 +392,12 @@ export default function InvoiceForm({
       <div className="border border-gray-200 rounded-lg">
         <button
           onClick={() => toggleSection('items')}
-          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center"
+          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center touch-optimized"
         >
           <span>📦 PRODUITS / SERVICES</span>
-          <span className="text-gray-500">{openSections.items ? '−' : '+'}</span>
+          <span className="text-gray-500 text-lg font-bold">
+            {openSections.items ? '−' : '+'}
+          </span>
         </button>
         
         {openSections.items && (
@@ -477,10 +531,12 @@ export default function InvoiceForm({
       <div className="border border-gray-200 rounded-lg">
         <button
           onClick={() => toggleSection('payment')}
-          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center"
+          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center touch-optimized"
         >
           <span>💳 PAIEMENT</span>
-          <span className="text-gray-500">{openSections.payment ? '−' : '+'}</span>
+          <span className="text-gray-500 text-lg font-bold">
+            {openSections.payment ? '−' : '+'}
+          </span>
         </button>
         
         {openSections.payment && (
@@ -526,10 +582,12 @@ export default function InvoiceForm({
       <div className="border border-gray-200 rounded-lg">
         <button
           onClick={() => toggleSection('notes')}
-          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center"
+          className="w-full px-4 py-3 text-left font-semibold text-gray-900 bg-gray-50 hover:bg-gray-100 rounded-t-lg flex justify-between items-center touch-optimized"
         >
           <span>📝 NOTES</span>
-          <span className="text-gray-500">{openSections.notes ? '−' : '+'}</span>
+          <span className="text-gray-500 text-lg font-bold">
+            {openSections.notes ? '−' : '+'}
+          </span>
         </button>
         
         {openSections.notes && (

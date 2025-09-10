@@ -29,18 +29,25 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
 .invoice-form-input {
   min-height: 44px;
   font-size: 16px; /* Évite le zoom automatique sur iOS */
+  padding: 12px;
+  border: 1px solid #d1d5db !important; /* Force la bordure grise */
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
   touch-action: manipulation;
   -webkit-appearance: none;
   appearance: none;
-  border-radius: 8px;
-  -webkit-border-radius: 8px;
   color: #111827 !important; /* Force la couleur de texte noire */
   background-color: white;
+  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
 }
 
 /* Focus management pour iOS */
 .invoice-form-input:focus {
   outline: none;
+  border-color: #2563eb !important; /* Bordure bleue en focus */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  -webkit-box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
   -webkit-tap-highlight-color: transparent;
   -webkit-focus-ring-color: transparent;
 }
@@ -290,4 +297,15 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
     transition: none;
     -webkit-transition: none;
   }
+}
+
+/* États d'erreur pour les inputs */
+.invoice-form-input.border-red-500 {
+  border-color: #ef4444 !important;
+  background-color: #fef2f2 !important;
+}
+
+.product-input.border-red-500 {
+  border-color: #ef4444 !important;
+  background-color: #fef2f2 !important;
 }
