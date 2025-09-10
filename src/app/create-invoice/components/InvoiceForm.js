@@ -165,6 +165,9 @@ export default function InvoiceForm({
                   autoComplete="off"
                   inputMode="text"
                 />
+                <p className="mt-1 text-xs text-gray-500">
+                  💡 Vous pouvez modifier ce nom selon vos besoins
+                </p>
               </div>
               
               <div>
