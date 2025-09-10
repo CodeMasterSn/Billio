@@ -4,6 +4,13 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  
+# Désactiver la détection automatique Next.js pour forcer l'export statique
+[build.processing]
+  skip_processing = false
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+# Redirections pour SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
