@@ -1,5 +1,6 @@
 import './globals.css'
 import '../styles/modal-animations.css'
+import '../styles/mobile-optimizations.css'
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
 

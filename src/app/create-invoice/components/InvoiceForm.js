@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function InvoiceForm({ 
   invoiceData, 
@@ -21,6 +21,20 @@ export default function InvoiceForm({
   })
 
   const [validationErrors, setValidationErrors] = useState({})
+  const [mobileError, setMobileError] = useState('')
+
+  // Gestionnaire d'événements tactiles optimisé pour iOS
+  const handleTouchEvent = (e, callback) => {
+    e.preventDefault()
+    e.stopPropagation()
+    try {
+      callback()
+    } catch (error) {
+      console.error('Erreur interaction tactile:', error)
+      setMobileError('Erreur d\'interaction. Veuillez réessayer.')
+      setTimeout(() => setMobileError(''), 3000)
+    }
+  }
 
   const toggleSection = (section) => {
     setOpenSections(prev => ({
@@ -61,6 +75,16 @@ export default function InvoiceForm({
       reader.readAsDataURL(file)
     }
   }
+
+  // Nettoyage automatique des erreurs mobiles
+  useEffect(() => {
+    if (mobileError) {
+      const timer = setTimeout(() => {
+        setMobileError('')
+      }, 5000)
+      return () => clearTimeout(timer)
+    }
+  }, [mobileError])
 
   return (
     <div className="space-y-6">
@@ -307,8 +331,10 @@ export default function InvoiceForm({
             <div className="flex justify-between items-center">
               <h4 className="text-lg font-semibold text-gray-900">Articles facturés</h4>
               <button
-                onClick={onAddItem}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium transition-colors"
+                onClick={(e) => handleTouchEvent(e, onAddItem)}
+                onTouchEnd={(e) => handleTouchEvent(e, onAddItem)}
+                className="add-product-button touch-optimized"
+                aria-label="Ajouter un produit"
               >
                 + Ajouter un produit
               </button>
@@ -321,8 +347,10 @@ export default function InvoiceForm({
                     <h5 className="font-semibold text-gray-900">Article #{index + 1}</h5>
                     {invoiceData.invoice.items.length > 1 && (
                       <button
-                        onClick={() => removeItem(index)}
-                        className="text-red-600 hover:text-red-800 text-sm font-medium transition-colors"
+                        onClick={(e) => handleTouchEvent(e, () => removeItem(index))}
+                        onTouchEnd={(e) => handleTouchEvent(e, () => removeItem(index))}
+                        className="remove-product-button touch-optimized"
+                        aria-label={`Supprimer l'article ${index + 1}`}
                       >
                         Supprimer
                       </button>
@@ -337,10 +365,12 @@ export default function InvoiceForm({
                         value={item?.description || ''}
                         onChange={(e) => handleItemChange(index, 'description', e.target.value)}
                         placeholder="Description du produit/service"
-                        className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 ${
+                        className={`product-input w-full ${
                           validationErrors[`items.${index}.description`] ? 'border-red-500 bg-red-50' : 'border-gray-300'
                         }`}
                         required
+                        autoComplete="off"
+                        inputMode="text"
                       />
                     </div>
                     
@@ -361,7 +391,10 @@ export default function InvoiceForm({
                           }
                         }}
                         placeholder="Ex: 2"
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                        className="product-input w-full"
+                        autoComplete="off"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
                       />
                     </div>
                     
@@ -382,7 +415,10 @@ export default function InvoiceForm({
                           }
                         }}
                         placeholder="Ex: 15000"
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                        className="product-input w-full"
+                        autoComplete="off"
+                        inputMode="decimal"
+                        pattern="[0-9]*[.,]?[0-9]*"
                       />
                     </div>
                   </div>
@@ -399,13 +435,20 @@ export default function InvoiceForm({
             </div>
             
             {/* Total général */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div className="total-calculation-zone">
               <div className="text-right">
                 <span className="text-lg font-semibold text-gray-900">
                   Total général: {(invoiceData.total || 0).toLocaleString('fr-FR')} FCFA
                 </span>
               </div>
             </div>
+            
+            {/* Message d'erreur mobile */}
+            {mobileError && (
+              <div className="mobile-error-message">
+                {mobileError}
+              </div>
+            )}
           </div>
         )}
       </div>
