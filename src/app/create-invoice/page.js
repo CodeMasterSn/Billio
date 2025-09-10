@@ -8,8 +8,25 @@ import { generatePDF } from '../../utils/pdfGenerator'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
+/**
+ * PAGE DE CRÉATION DE FACTURE - BILLIO
+ * 
+ * Cette page est le cœur de l'application Billio. Elle permet aux utilisateurs de :
+ * - Créer des factures professionnelles
+ * - Prévisualiser en temps réel
+ * - Télécharger en PDF
+ * - Imprimer directement
+ * 
+ * Architecture :
+ * - Split-screen : formulaire à gauche, aperçu à droite
+ * - État React centralisé pour toutes les données de facture
+ * - Calculs automatiques des totaux
+ * - Gestion des logos d'entreprise
+ * - Support des paiements mobiles africains (Orange Money, Wave)
+ */
+
 export default function CreateInvoicePage() {
-  // Génération automatique du nom de facture
+  // Génération automatique du nom de facture basé sur la date actuelle
   const generateInvoiceName = () => {
     const today = new Date()
     const month = today.toLocaleDateString('fr-FR', { month: 'long' })
@@ -81,7 +98,8 @@ export default function CreateInvoicePage() {
     }
   }, [showModal])
 
-  // Calcul automatique du total
+  // Calcul automatique du total - se déclenche à chaque modification des items
+  // Cette fonction surveille les changements dans les articles et recalcule automatiquement le total
   useEffect(() => {
     const total = invoiceData.invoice.items.reduce((sum, item) => {
       const quantity = item.quantity === '' ? 0 : (item.quantity || 0)
@@ -297,15 +315,19 @@ export default function CreateInvoicePage() {
     updateInvoiceData('company', 'logo', null)
   }
 
-  // Téléchargement PDF
+  // Téléchargement PDF - Fonction principale pour générer et télécharger le PDF
   const handleDownloadPDF = async () => {
     setIsDownloading(true)
     try {
+      // Générer le PDF via notre utilitaire pdfGenerator
       const pdfBlob = await generatePDF(invoiceData)
+      
+      // Créer un lien de téléchargement temporaire
       const url = URL.createObjectURL(pdfBlob)
       const link = document.createElement('a')
       link.href = url
       
+      // Nommer le fichier avec le nom de la facture ou une date par défaut
       const fileName = invoiceData.invoice.name 
         ? `${invoiceData.invoice.name}.pdf`
         : `Facture_${new Date().toISOString().split('T')[0]}.pdf`
@@ -316,11 +338,12 @@ export default function CreateInvoicePage() {
       document.body.removeChild(link)
       URL.revokeObjectURL(url)
       
+      // Afficher le modal de succès
       setModalMessage('PDF téléchargé avec succès !')
       setModalType('download')
       setShowModal(true)
       
-      // Tracking GA4
+      // Tracking Google Analytics si disponible
       if (typeof gtag !== 'undefined') {
         gtag('event', 'pdf_download', {
           'event_category': 'invoice',

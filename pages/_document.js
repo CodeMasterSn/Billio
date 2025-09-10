@@ -9,15 +9,18 @@ export default function Document() {
         <link rel="shortcut icon" type="image/png" href="/favicons/favicon.png" />
         <link rel="apple-touch-icon" href="/favicons/favicon.png" />
         
-        {/* Google Analytics 4 */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4D2F0SLXGD"></script>
+        {/* Google Analytics */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-8Y0MP42KQS"
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-4D2F0SLXGD');
+              gtag('config', 'G-8Y0MP42KQS');
             `,
           }}
         />

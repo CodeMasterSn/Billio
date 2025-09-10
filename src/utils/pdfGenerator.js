@@ -1,6 +1,19 @@
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 
+/**
+ * GÉNÉRATEUR PDF POUR FACTURES BILLIO
+ * 
+ * Ce module gère la génération de PDF côté client pour les factures.
+ * Il utilise jsPDF pour créer le PDF et html2canvas pour convertir le HTML en image.
+ * 
+ * Fonctionnalités principales :
+ * - Conversion HTML vers PDF via canvas
+ * - Conversion des nombres en lettres françaises
+ * - Formatage des dates françaises
+ * - Génération de factures professionnelles
+ */
+
 // Fonction pour convertir les nombres en mots français
 export const numberToWords = (num) => {
   const units = ['', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf']
@@ -45,6 +58,7 @@ export const formatDate = (dateString) => {
 export const generatePDF = async (invoiceData) => {
   try {
     // Créer un élément temporaire pour le rendu
+    // Cet élément sera invisible et utilisé uniquement pour la conversion HTML->PDF
     const tempDiv = document.createElement('div')
     tempDiv.style.position = 'absolute'
     tempDiv.style.left = '-9999px'
@@ -56,27 +70,28 @@ export const generatePDF = async (invoiceData) => {
     tempDiv.style.fontSize = '12px'
     tempDiv.style.lineHeight = '1.6'
     
-    // Générer le HTML de la facture
+    // Générer le HTML de la facture avec tous les styles inline
     const invoiceHTML = generateInvoiceHTML(invoiceData)
     tempDiv.innerHTML = invoiceHTML
     
-    // Ajouter au DOM temporairement
+    // Ajouter au DOM temporairement pour permettre le rendu
     document.body.appendChild(tempDiv)
     
-    // Convertir en canvas
+    // Convertir en canvas avec html2canvas
+    // Cette étape capture l'élément HTML comme image
     const canvas = await html2canvas(tempDiv, {
-      scale: 2,
-      useCORS: true,
-      allowTaint: true,
+      scale: 2, // Haute résolution pour un PDF de qualité
+      useCORS: true, // Permet les images externes
+      allowTaint: true, // Permet les images non-CORS
       backgroundColor: '#ffffff',
       width: 800,
       height: tempDiv.scrollHeight
     })
     
-    // Nettoyer
+    // Nettoyer l'élément temporaire
     document.body.removeChild(tempDiv)
     
-    // Créer le PDF
+    // Créer le PDF avec jsPDF
     const imgData = canvas.toDataURL('image/png')
     const pdf = new jsPDF('p', 'mm', 'a4')
     const pdfWidth = pdf.internal.pageSize.getWidth()
@@ -98,7 +113,7 @@ export const generatePDF = async (invoiceData) => {
       heightLeft -= pdfHeight
     }
     
-    // Retourner le PDF sous forme de blob
+    // Retourner le PDF sous forme de blob pour le téléchargement
     const pdfBlob = pdf.output('blob')
     return pdfBlob
   } catch (error) {

@@ -8,6 +8,24 @@ import { emailjsConfig } from '../../config/emailjs'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
+/**
+ * PAGE DE CONTACT - BILLIO
+ * 
+ * Cette page gère le formulaire de contact avec EmailJS pour l'envoi d'emails.
+ * 
+ * Fonctionnalités :
+ * - Formulaire de contact avec validation
+ * - Intégration EmailJS pour l'envoi d'emails
+ * - FAQ interactive
+ * - Carte Google Maps
+ * - Tracking des événements
+ * 
+ * Technologies utilisées :
+ * - EmailJS pour l'envoi d'emails côté client
+ * - React hooks pour la gestion d'état
+ * - Validation côté client
+ */
+
 export default function ContactPage() {
   // États React pour le formulaire EmailJS
   const [formData, setFormData] = useState({
@@ -23,7 +41,7 @@ export default function ContactPage() {
 
   const formRef = useRef()
 
-  // Vérification de la configuration EmailJS
+  // Vérification de la configuration EmailJS au chargement
   useEffect(() => {
     console.log('Configuration EmailJS:', emailjsConfig)
     
@@ -53,14 +71,14 @@ export default function ContactPage() {
     }
   }
 
-  // Fonction handleSubmit complète
+  // Fonction handleSubmit complète - Gestion du formulaire EmailJS
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitStatus('')
     setErrors({})
 
-    // Validation des champs
+    // Validation côté client des champs obligatoires
     const newErrors = {}
     if (!formData.nom.trim()) newErrors.nom = 'Le nom est obligatoire'
     if (!formData.email.trim()) newErrors.email = 'L\'email est obligatoire'
@@ -76,7 +94,7 @@ export default function ContactPage() {
     }
 
     try {
-      // Préparer les données pour EmailJS
+      // Préparer les données pour EmailJS selon le template configuré
       const templateParams = {
         from_name: formData.nom,
         from_email: formData.email,
@@ -89,6 +107,7 @@ export default function ContactPage() {
       console.log('Config EmailJS:', emailjsConfig)
 
       // Envoi EmailJS avec gestion d'erreur améliorée
+      // EmailJS permet d'envoyer des emails directement depuis le frontend
       const response = await emailjs.send(
         emailjsConfig.serviceId,
         emailjsConfig.templateId,
@@ -98,7 +117,7 @@ export default function ContactPage() {
 
       console.log('Succès EmailJS:', response)
       
-      // Tracking GA4 si disponible
+      // Tracking Google Analytics si disponible
       if (typeof gtag !== 'undefined') {
         gtag('event', 'contact_form_submit', {
           'subject_category': formData.sujet
@@ -107,7 +126,7 @@ export default function ContactPage() {
 
       setSubmitStatus('success')
       
-      // Reset formulaire après 2 secondes
+      // Reset automatique du formulaire après succès
       setTimeout(() => {
         setFormData({
           nom: '',
@@ -119,6 +138,7 @@ export default function ContactPage() {
       }, 2000)
 
     } catch (error) {
+      // Logging détaillé des erreurs EmailJS pour le debugging
       console.error('=== ERREUR EMAILJS COMPLÈTE ===')
       console.error('Erreur objet:', error)
       console.error('Message:', error?.message || 'Pas de message')
@@ -129,7 +149,7 @@ export default function ContactPage() {
       
       setSubmitStatus('error')
       
-      // Tracking erreur GA4 si disponible
+      // Tracking des erreurs pour analytics
       if (typeof gtag !== 'undefined') {
         gtag('event', 'contact_form_error', {
           'error_message': error?.message || 'Erreur inconnue'
