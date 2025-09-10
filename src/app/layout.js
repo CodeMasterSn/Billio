@@ -1,6 +1,7 @@
 import './globals.css'
 import '../styles/modal-animations.css'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,6 +19,20 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <body className={`${inter.className} bg-gray-50 min-h-screen`}>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-8Y0MP42KQS"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8Y0MP42KQS');
+          `}
+        </Script>
+        
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
           {children}
         </div>
