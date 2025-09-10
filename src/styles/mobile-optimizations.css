@@ -34,6 +34,8 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
   appearance: none;
   border-radius: 8px;
   -webkit-border-radius: 8px;
+  color: #111827 !important; /* Force la couleur de texte noire */
+  background-color: white;
 }
 
 /* Focus management pour iOS */
@@ -133,6 +135,7 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
   -webkit-appearance: none;
   appearance: none;
   background-color: white;
+  color: #111827 !important; /* Force la couleur de texte noire */
   transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;
 }
@@ -239,9 +242,26 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
   input[type="email"],
   input[type="tel"],
   input[type="number"],
+  input[type="password"],
+  input[type="search"],
   select,
   textarea {
     font-size: 16px !important;
+    color: #111827 !important; /* Force la couleur de texte noire */
+    background-color: white !important; /* Force le fond blanc */
+    -webkit-text-fill-color: #111827 !important; /* Safari spécifique */
+  }
+  
+  /* Correction spécifique pour les inputs avec placeholder */
+  input::placeholder {
+    color: #6b7280 !important;
+    -webkit-text-fill-color: #6b7280 !important;
+  }
+  
+  /* Correction pour les inputs en focus */
+  input:focus {
+    color: #111827 !important;
+    -webkit-text-fill-color: #111827 !important;
   }
 }
 

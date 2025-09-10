@@ -110,10 +110,12 @@ export default function InvoiceForm({
                   value={invoiceData.invoice?.name || ''}
                   onChange={(e) => handleInputChange('invoice', 'name', e.target.value)}
                   placeholder="Ex: Facture Web Design - Janvier 2024"
-                  className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 ${
+                  className={`invoice-form-input w-full ${
                     validationErrors['invoice.name'] ? 'border-red-500 bg-red-50' : 'border-gray-300'
                   }`}
                   required
+                  autoComplete="off"
+                  inputMode="text"
                 />
               </div>
               
@@ -125,7 +127,7 @@ export default function InvoiceForm({
                   type="date"
                   value={invoiceData.invoice?.date || ''}
                   onChange={(e) => handleInputChange('invoice', 'date', e.target.value)}
-                  className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 ${
+                  className={`invoice-form-input w-full ${
                     validationErrors['invoice.date'] ? 'border-red-500 bg-red-50' : 'border-gray-300'
                   }`}
                   required
@@ -189,10 +191,12 @@ export default function InvoiceForm({
                   value={invoiceData.company?.name || ''}
                   onChange={(e) => handleInputChange('company', 'name', e.target.value)}
                   placeholder="Nom de votre entreprise"
-                  className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 ${
+                  className={`invoice-form-input w-full ${
                     validationErrors['company.name'] ? 'border-red-500 bg-red-50' : 'border-gray-300'
                   }`}
                   required
+                  autoComplete="off"
+                  inputMode="text"
                 />
               </div>
               
@@ -205,10 +209,12 @@ export default function InvoiceForm({
                   value={invoiceData.company?.phone || ''}
                   onChange={(e) => handleInputChange('company', 'phone', e.target.value)}
                   placeholder="77 123 45 67"
-                  className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 ${
+                  className={`invoice-form-input w-full ${
                     validationErrors['company.phone'] ? 'border-red-500 bg-red-50' : 'border-gray-300'
                   }`}
                   required
+                  autoComplete="off"
+                  inputMode="tel"
                 />
               </div>
             </div>
@@ -223,7 +229,11 @@ export default function InvoiceForm({
                   value={invoiceData.company?.email || ''}
                   onChange={(e) => handleInputChange('company', 'email', e.target.value)}
                   placeholder="contact@entreprise.com"
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                  className="invoice-form-input w-full"
+                autoComplete="off"
+                inputMode="text"
+                  autoComplete="email"
+                  inputMode="email"
                 />
               </div>
               
@@ -236,7 +246,11 @@ export default function InvoiceForm({
                   value={invoiceData.company?.address || ''}
                   onChange={(e) => handleInputChange('company', 'address', e.target.value)}
                   placeholder="Avenue Léopold Sédar Senghor, Dakar"
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                  className="invoice-form-input w-full"
+                autoComplete="off"
+                inputMode="text"
+                  autoComplete="off"
+                  inputMode="text"
                 />
               </div>
             </div>
@@ -265,10 +279,12 @@ export default function InvoiceForm({
                 value={invoiceData.client?.name || ''}
                 onChange={(e) => handleInputChange('client', 'name', e.target.value)}
                 placeholder="Nom complet du client"
-                className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 ${
+                className={`invoice-form-input w-full ${
                   validationErrors['client.name'] ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
                 required
+                autoComplete="off"
+                inputMode="text"
               />
             </div>
 
@@ -295,7 +311,9 @@ export default function InvoiceForm({
                   value={invoiceData.client?.phone || ''}
                   onChange={(e) => handleInputChange('client', 'phone', e.target.value)}
                   placeholder="77 123 45 67"
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                  className="invoice-form-input w-full"
+                  autoComplete="tel"
+                  inputMode="tel"
                 />
               </div>
               
@@ -308,7 +326,9 @@ export default function InvoiceForm({
                   value={invoiceData.client?.email || ''}
                   onChange={(e) => handleInputChange('client', 'email', e.target.value)}
                   placeholder="client@email.com"
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                  className="invoice-form-input w-full"
+                  autoComplete="email"
+                  inputMode="email"
                 />
               </div>
             </div>
@@ -492,7 +512,9 @@ export default function InvoiceForm({
                   value={invoiceData.company?.mobileMoneyNumber || ''}
                   onChange={(e) => handleInputChange('company', 'mobileMoneyNumber', e.target.value)}
                   placeholder={invoiceData.company.mobileMoneyService === 'Orange Money' ? '77 123 45 67' : '70 123 45 67'}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                  className="invoice-form-input w-full"
+                  autoComplete="tel"
+                  inputMode="tel"
                 />
               </div>
             )}
