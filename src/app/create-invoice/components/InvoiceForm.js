@@ -127,6 +127,9 @@ export default function InvoiceForm({
                 Appuyez sur les sections ci-dessous pour les ouvrir et remplir vos informations. 
                 Vous pouvez ouvrir/fermer chaque section selon vos besoins.
               </p>
+              <p className="mt-2 text-sm text-blue-700">
+                💾 Retrouvez toutes vos factures dans l'historique accessible via le menu.
+              </p>
             </div>
           </div>
         </div>

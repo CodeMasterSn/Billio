@@ -389,7 +389,7 @@ export default function InvoicePreview({ invoiceData }) {
                   <td className="border-0 px-2 py-3 text-right text-gray-900 text-xs sm:text-sm whitespace-nowrap">
                     {item.quantity === '' ? '-' : (item.quantity || '-')}
                   </td>
-                  <td className="border-0 px-2 py-3 text-right font-semibold text-gray-900 text-xs whitespace-nowrap">
+                  <td className="border-0 px-2 py-3 text-right font-semibold text-gray-900 text-xs whitespace-nowrap overflow-hidden">
                     {((item.price || 0) * (item.quantity === '' ? 0 : (item.quantity || 0))).toLocaleString('fr-FR')} FCFA
                   </td>
                 </tr>

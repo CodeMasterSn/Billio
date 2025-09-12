@@ -6,12 +6,22 @@ const nextConfig = {
     unoptimized: true
   },
   eslint: {
-    // Désactiver ESLint temporairement pour le déploiement
     ignoreDuringBuilds: true,
   },
   typescript: {
-    // Désactiver TypeScript temporairement si nécessaire
     ignoreBuildErrors: true,
+  },
+  // Ajout pour résoudre les problèmes Webpack
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      }
+    }
+    return config
   },
 }
 

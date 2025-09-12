@@ -23,9 +23,6 @@ export default function Header() {
             <Link href="/historique" className="text-gray-700 hover:text-blue-600 transition-colors px-2 py-1 rounded-md text-xs xl:text-sm font-medium whitespace-nowrap">
               Historique
             </Link>
-            <Link href="/tarifs" className="text-gray-700 hover:text-blue-600 transition-colors px-2 py-1 rounded-md text-xs xl:text-sm font-medium whitespace-nowrap">
-              Tarifs
-            </Link>
             <Link href="/about" className="text-gray-700 hover:text-blue-600 transition-colors px-2 py-1 rounded-md text-xs xl:text-sm font-medium whitespace-nowrap">
               À propos
             </Link>
@@ -74,13 +71,6 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Historique
-              </Link>
-              <Link 
-                href="/tarifs" 
-                className="block px-3 py-2 rounded-md text-sm sm:text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Tarifs
               </Link>
               <Link 
                 href="/about" 

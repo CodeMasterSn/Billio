@@ -174,7 +174,7 @@ export default function InvoiceHistoryPage() {
         <div className="mb-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 whitespace-nowrap">
                 📋 Historique des Factures
               </h1>
               <p className="text-gray-600">
@@ -200,7 +200,7 @@ export default function InvoiceHistoryPage() {
                 <div className="text-sm text-gray-600">Total Factures</div>
               </div>
               <div className="bg-white rounded-lg p-4 shadow-sm">
-                <div className="text-2xl font-bold text-blue-500">
+                <div className="text-lg font-bold text-blue-500 whitespace-nowrap">
                   {formatAmount(stats.totalAmount)} FCFA
                 </div>
                 <div className="text-sm text-gray-600">Montant Total</div>
@@ -284,7 +284,7 @@ export default function InvoiceHistoryPage() {
                       </p>
                     </div>
                     <div className="text-right">
-                      <div className="text-xl font-bold text-blue-500">
+                      <div className="text-lg font-bold text-blue-500 whitespace-nowrap">
                         {formatAmount(invoice.totalAmount)} FCFA
                       </div>
                     </div>
