@@ -12,7 +12,7 @@ export default function InvoiceForm({
   onLogoRemove 
 }) {
   const [openSections, setOpenSections] = useState({
-    invoice: false, // Fermé par défaut sur mobile
+    invoice: false, // Fermé par défaut (desktop et mobile)
     company: false,
     client: false,
     items: false,
@@ -83,19 +83,17 @@ export default function InvoiceForm({
       const mobile = window.innerWidth <= 768
       setIsMobile(mobile)
       
-      // Sur desktop, ouvrir toutes les sections par défaut
-      if (!mobile) {
-        setOpenSections({
-          invoice: true,
-          company: true,
-          client: true,
-          items: true,
-          payment: true,
-          notes: true
-        })
-      }
+      // Toutes les sections fermées par défaut (desktop et mobile)
+      setOpenSections({
+        invoice: false,
+        company: false,
+        client: false,
+        items: false,
+        payment: false,
+        notes: false
+      })
     }
-
+    
     checkMobile()
     window.addEventListener('resize', checkMobile)
     

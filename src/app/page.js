@@ -24,7 +24,7 @@ export default function HomePage() {
     },
     {
       question: "Quelles fonctionnalités sont disponibles maintenant ?",
-      answer: "Création de factures, téléchargement PDF, impression, compatibilité mobile, formats adaptés au Sénégal (Orange Money, Wave, NINEA). Historique et templates personnalisés arrivent bientôt."
+      answer: "Création de factures, téléchargement PDF, impression, compatibilité mobile, formats adaptés au Sénégal (Orange Money, Wave, NINEA). Historique disponible et templates personnalisés arrivent bientôt."
     },
     {
       question: "Mes données sont-elles sécurisées ?",
@@ -118,19 +118,14 @@ export default function HomePage() {
             </div>
             
             {/* Point fort 2 */}
-            <div className="text-center space-y-4 p-6 rounded-xl hover:shadow-lg transition-shadow relative">
-              <div className="w-16 h-16 bg-green-100 rounded-full mx-auto flex items-center justify-center relative">
+            <div className="text-center space-y-4 p-6 rounded-xl hover:shadow-lg transition-shadow">
+              <div className="w-16 h-16 bg-green-100 rounded-full mx-auto flex items-center justify-center">
                 <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
-                <div className="absolute -top-1 -right-1">
-                  <span className="bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow-sm">
-                    Bientôt
-                  </span>
-                </div>
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
-                Bientôt - Historique de vos factures
+                Historique de vos factures
               </h3>
               <p className="text-sm sm:text-base text-gray-600">
                 Retrouvez toutes vos factures en un clic, consultez leur statut et gérez votre historique de facturation facilement.

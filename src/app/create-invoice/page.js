@@ -5,8 +5,10 @@ import Link from 'next/link'
 import InvoiceForm from './components/InvoiceForm'
 import InvoicePreview from './components/InvoicePreview'
 import { generatePDF } from '../../utils/pdfGenerator'
+import { saveInvoiceToHistory } from '../../utils/invoiceHistory'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
+import HistoryDiscoveryBanner from '../../components/HistoryDiscoveryBanner'
 
 /**
  * PAGE DE CRÉATION DE FACTURE - BILLIO
@@ -338,6 +340,17 @@ export default function CreateInvoicePage() {
       document.body.removeChild(link)
       URL.revokeObjectURL(url)
       
+      // Sauvegarder automatiquement dans l'historique
+      const savedInvoiceId = saveInvoiceToHistory(invoiceData)
+      if (savedInvoiceId) {
+        console.log('Facture sauvegardée dans l\'historique:', savedInvoiceId)
+        
+        // Déclencher un événement personnalisé pour mettre à jour le bandeau
+        window.dispatchEvent(new CustomEvent('invoiceSaved', { 
+          detail: { invoiceId: savedInvoiceId } 
+        }))
+      }
+      
       // Afficher le modal de succès
       setModalMessage('PDF téléchargé avec succès !')
       setModalType('download')
@@ -474,6 +487,9 @@ export default function CreateInvoicePage() {
       
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-7xl mx-auto">
+          {/* Bandeau de découverte historique */}
+          <HistoryDiscoveryBanner />
+          
           {/* En-tête */}
           <div className="mb-8 text-center">
             <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-4">

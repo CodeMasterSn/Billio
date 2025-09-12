@@ -54,11 +54,33 @@ export const formatDate = (dateString) => {
   })
 }
 
-// Fonction pour générer le PDF côté client
+/**
+ * GÉNÉRATION PDF CÔTÉ CLIENT - FONCTION PRINCIPALE
+ * 
+ * Cette fonction est le cœur du système de génération PDF de Billio.
+ * Elle convertit les données de facture en document PDF professionnel.
+ * 
+ * PROCESSUS DE GÉNÉRATION :
+ * 1. Création d'un élément DOM temporaire invisible
+ * 2. Génération du HTML de la facture avec styles inline
+ * 3. Conversion HTML vers image via html2canvas
+ * 4. Création du PDF via jsPDF avec l'image générée
+ * 5. Téléchargement automatique du fichier PDF
+ * 
+ * OPTIMISATIONS TECHNIQUES :
+ * - Styles inline pour éviter les problèmes de CSS
+ * - Élément temporaire pour éviter les conflits visuels
+ * - Gestion des erreurs robuste avec fallbacks
+ * - Support des logos d'entreprise (images)
+ * 
+ * @param {Object} invoiceData - Données complètes de la facture
+ * @returns {Promise<void>} - Téléchargement automatique du PDF
+ */
 export const generatePDF = async (invoiceData) => {
   try {
     // Créer un élément temporaire pour le rendu
     // Cet élément sera invisible et utilisé uniquement pour la conversion HTML->PDF
+    // Position absolue hors écran pour éviter les interférences visuelles
     const tempDiv = document.createElement('div')
     tempDiv.style.position = 'absolute'
     tempDiv.style.left = '-9999px'
@@ -122,7 +144,31 @@ export const generatePDF = async (invoiceData) => {
   }
 }
 
-// Fonction pour générer l'HTML de la facture - Identique à l'aperçu et l'impression
+/**
+ * GÉNÉRATION HTML DE LA FACTURE - TEMPLATE PDF
+ * 
+ * Cette fonction génère le HTML complet de la facture avec tous les styles inline.
+ * Elle reproduit exactement l'apparence de l'aperçu à l'écran pour garantir
+ * la cohérence visuelle entre l'aperçu et le PDF téléchargé.
+ * 
+ * STRUCTURE DE LA FACTURE :
+ * 1. Motifs décoratifs (coins bleus)
+ * 2. En-tête avec logo, nom entreprise et informations
+ * 3. Titre "FACTURE" avec détails (nom, date)
+ * 4. Section "Facturé par" et "Facturé à" côte à côte
+ * 5. Tableau des articles/services avec calculs
+ * 6. Section paiement et notes
+ * 7. Pied de page avec totaux
+ * 
+ * OPTIMISATIONS PDF :
+ * - Styles inline complets pour éviter les problèmes de CSS
+ * - Largeur fixe (800px) pour un rendu PDF optimal
+ * - Couleurs et polices cohérentes avec l'aperçu
+ * - Structure responsive adaptée au format PDF
+ * 
+ * @param {Object} invoiceData - Données complètes de la facture
+ * @returns {string} - HTML complet avec styles inline
+ */
 const generateInvoiceHTML = (invoiceData) => {
   return `
     <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 800px; margin: 0 auto; background: white; line-height: 1.4; color: #333; position: relative;">
@@ -139,21 +185,27 @@ const generateInvoiceHTML = (invoiceData) => {
       <div style="position: absolute; bottom: 0; left: 50%; width: 24px; height: 24px; border-bottom: 2px solid #93c5fd; border-radius: 50%; transform: translateX(-50%);"></div>
 
       <div style="padding: 40px; position: relative; z-index: 10;">
-        <!-- En-tête -->
+        <!-- EN-TÊTE DE LA FACTURE -->
+        <!-- Structure flex pour aligner logo+infos à gauche et titre FACTURE à droite -->
         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px;">
+          <!-- SECTION ENTREPRISE (gauche) -->
           <div style="flex: 1;">
+            <!-- Logo + Nom de l'entreprise alignés horizontalement -->
             <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+              <!-- Logo ou initiales de l'entreprise -->
               <div style="width: 60px; height: 60px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                 ${invoiceData.company?.logo ? 
                   `<img src="${invoiceData.company.logo}" alt="Logo entreprise" style="width: 100%; height: 100%; object-fit: contain;" />` : 
                   `<span style="color: #333; font-size: 16px; font-weight: bold;">${invoiceData.company?.name ? invoiceData.company.name.substring(0, 2).toUpperCase() : 'LO'}</span>`
                 }
               </div>
+              <!-- Nom de l'entreprise -->
               <h1 style="margin: 0; color: #333; font-size: 18px; font-weight: 600;">${invoiceData.company?.name || 'Votre Entreprise'}</h1>
             </div>
-            <p style="margin: 3px 0; color: #333; font-size: 13px;">${invoiceData.company?.address || 'Adresse non renseignée'}</p>
-            <p style="margin: 3px 0; color: #333; font-size: 13px;">${invoiceData.company?.phone || 'Téléphone non renseigné'}</p>
-            <p style="margin: 3px 0; color: #333; font-size: 13px;">${invoiceData.company?.email || 'Email non renseigné'}</p>
+            <!-- Informations de contact de l'entreprise (affichage conditionnel) -->
+            ${invoiceData.company?.address ? `<p style="margin: 3px 0; color: #333; font-size: 13px;">${invoiceData.company.address}</p>` : ''}
+            ${invoiceData.company?.phone ? `<p style="margin: 3px 0; color: #333; font-size: 13px;">${invoiceData.company.phone}</p>` : ''}
+            ${invoiceData.company?.email ? `<p style="margin: 3px 0; color: #333; font-size: 13px;">${invoiceData.company.email}</p>` : ''}
           </div>
           
           <div style="text-align: right; flex-shrink: 0; width: 256px; max-width: none;">
@@ -177,15 +229,35 @@ const generateInvoiceHTML = (invoiceData) => {
           </div>
         </div>
 
-      <!-- Informations parties prenantes -->
+      <!-- SECTION PARTIES PRENANTES -->
+      <!-- Structure côte à côte : "Facturé par" (entreprise) et "Facturé à" (client) -->
       <div style="margin-bottom: 40px;">
-        <div>
-          <h3 style="margin: 0 0 12px 0; color: #333; font-size: 14px; font-weight: 600;">Facturé à</h3>
-          ${invoiceData.client?.name ? `
-            <p style="margin: 4px 0; color: #333; font-size: 13px; font-weight: 600;">${invoiceData.client.name}</p>
-            <p style="margin: 4px 0; color: #333; font-size: 13px;">${invoiceData.client.address || 'Adresse non renseignée'}</p>
-            ${invoiceData.client.phone ? `<p style="margin: 4px 0; color: #333; font-size: 13px;">${invoiceData.client.phone}</p>` : ''}
-          ` : '<p style="margin: 4px 0; color: #999; font-style: italic; font-size: 13px;">Informations client non renseignées</p>'}
+        <div style="display: flex; justify-content: space-between; gap: 40px;">
+          <!-- FACTURÉ PAR - Informations de l'entreprise qui émet la facture -->
+          <div style="flex: 1;">
+            <h3 style="margin: 0 0 12px 0; color: #333; font-size: 14px; font-weight: 600;">Facturé par</h3>
+            <div style="text-sm space-y-1;">
+              <!-- Nom de l'entreprise (obligatoire) -->
+              <div style="font-weight: 600; color: #333; font-size: 13px;">${invoiceData.company?.name || 'Nom de l\'entreprise'}</div>
+              <!-- Informations de contact (affichage conditionnel - pas de "non renseigné") -->
+              ${invoiceData.company?.address ? `<div style="color: #333; font-size: 13px;">${invoiceData.company.address}</div>` : ''}
+              ${invoiceData.company?.phone ? `<div style="color: #333; font-size: 13px;">Tél: ${invoiceData.company.phone}</div>` : ''}
+              ${invoiceData.company?.email ? `<div style="color: #333; font-size: 13px;">Email: ${invoiceData.company.email}</div>` : ''}
+            </div>
+          </div>
+          
+          <!-- FACTURÉ À - Informations du client destinataire de la facture -->
+          <div style="flex: 1;">
+            <h3 style="margin: 0 0 12px 0; color: #333; font-size: 14px; font-weight: 600;">Facturé à</h3>
+            ${invoiceData.client?.name ? `
+              <!-- Nom du client (obligatoire) -->
+              <div style="font-weight: 600; color: #333; font-size: 13px;">${invoiceData.client.name}</div>
+              <!-- Informations de contact client (affichage conditionnel - pas de "non renseigné") -->
+              ${invoiceData.client.address ? `<div style="color: #333; font-size: 13px;">${invoiceData.client.address}</div>` : ''}
+              ${invoiceData.client.phone ? `<div style="color: #333; font-size: 13px;">Tél: ${invoiceData.client.phone}</div>` : ''}
+              ${invoiceData.client.email ? `<div style="color: #333; font-size: 13px;">Email: ${invoiceData.client.email}</div>` : ''}
+            ` : '<div style="color: #999; font-style: italic; font-size: 13px;">Informations client non renseignées</div>'}
+          </div>
         </div>
       </div>
 

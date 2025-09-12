@@ -1,11 +1,48 @@
+/**
+ * OPTIMISATIONS MOBILES POUR BILLIO - COMPATIBILITÉ IPHONE ET ANDROID
+ * 
+ * Ce fichier CSS contient toutes les optimisations spécifiques pour améliorer
+ * l'expérience utilisateur sur les appareils mobiles, particulièrement les iPhones.
+ * 
+ * PROBLÈMES RÉSOLUS :
+ * 1. Zoom automatique sur iOS lors de la saisie dans les inputs
+ * 2. Texte blanc invisible dans les champs de saisie
+ * 3. Bordures manquantes sur les inputs
+ * 4. Zones tactiles trop petites pour les boutons
+ * 5. Comportements tactiles non optimisés
+ * 
+ * TECHNIQUES UTILISÉES :
+ * - font-size: 16px minimum pour éviter le zoom iOS
+ * - touch-action: manipulation pour les interactions tactiles
+ * - -webkit- prefixes pour la compatibilité Safari
+ * - min-height: 44px pour les zones tactiles recommandées par Apple
+ * - color: #111827 !important pour forcer la couleur de texte
+ * 
+ * COMPATIBILITÉ :
+ * - iOS Safari (iPhone/iPad)
+ * - Chrome Mobile (Android)
+ * - Firefox Mobile
+ * - Edge Mobile
+ * 
+ * @author Équipe Billio
+ * @version 1.0
+ * @since Décembre 2024
+ */
+
 /* OPTIMISATIONS MOBILES POUR IPHONE/SAFARI - BILLIO */
 
-/* Touch-action pour tous les éléments interactifs */
+/* ========================================
+   OPTIMISATIONS TACTILES GLOBALES
+   ======================================== */
+/* 
+ * Applique les optimisations tactiles à tous les éléments interactifs
+ * pour améliorer la réactivité sur les appareils mobiles
+ */
 button, input, select, textarea, [role="button"] {
-  touch-action: manipulation;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
+  touch-action: manipulation; /* Évite les délais de double-tap */
+  -webkit-touch-callout: none; /* Désactive le menu contextuel iOS */
+  -webkit-user-select: none; /* Empêche la sélection de texte */
+  user-select: none; /* Standard pour empêcher la sélection */
 }
 
 /* Tailles minimales tactiles iOS (44px minimum) */
@@ -25,21 +62,27 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
   user-select: none;
 }
 
-/* Inputs optimisés pour mobile */
+/* ========================================
+   CLASSES D'INPUTS OPTIMISÉES MOBILE
+   ======================================== */
+/* 
+ * Classes spécifiques pour les inputs du formulaire de facturation
+ * Résolvent les problèmes de zoom iOS et de couleur de texte
+ */
 .invoice-form-input {
-  min-height: 44px;
+  min-height: 44px; /* Zone tactile minimale recommandée par Apple */
   font-size: 16px; /* Évite le zoom automatique sur iOS */
-  padding: 12px;
+  padding: 12px; /* Espacement confortable pour la saisie */
   border: 1px solid #d1d5db !important; /* Force la bordure grise */
   border-radius: 8px;
-  -webkit-border-radius: 8px;
-  touch-action: manipulation;
-  -webkit-appearance: none;
-  appearance: none;
+  -webkit-border-radius: 8px; /* Compatibilité Safari */
+  touch-action: manipulation; /* Optimisation tactile */
+  -webkit-appearance: none; /* Supprime les styles par défaut iOS */
+  appearance: none; /* Standard pour supprimer les styles par défaut */
   color: #111827 !important; /* Force la couleur de texte noire */
-  background-color: white;
-  transition: all 0.2s ease;
-  -webkit-transition: all 0.2s ease;
+  background-color: white; /* Fond blanc garanti */
+  transition: all 0.2s ease; /* Transition fluide */
+  -webkit-transition: all 0.2s ease; /* Compatibilité Safari */
 }
 
 /* Focus management pour iOS */

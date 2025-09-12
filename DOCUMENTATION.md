@@ -413,6 +413,36 @@ npm run build
 
 ---
 
+## 📝 MODIFICATIONS RÉCENTES (Décembre 2024)
+
+### 🔧 Corrections PDF et Optimisations Mobile
+
+#### **Problèmes résolus :**
+1. **Messages "non renseigné" dans le PDF** : Suppression des messages d'erreur pour les champs vides
+2. **Titre "Facturé par" manquant** : Restauration de la structure complète des parties prenantes
+3. **Informations entreprise dans l'en-tête** : Réintégration des détails après le logo
+4. **Optimisations mobile** : Amélioration de la compatibilité iPhone et correction des problèmes de saisie
+
+#### **Fichiers modifiés :**
+- `src/utils/pdfGenerator.js` : Correction de la génération PDF
+- `src/app/create-invoice/components/InvoiceForm.js` : Optimisations mobile
+- `src/styles/mobile-optimizations.css` : Styles spécifiques mobile
+
+#### **Nouvelles fonctionnalités ajoutées :**
+- **Historique des factures** : Sauvegarde automatique dans localStorage
+- **Page historique** : Interface de consultation des factures créées
+- **Page tarifs** : Présentation des plans de facturation
+- **Pages légales** : Conditions d'utilisation, politique de confidentialité, politique des cookies
+- **Centre d'aide** : FAQ complète et support utilisateur
+
+#### **Améliorations UX :**
+- **Sections fermées par défaut** : Formulaire moins encombrant
+- **Messages d'aide** : Clarifications pour les utilisateurs
+- **Navigation optimisée** : Réorganisation du menu principal
+- **Design responsive** : Amélioration de l'expérience mobile
+
+---
+
 ## 🎯 CONCLUSION
 
 Le projet **Billio** est une application web moderne et bien structurée qui répond efficacement aux besoins de facturation des entrepreneurs africains. L'architecture technique est solide avec une séparation claire des responsabilités, une gestion d'état centralisée et des fonctionnalités adaptées au marché local.

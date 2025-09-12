@@ -15,19 +15,19 @@ export default function Header() {
             Billio
           </Link>
           
-          {/* Navigation Desktop */}
+          {/* Navigation Desktop - Ordre optimisé selon logique d'usage */}
           <nav className="hidden lg:flex space-x-4 xl:space-x-6">
             <Link href="/create-invoice" className="text-gray-700 hover:text-blue-600 transition-colors px-2 py-1 rounded-md text-xs xl:text-sm font-medium whitespace-nowrap">
               Créer une facture
             </Link>
-            <Link href="/invoice-history" className="text-gray-700 hover:text-blue-600 transition-colors px-2 py-1 rounded-md text-xs xl:text-sm font-medium whitespace-nowrap">
+            <Link href="/historique" className="text-gray-700 hover:text-blue-600 transition-colors px-2 py-1 rounded-md text-xs xl:text-sm font-medium whitespace-nowrap">
               Historique
+            </Link>
+            <Link href="/tarifs" className="text-gray-700 hover:text-blue-600 transition-colors px-2 py-1 rounded-md text-xs xl:text-sm font-medium whitespace-nowrap">
+              Tarifs
             </Link>
             <Link href="/about" className="text-gray-700 hover:text-blue-600 transition-colors px-2 py-1 rounded-md text-xs xl:text-sm font-medium whitespace-nowrap">
               À propos
-            </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-blue-600 transition-colors px-2 py-1 rounded-md text-xs xl:text-sm font-medium whitespace-nowrap">
-              Contact
             </Link>
           </nav>
           
@@ -69,11 +69,18 @@ export default function Header() {
                 Créer une facture
               </Link>
               <Link 
-                href="/invoice-history" 
+                href="/historique" 
                 className="block px-3 py-2 rounded-md text-sm sm:text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Historique
+              </Link>
+              <Link 
+                href="/tarifs" 
+                className="block px-3 py-2 rounded-md text-sm sm:text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Tarifs
               </Link>
               <Link 
                 href="/about" 
@@ -81,13 +88,6 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 À propos
-              </Link>
-              <Link 
-                href="/contact" 
-                className="block px-3 py-2 rounded-md text-sm sm:text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
               </Link>
               <div className="pt-2">
                 <Link 
