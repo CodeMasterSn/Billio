@@ -9,8 +9,9 @@ import { useState } from 'react'
 export default function HomePage() {
   const [openFAQ, setOpenFAQ] = useState(null)
 
-  const toggleFAQ = (index) => {
+  const toggleFAQ = (index, event) => {
     setOpenFAQ(openFAQ === index ? null : index)
+    event.target.blur() // Supprimer le focus après le clic
   }
 
   const faqs = [
@@ -20,7 +21,7 @@ export default function HomePage() {
     },
     {
       question: "Billio est-il gratuit ?",
-      answer: "Oui ! Créez jusqu'à 30 factures par mois gratuitement. Pour une utilisation plus intensive, Billio Pro offre un accès illimité à partir de 10.000 FCFA/mois."
+      answer: "Oui ! Billio est actuellement entièrement gratuit. Créez un nombre illimité de factures sans aucune limite. La plateforme reste gratuite jusqu'à l'arrivée des fonctionnalités premium."
     },
     {
       question: "Quelles fonctionnalités sont disponibles maintenant ?",
@@ -340,8 +341,8 @@ export default function HomePage() {
             {faqs.map((faq, index) => (
               <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <button 
-                  onClick={() => toggleFAQ(index)}
-                  className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 text-left flex justify-between items-center hover:bg-blue-50 transition-colors"
+                  onClick={(e) => toggleFAQ(index, e)}
+                  className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 text-left flex justify-between items-center hover:bg-blue-50 transition-colors focus:outline-none"
                 >
                   <h3 className="text-base sm:text-lg font-semibold text-gray-900 pr-4">
                     {faq.question}

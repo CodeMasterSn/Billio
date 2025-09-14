@@ -24,7 +24,7 @@ export default function CentreAidePage() {
 2. Remplissez les informations de votre entreprise (nom, adresse, téléphone)
 3. Ajoutez les détails de votre client (nom, adresse, téléphone)
 4. Listez vos produits ou services avec quantités et prix
-5. Choisissez le mode de paiement (Wave, Orange Money, virement, espèces)
+5. Indiquez le mode de paiement souhaité sur la facture (Wave, Orange Money, virement, espèces) pour informer votre client
 6. Ajoutez des notes si nécessaire
 7. Cliquez sur 'Télécharger' pour récupérer votre facture PDF
 
@@ -34,14 +34,14 @@ Temps estimé : 2-3 minutes. Votre facture sera automatiquement sauvegardée dan
       id: 'start-2',
       category: 'Démarrage',
       question: 'Billio est-il vraiment gratuit ?',
-      answer: `Oui, Billio propose un plan gratuit qui vous permet de :
-• Créer jusqu'à 10 factures par mois
+      answer: `Oui, Billio est actuellement entièrement gratuit ! Vous pouvez :
+• Créer un nombre illimité de factures
 • Télécharger vos factures en PDF
 • Imprimer directement vos factures
-• Accéder à votre historique
-• Utiliser toutes les fonctionnalités de base
+• Accéder à votre historique complet
+• Utiliser toutes les fonctionnalités disponibles
 
-Le plan gratuit est parfait pour débuter et tester notre solution. Pour plus de factures, découvrez nos plans payants sur la page Tarifs.`
+La plateforme reste gratuite jusqu'à l'arrivée des fonctionnalités premium. Profitez-en !`
     },
     {
       id: 'start-3',
@@ -87,13 +87,14 @@ Conseil : Utilisez un logo de bonne qualité (minimum 200x200 pixels) pour un re
       id: 'features-2',
       category: 'Fonctionnalités',
       question: 'Puis-je modifier une facture créée ?',
-      answer: `Oui, vous pouvez modifier vos factures :
-1. Allez dans votre 'Historique'
-2. Cliquez sur 'Voir la facture' pour la facture souhaitée
-3. Modifiez les informations nécessaires
-4. Téléchargez la nouvelle version
+      answer: `Actuellement, la modification de factures n'est pas encore disponible. 
 
-Note : Chaque modification crée une nouvelle version. L'historique conserve toutes les versions pour votre traçabilité.`
+Pour l'instant, vous pouvez :
+• Consulter vos factures dans l'historique
+• Télécharger à nouveau vos factures existantes
+• Créer une nouvelle facture si des modifications sont nécessaires
+
+Cette fonctionnalité sera disponible prochainement dans les versions futures de Billio.`
     },
     {
       id: 'features-3',
@@ -129,62 +130,64 @@ Vous pouvez indiquer plusieurs modes de paiement sur une même facture.`
       id: 'pricing-1',
       category: 'Plans et tarification',
       question: 'Quelles sont les différences entre les plans ?',
-      answer: `Plan Gratuit :
-• 10 factures par mois
-• Toutes les fonctionnalités de base
-• Support communautaire
-
-Plan Standard (10 000 FCFA/mois) :
+      answer: `Plan Gratuit (Actuel) :
 • Factures illimitées
+• Toutes les fonctionnalités disponibles
+• Support communautaire
+• Aucune limite d'utilisation
+
+Plan Standard (Bientôt disponible) :
 • Templates personnalisés
 • Support prioritaire
-• Export Excel
+• Fonctionnalités avancées
 
-Plan Premium (25 000 FCFA/mois) :
+Plan Premium (Bientôt disponible) :
 • Tout du Standard
 • Intégration comptabilité
 • Rapports avancés
 • Support dédié
 
-Découvrez tous les détails sur notre page Tarifs.`
+Actuellement, tous les utilisateurs bénéficient du plan gratuit complet !`
     },
     {
       id: 'pricing-2',
       category: 'Plans et tarification',
       question: 'Comment passer au plan payant ?',
-      answer: `Pour passer au plan payant :
+      answer: `Pour passer au plan payant (bientôt disponible) :
 1. Rendez-vous sur la page 'Tarifs'
 2. Choisissez votre plan (Standard ou Premium)
 3. Cliquez sur 'Choisir ce plan'
 4. Effectuez le paiement via Wave ou Orange Money
 5. Votre compte sera activé immédiatement
 
-Paiement sécurisé et instantané. Support disponible si besoin.`
+Actuellement, la plateforme est entièrement gratuite. Les plans payants seront disponibles prochainement avec des fonctionnalités premium.`
     },
     {
       id: 'pricing-3',
       category: 'Plans et tarification',
       question: 'Puis-je annuler mon abonnement ?',
-      answer: `Oui, vous pouvez annuler votre abonnement à tout moment :
+      answer: `Oui, vous pourrez annuler votre abonnement à tout moment (quand les plans payants seront disponibles) :
 1. Contactez-nous via le formulaire de contact
 2. Indiquez votre demande d'annulation
 3. Votre abonnement sera arrêté à la fin de la période payée
 4. Vous retrouverez automatiquement le plan gratuit
 
-Aucun frais d'annulation. Politique flexible et transparente.`
+Actuellement, la plateforme est entièrement gratuite. Aucun abonnement à gérer !`
     },
     {
       id: 'pricing-4',
       category: 'Plans et tarification',
       question: 'Comment se fait le paiement via Wave ?',
-      answer: `Paiement Wave simple et sécurisé :
+      answer: `Cette question concerne les paiements futurs pour les plans payants (bientôt disponibles).
+
+Actuellement, Billio est entièrement gratuit. Quand les plans payants seront disponibles, le paiement Wave fonctionnera ainsi :
 1. Sélectionnez votre plan sur la page Tarifs
 2. Cliquez sur 'Payer avec Wave'
 3. Vous serez redirigé vers Wave
 4. Confirmez le paiement avec votre code PIN
 5. Retour automatique sur Billio avec activation immédiate
 
-Paiement instantané et sécurisé. Recevez votre facture par email.`
+Pour l'instant, profitez de la gratuité totale !`
     },
 
     // TECHNIQUE
@@ -290,37 +293,65 @@ Fonctionnalités adaptées aux besoins professionnels :
       question: 'Comment obtenir une facture pour ma comptabilité ?',
       answer: `Pour vos besoins comptables :
 1. Téléchargez vos factures en PDF depuis l'historique
-2. Exportez vos données en Excel (plan payant)
-3. Conservez vos factures dans vos dossiers comptables
-4. Transmettez à votre comptable si nécessaire
+2. Conservez vos factures dans vos dossiers comptables
+3. Transmettez à votre comptable si nécessaire
 
-Format compatible avec tous les logiciels comptables sénégalais.`
+Actuellement, l'export Excel n'est pas encore disponible. Cette fonctionnalité sera ajoutée dans les versions futures.`
     }
   ]
 
-  // Filtrage des FAQ en temps réel
+  // Filtrage des FAQ en temps réel - amélioré
   useEffect(() => {
     if (searchTerm === '') {
       setFilteredFAQs(allFAQs)
     } else {
-      const filtered = allFAQs.filter(faq => 
-        faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        faq.answer.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        faq.category.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      const searchLower = searchTerm.toLowerCase()
+      const filtered = allFAQs.filter(faq => {
+        // Recherche dans la question
+        const questionMatch = faq.question.toLowerCase().includes(searchLower)
+        // Recherche dans la réponse
+        const answerMatch = faq.answer.toLowerCase().includes(searchLower)
+        // Recherche dans la catégorie
+        const categoryMatch = faq.category.toLowerCase().includes(searchLower)
+        // Recherche par mots-clés séparés
+        const keywords = searchLower.split(' ').filter(word => word.length > 2)
+        const keywordMatch = keywords.some(keyword => 
+          faq.question.toLowerCase().includes(keyword) ||
+          faq.answer.toLowerCase().includes(keyword) ||
+          faq.category.toLowerCase().includes(keyword)
+        )
+        
+        return questionMatch || answerMatch || categoryMatch || keywordMatch
+      })
       setFilteredFAQs(filtered)
     }
   }, [searchTerm])
 
-  // Gestion des sections
-  const toggleSection = (section) => {
-    setOpenSection(openSection === section ? null : section)
-    setOpenFAQ(null) // Fermer les FAQ ouvertes
+  // Fonction pour mettre en évidence les termes recherchés
+  const highlightSearchTerm = (text) => {
+    if (!searchTerm) return text
+    
+    const regex = new RegExp(`(${searchTerm})`, 'gi')
+    return text.split(regex).map((part, index) => 
+      regex.test(part) ? (
+        <mark key={index} className="bg-yellow-200 px-1 rounded">
+          {part}
+        </mark>
+      ) : part
+    )
   }
 
   // Gestion des FAQ individuelles
-  const toggleFAQ = (faqId) => {
+  const toggleFAQ = (faqId, event) => {
     setOpenFAQ(openFAQ === faqId ? null : faqId)
+    event.target.blur() // Supprimer le focus après le clic
+  }
+
+  // Gestion des sections (catégories)
+  const toggleSection = (section, event) => {
+    setOpenSection(openSection === section ? null : section)
+    setOpenFAQ(null) // Fermer les FAQ ouvertes quand on change de section
+    event.target.blur() // Supprimer le focus après le clic
   }
 
   // Grouper les FAQ par catégorie
@@ -380,7 +411,7 @@ Format compatible avec tous les logiciels comptables sénégalais.`
               Trouvez rapidement des réponses à vos questions
             </p>
             
-            {/* Barre de recherche */}
+            {/* Barre de recherche améliorée */}
             <div className="max-w-2xl mx-auto">
               <div className="relative">
                 <input
@@ -388,12 +419,27 @@ Format compatible avec tous les logiciels comptables sénégalais.`
                   placeholder="Rechercher une question..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-4 py-3 pl-12 pr-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 pl-12 pr-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
                 />
                 <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
+                {searchTerm && (
+                  <button
+                    onClick={() => setSearchTerm('')}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                )}
               </div>
+              {searchTerm && (
+                <div className="mt-2 text-sm text-gray-600 text-gray-900">
+                  {filteredFAQs.length} résultat{filteredFAQs.length !== 1 ? 's' : ''} trouvé{filteredFAQs.length !== 1 ? 's' : ''}
+                </div>
+              )}
             </div>
           </div>
 
@@ -404,14 +450,14 @@ Format compatible avec tous les logiciels comptables sénégalais.`
               {['Démarrage', 'Fonctionnalités', 'Plans et tarification', 'Technique', 'Légal et entreprise'].map((category) => (
                 <button
                   key={category}
-                  onClick={() => toggleSection(category)}
-                  className={`p-4 rounded-lg border-2 transition-all ${
+                  onClick={(e) => toggleSection(category, e)}
+                  className={`p-4 rounded-lg border-2 transition-all focus:outline-none ${
                     openSection === category
                       ? 'border-blue-500 bg-blue-50 text-blue-700'
                       : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
                   }`}
                 >
-                  <div className="text-sm font-medium text-center">{category}</div>
+                  <div className="text-sm font-medium text-center text-gray-900">{category}</div>
                 </button>
               ))}
             </div>
@@ -422,8 +468,8 @@ Format compatible avec tous les logiciels comptables sénégalais.`
             {Object.keys(groupedFAQs).map((category) => (
               <div key={category} className="bg-white rounded-lg shadow-sm border border-gray-200">
                 <button
-                  onClick={() => toggleSection(category)}
-                  className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                  onClick={(e) => toggleSection(category, e)}
+                  className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors focus:outline-none"
                 >
                   <h3 className="text-xl font-semibold text-gray-900">{category}</h3>
                   <span className="text-gray-500 text-2xl font-bold">
@@ -436,10 +482,10 @@ Format compatible avec tous les logiciels comptables sénégalais.`
                     {groupedFAQs[category].map((faq) => (
                       <div key={faq.id} className="border-b border-gray-100 last:border-b-0">
                         <button
-                          onClick={() => toggleFAQ(faq.id)}
-                          className="w-full px-6 py-4 text-left flex justify-between items-start hover:bg-gray-50 transition-colors"
+                          onClick={(e) => toggleFAQ(faq.id, e)}
+                          className="w-full px-6 py-4 text-left flex justify-between items-start hover:bg-gray-50 transition-colors focus:outline-none"
                         >
-                          <span className="text-lg font-medium text-gray-800 pr-4">{faq.question}</span>
+                          <span className="text-lg font-medium text-gray-800 pr-4">{highlightSearchTerm(faq.question)}</span>
                           <span className="text-gray-500 text-xl font-bold flex-shrink-0">
                             {openFAQ === faq.id ? '−' : '+'}
                           </span>
@@ -447,8 +493,8 @@ Format compatible avec tous les logiciels comptables sénégalais.`
                         
                         {openFAQ === faq.id && (
                           <div className="px-6 pb-4">
-                            <div className="text-gray-700 leading-relaxed whitespace-pre-line">
-                              {faq.answer}
+                            <div className="text-gray-700 leading-relaxed whitespace-pre-line text-gray-900">
+                              {highlightSearchTerm(faq.answer)}
                             </div>
                           </div>
                         )}
@@ -463,7 +509,7 @@ Format compatible avec tous les logiciels comptables sénégalais.`
           {/* Message si aucune FAQ trouvée */}
           {searchTerm && filteredFAQs.length === 0 && (
             <div className="text-center py-12">
-              <div className="text-gray-500 text-lg mb-4">
+              <div className="text-gray-500 text-lg mb-4 text-gray-900">
                 Aucune question trouvée pour "{searchTerm}"
               </div>
               <button
@@ -480,7 +526,7 @@ Format compatible avec tous les logiciels comptables sénégalais.`
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
               Votre question n'est pas listée ?
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-6 text-gray-900">
               Notre équipe est là pour vous aider. Contactez-nous directement.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -506,19 +552,19 @@ Format compatible avec tous les logiciels comptables sénégalais.`
               <Link href="/create-invoice" className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                 <div className="text-blue-600 text-2xl mb-3">📄</div>
                 <h3 className="font-semibold text-gray-900 mb-2">Créer une facture</h3>
-                <p className="text-gray-600 text-sm">Commencez à créer vos factures professionnelles</p>
+                <p className="text-gray-600 text-sm text-gray-900">Commencez à créer vos factures professionnelles</p>
               </Link>
               
               <Link href="/tarifs" className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                 <div className="text-blue-600 text-2xl mb-3">💰</div>
                 <h3 className="font-semibold text-gray-900 mb-2">Nos tarifs</h3>
-                <p className="text-gray-600 text-sm">Découvrez nos plans adaptés à vos besoins</p>
+                <p className="text-gray-600 text-sm text-gray-900">Découvrez nos plans adaptés à vos besoins</p>
               </Link>
               
               <Link href="/historique" className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                 <div className="text-blue-600 text-2xl mb-3">📊</div>
                 <h3 className="font-semibold text-gray-900 mb-2">Mon historique</h3>
-                <p className="text-gray-600 text-sm">Gérez toutes vos factures créées</p>
+                <p className="text-gray-600 text-sm text-gray-900">Gérez toutes vos factures créées</p>
               </Link>
             </div>
           </div>

@@ -294,12 +294,12 @@ export default function PolitiqueCookiesPage() {
                         <p className="text-blue-800 mb-4">
                           Un cookie est un petit fichier texte stocké sur votre appareil (ordinateur, smartphone, tablette) lorsque vous visitez un site web. Il permet au site de mémoriser vos préférences et d'améliorer votre expérience de navigation.
                         </p>
-                        <ul className="text-blue-800 space-y-2">
-                          <li>• <strong>Ne contient jamais d'informations personnelles sensibles</strong></li>
-                          <li>• <strong>Améliore votre expérience</strong> en mémorisant vos préférences</li>
-                          <li>• <strong>Facilite la navigation</strong> en évitant de ressaisir des informations</li>
-                          <li>• <strong>Peut être supprimé</strong> à tout moment depuis votre navigateur</li>
-                        </ul>
+                      <ul className="text-blue-800 space-y-2">
+                        <li className="text-gray-900">• <strong>Ne contient jamais d'informations personnelles sensibles</strong></li>
+                        <li className="text-gray-900">• <strong>Améliore votre expérience</strong> en mémorisant vos préférences</li>
+                        <li className="text-gray-900">• <strong>Facilite la navigation</strong> en évitant de ressaisir des informations</li>
+                        <li className="text-gray-900">• <strong>Peut être supprimé</strong> à tout moment depuis votre navigateur</li>
+                      </ul>
                       </div>
                       
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">Types de cookies</h3>
@@ -409,12 +409,12 @@ export default function PolitiqueCookiesPage() {
                       <h3 className="text-lg font-semibold text-red-900 mb-3">❌ Cookies que nous n'utilisons PAS</h3>
                       <div className="grid md:grid-cols-2 gap-4">
                         <ul className="text-red-800 space-y-2">
-                          <li>• <strong>Cookies publicitaires :</strong> AUCUN</li>
-                          <li>• <strong>Cookies de ciblage :</strong> AUCUN</li>
+                          <li className="text-gray-900">• <strong>Cookies publicitaires :</strong> AUCUN</li>
+                          <li className="text-gray-900">• <strong>Cookies de ciblage :</strong> AUCUN</li>
                         </ul>
                         <ul className="text-red-800 space-y-2">
-                          <li>• <strong>Cookies réseaux sociaux :</strong> AUCUN</li>
-                          <li>• <strong>Cookies de tracking commercial :</strong> AUCUN</li>
+                          <li className="text-gray-900">• <strong>Cookies réseaux sociaux :</strong> AUCUN</li>
+                          <li className="text-gray-900">• <strong>Cookies de tracking commercial :</strong> AUCUN</li>
                         </ul>
                       </div>
                       <p className="text-red-700 mt-4 font-medium">
@@ -428,7 +428,7 @@ export default function PolitiqueCookiesPage() {
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">Finalités détaillées</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">Amélioration du service</h3>
-                      <ul className="list-disc pl-6 space-y-2 mb-6">
+                      <ul className="list-disc pl-6 space-y-2 mb-6 text-gray-900">
                         <li>Comprendre quelles fonctionnalités sont les plus utilisées</li>
                         <li>Identifier les problèmes techniques et les corriger</li>
                         <li>Optimiser les performances de la plateforme</li>
@@ -437,7 +437,7 @@ export default function PolitiqueCookiesPage() {
                       </ul>
                       
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">Mesures d'audience</h3>
-                      <ul className="list-disc pl-6 space-y-2 mb-6">
+                      <ul className="list-disc pl-6 space-y-2 mb-6 text-gray-900">
                         <li>Nombre de visiteurs uniques et pages vues</li>
                         <li>Pages les plus consultées et parcours utilisateur</li>
                         <li>Taux de conversion création de factures</li>
@@ -513,7 +513,7 @@ export default function PolitiqueCookiesPage() {
                       </div>
                       
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">Garanties de protection</h3>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li>Clauses contractuelles types de l'Union Européenne</li>
                         <li>Certifications internationales de protection des données</li>
                         <li>Audit régulier des pratiques de sécurité</li>
@@ -631,7 +631,7 @@ export default function PolitiqueCookiesPage() {
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">Mise à jour et contact</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">Évolution de la politique</h3>
-                      <ul className="list-disc pl-6 space-y-2 mb-6">
+                      <ul className="list-disc pl-6 space-y-2 mb-6 text-gray-900">
                         <li>Notification des changements majeurs par email ou banner</li>
                         <li>Date de dernière mise à jour visible en haut de page</li>
                         <li>Archive des versions précédentes disponible sur demande</li>

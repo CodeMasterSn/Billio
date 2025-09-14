@@ -69,9 +69,35 @@ export default function InvoiceForm({
   const handleLogoChange = (e) => {
     const file = e.target.files[0]
     if (file) {
+      // Vérifier la taille du fichier (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setMobileError('Le fichier est trop volumineux. Taille maximale : 5MB')
+        setTimeout(() => setMobileError(''), 5000)
+        e.target.value = '' // Reset input
+        return
+      }
+      
+      // Vérifier le type de fichier
+      if (!file.type.startsWith('image/')) {
+        setMobileError('Veuillez sélectionner un fichier image valide')
+        setTimeout(() => setMobileError(''), 5000)
+        e.target.value = '' // Reset input
+        return
+      }
+      
       const reader = new FileReader()
       reader.onload = (e) => {
-        onLogoUpload(e.target.result)
+        try {
+          onLogoUpload(e.target.result)
+        } catch (error) {
+          console.error('Erreur lors du chargement du logo:', error)
+          setMobileError('Erreur lors du chargement du logo. Veuillez réessayer.')
+          setTimeout(() => setMobileError(''), 5000)
+        }
+      }
+      reader.onerror = () => {
+        setMobileError('Erreur lors de la lecture du fichier. Veuillez réessayer.')
+        setTimeout(() => setMobileError(''), 5000)
       }
       reader.readAsDataURL(file)
     }
@@ -126,9 +152,6 @@ export default function InvoiceForm({
               <p className="mt-1 text-sm text-blue-700">
                 Appuyez sur les sections ci-dessous pour les ouvrir et remplir vos informations. 
                 Vous pouvez ouvrir/fermer chaque section selon vos besoins.
-              </p>
-              <p className="mt-2 text-sm text-blue-700">
-                💾 Retrouvez toutes vos factures dans l'historique accessible via le menu.
               </p>
             </div>
           </div>
@@ -209,6 +232,11 @@ export default function InvoiceForm({
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Logo (optionnel)
               </label>
+              {isMobile && (
+                <p className="text-xs text-gray-500 mb-2">
+                  💡 Appuyez sur "Choisir un fichier" pour sélectionner une image depuis votre galerie ou prendre une photo
+                </p>
+              )}
               <div className="flex items-center space-x-4">
                 {invoiceData.company?.logo ? (
                   <div className="flex items-center space-x-2">
@@ -218,19 +246,25 @@ export default function InvoiceForm({
                       className="w-16 h-16 object-contain border border-gray-300 rounded"
                     />
                     <button
-                      onClick={onLogoRemove}
-                      className="text-red-600 hover:text-red-800 text-sm"
+                      onClick={(e) => handleTouchEvent(e, onLogoRemove)}
+                      className="text-red-600 hover:text-red-800 text-sm touch-optimized"
                     >
                       Supprimer
                     </button>
                   </div>
                 ) : (
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleLogoChange}
-                    className="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                  />
+                  <div className="flex flex-col space-y-2">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleLogoChange}
+                      className="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 touch-optimized"
+                      capture="environment"
+                    />
+                    <p className="text-xs text-gray-500">
+                      Formats acceptés : JPG, PNG, GIF (max 5MB)
+                    </p>
+                  </div>
                 )}
               </div>
             </div>
@@ -547,14 +581,14 @@ export default function InvoiceForm({
           <div className="p-4 space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Mode de paiement
+                Mode de paiement à indiquer sur la facture
               </label>
               <select
                 value={invoiceData.company?.mobileMoneyService || ''}
                 onChange={(e) => handleInputChange('company', 'mobileMoneyService', e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
               >
-                <option value="">Sélectionner un mode de paiement</option>
+                <option value="">Sélectionner le mode de paiement à afficher sur la facture</option>
                 <option value="Orange Money">Orange Money</option>
                 <option value="Wave">Wave</option>
                 <option value="Paiement espèce">Paiement espèce</option>

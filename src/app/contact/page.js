@@ -50,8 +50,9 @@ export default function ContactPage() {
     }
   }, [])
 
-  const toggleFAQ = (index) => {
+  const toggleFAQ = (index, event) => {
     setOpenFAQ(openFAQ === index ? null : index)
+    event.target.blur() // Supprimer le focus après le clic
   }
 
   // Gestionnaire de changement formulaire
@@ -180,7 +181,7 @@ export default function ContactPage() {
     },
     {
       question: "Comment puis-je recevoir mes paiements ?",
-      answer: "Billio vous aide à créer des factures professionnelles. Pour les paiements, vous pouvez utiliser les paiements mobiles (Orange Money, Wave), virements bancaires, ou espèces selon vos préférences."
+      answer: "Billio vous aide à créer des factures professionnelles. Pour recevoir vos paiements, vous pouvez indiquer sur vos factures les moyens de paiement que vous acceptez (Orange Money, Wave, virements bancaires, espèces) selon vos préférences. Billio ne traite pas les paiements directement."
     },
     {
       question: "Y a-t-il des frais cachés ?",
@@ -434,8 +435,8 @@ export default function ContactPage() {
               {faqs.map((faq, index) => (
                 <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200">
                   <button
-                    onClick={() => toggleFAQ(index)}
-                    className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                    onClick={(e) => toggleFAQ(index, e)}
+                    className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors focus:outline-none"
                   >
                     <span className="text-lg font-medium text-gray-900">
                       {faq.question}

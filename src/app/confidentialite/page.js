@@ -170,11 +170,11 @@ export default function ConfidentialitePage() {
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
                       <h3 className="font-semibold text-blue-900 mb-3">En bref :</h3>
                       <ul className="text-blue-800 space-y-2">
-                        <li>• <strong>Vos données restent sur votre appareil</strong> - Stockage local uniquement</li>
-                        <li>• <strong>Aucune revente</strong> - Nous ne vendons jamais vos données</li>
-                        <li>• <strong>Transparence totale</strong> - Vous savez exactement ce qui est collecté</li>
-                        <li>• <strong>Droits RGPD complets</strong> - Accès, rectification, suppression, portabilité</li>
-                        <li>• <strong>Conformité sénégalaise</strong> - Respect de la législation locale</li>
+                        <li className="text-gray-900">• <strong>Vos données restent sur votre appareil</strong> - Stockage local uniquement</li>
+                        <li className="text-gray-900">• <strong>Aucune revente</strong> - Nous ne vendons jamais vos données</li>
+                        <li className="text-gray-900">• <strong>Transparence totale</strong> - Vous savez exactement ce qui est collecté</li>
+                        <li className="text-gray-900">• <strong>Droits RGPD complets</strong> - Accès, rectification, suppression, portabilité</li>
+                        <li className="text-gray-900">• <strong>Conformité sénégalaise</strong> - Respect de la législation locale</li>
                       </ul>
                     </div>
                     <div className="prose prose-gray max-w-none">
@@ -215,7 +215,7 @@ export default function ConfidentialitePage() {
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">2.1 Données directement fournies</h3>
                       <p className="mb-4">Vous nous fournissez directement les données suivantes :</p>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>Informations entreprise :</strong> nom, adresse, téléphone, email, NINEA, logo</li>
                         <li><strong>Informations clients :</strong> nom, adresse, coordonnées de vos clients</li>
                         <li><strong>Données de facturation :</strong> produits/services, prix, quantités, modes de paiement</li>
@@ -223,7 +223,7 @@ export default function ConfidentialitePage() {
                       </ul>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">2.2 Données collectées automatiquement</h3>
                       <p className="mb-4">Nous collectons automatiquement :</p>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>Données de navigation :</strong> pages visitées, temps passé, actions effectuées</li>
                         <li><strong>Données techniques :</strong> adresse IP, type de navigateur, système d'exploitation</li>
                         <li><strong>Cookies de fonctionnement :</strong> préférences utilisateur, session active</li>
@@ -243,7 +243,7 @@ export default function ConfidentialitePage() {
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">3. Finalités du traitement</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">3.1 Finalités principales</h3>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>Fourniture du service :</strong> création, génération et téléchargement de factures</li>
                         <li><strong>Sauvegarde locale :</strong> conservation de vos factures dans l'historique</li>
                         <li><strong>Support technique :</strong> assistance et résolution des problèmes</li>
@@ -251,7 +251,7 @@ export default function ConfidentialitePage() {
                         <li><strong>Analyse statistique :</strong> compréhension de l'utilisation (anonymisée)</li>
                       </ul>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">3.2 Base légale</h3>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>Exécution du contrat :</strong> fourniture du service de facturation</li>
                         <li><strong>Intérêt légitime :</strong> amélioration du service et support technique</li>
                         <li><strong>Consentement :</strong> cookies analytiques et communications marketing</li>
@@ -276,13 +276,13 @@ export default function ConfidentialitePage() {
                           <strong>Vos données de facturation sont stockées UNIQUEMENT sur votre appareil</strong> dans le localStorage de votre navigateur. Elles ne sont jamais transmises à nos serveurs.
                         </p>
                       </div>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>localStorage :</strong> données de facturation et historique</li>
                         <li><strong>EmailJS :</strong> transmission temporaire des emails de contact</li>
                         <li><strong>Google Analytics :</strong> données anonymisées d'utilisation</li>
                       </ul>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">4.2 Durées de conservation</h3>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>localStorage :</strong> jusqu'à suppression par l'utilisateur</li>
                         <li><strong>Analytics :</strong> 26 mois maximum (Google Analytics)</li>
                         <li><strong>Emails support :</strong> 3 ans maximum</li>
@@ -301,7 +301,7 @@ export default function ConfidentialitePage() {
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">5.1 Prestataires techniques</h3>
                       <p className="mb-4">Nous partageons des données limitées avec :</p>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>Google Analytics :</strong> données anonymisées d'utilisation (avec consentement)</li>
                         <li><strong>EmailJS :</strong> transmission des emails de contact</li>
                         <li><strong>Netlify :</strong> hébergement technique (données techniques uniquement)</li>
@@ -372,7 +372,7 @@ export default function ConfidentialitePage() {
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">7. Sécurité des données</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">7.1 Mesures techniques</h3>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>Chiffrement HTTPS :</strong> toutes les communications sont chiffrées</li>
                         <li><strong>Stockage local sécurisé :</strong> localStorage protégé par le navigateur</li>
                         <li><strong>Pas de transmission non chiffrée :</strong> aucune donnée en clair</li>
@@ -380,7 +380,7 @@ export default function ConfidentialitePage() {
                         <li><strong>Anonymisation :</strong> données analytiques anonymisées</li>
                       </ul>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">7.2 Mesures organisationnelles</h3>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>Accès limité :</strong> seules les personnes autorisées accèdent aux données</li>
                         <li><strong>Formation équipe :</strong> sensibilisation à la protection des données</li>
                         <li><strong>Procédures incidents :</strong> gestion des violations de données</li>
@@ -401,14 +401,14 @@ export default function ConfidentialitePage() {
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">8.1 Cookies strictement nécessaires</h3>
                       <p className="mb-4">Ces cookies sont indispensables au fonctionnement :</p>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>Cookies de session :</strong> maintien de votre session active</li>
                         <li><strong>Préférences utilisateur :</strong> sauvegarde de vos paramètres</li>
                         <li><strong>Fonctionnement :</strong> cookies techniques essentiels</li>
                       </ul>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">8.2 Cookies analytiques</h3>
                       <p className="mb-4">Ces cookies nécessitent votre consentement :</p>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>Google Analytics :</strong> analyse d'utilisation anonymisée</li>
                         <li><strong>Anonymisation IP :</strong> votre adresse IP est anonymisée</li>
                         <li><strong>Opt-out possible :</strong> vous pouvez refuser à tout moment</li>
@@ -427,13 +427,13 @@ export default function ConfidentialitePage() {
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">9. Transferts internationaux</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">9.1 Prestataires internationaux</h3>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>Netlify (États-Unis) :</strong> hébergement technique avec clauses contractuelles types</li>
                         <li><strong>Google Analytics (États-Unis) :</strong> données anonymisées avec garanties appropriées</li>
                         <li><strong>EmailJS (Union Européenne) :</strong> transmission emails avec conformité RGPD</li>
                       </ul>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">9.2 Garanties appropriées</h3>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>Clauses contractuelles types UE :</strong> protection standard européenne</li>
                         <li><strong>Certifications Privacy Shield :</strong> garanties de protection</li>
                         <li><strong>Évaluation régulière :</strong> vérification des garanties</li>
@@ -453,7 +453,7 @@ export default function ConfidentialitePage() {
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">10.1 Obligation de notification</h3>
                       <p className="mb-4">En cas de violation de données, nous nous engageons à :</p>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>Notifier l'autorité :</strong> sous 72h si risque pour les droits et libertés</li>
                         <li><strong>Informer les utilisateurs :</strong> si risque élevé pour leurs données</li>
                         <li><strong>Prendre des mesures :</strong> correction immédiate des failles</li>
@@ -461,7 +461,7 @@ export default function ConfidentialitePage() {
                       </ul>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">10.2 Procédure interne</h3>
                       <p className="mb-4">Notre procédure de gestion des incidents :</p>
-                      <ol className="list-decimal pl-6 space-y-2 mb-4">
+                      <ol className="list-decimal pl-6 space-y-2 mb-4 text-gray-900">
                         <li>Détection et évaluation de la violation</li>
                         <li>Mesures immédiates de confinement</li>
                         <li>Évaluation des risques pour les personnes</li>
@@ -487,7 +487,7 @@ export default function ConfidentialitePage() {
                         <strong>Rôle :</strong> Responsable de la protection des données personnelles
                       </p>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">11.2 Missions du DPO</h3>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li>Conseil sur la conformité RGPD</li>
                         <li>Formation de l'équipe</li>
                         <li>Audit des pratiques</li>
@@ -509,13 +509,13 @@ export default function ConfidentialitePage() {
                       <p className="mb-4">
                         Si vous estimez que vos droits ne sont pas respectés, vous pouvez saisir :
                       </p>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li><strong>Commission de l'informatique et des libertés (Sénégal)</strong></li>
                         <li><strong>CNIL (France)</strong> si vous résidez dans l'UE</li>
                         <li><strong>Autorité compétente</strong> de votre pays de résidence</li>
                       </ul>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">12.2 Procédure de réclamation</h3>
-                      <ol className="list-decimal pl-6 space-y-2 mb-4">
+                      <ol className="list-decimal pl-6 space-y-2 mb-4 text-gray-900">
                         <li>Contactez-nous d'abord pour résolution amiable</li>
                         <li>Si insatisfait, saisissez l'autorité de contrôle</li>
                         <li>Recours possible devant les tribunaux</li>

@@ -8,7 +8,6 @@ import { generatePDF } from '../../utils/pdfGenerator'
 import { saveInvoiceToHistory } from '../../utils/invoiceHistory'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import HistoryDiscoveryBanner from '../../components/HistoryDiscoveryBanner'
 
 /**
  * PAGE DE CRÉATION DE FACTURE - BILLIO
@@ -344,11 +343,6 @@ export default function CreateInvoicePage() {
       const savedInvoiceId = saveInvoiceToHistory(invoiceData)
       if (savedInvoiceId) {
         console.log('Facture sauvegardée dans l\'historique:', savedInvoiceId)
-        
-        // Déclencher un événement personnalisé pour mettre à jour le bandeau
-        window.dispatchEvent(new CustomEvent('invoiceSaved', { 
-          detail: { invoiceId: savedInvoiceId } 
-        }))
       }
       
       // Afficher le modal de succès
@@ -487,8 +481,26 @@ export default function CreateInvoicePage() {
       
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-7xl mx-auto">
-          {/* Bandeau de découverte historique */}
-          <HistoryDiscoveryBanner />
+          {/* Bouton d'accès à l'historique - Responsive et optimisé pour tous les écrans */}
+          <div className="mb-8 flex justify-center">
+            <div className="relative">
+              <Link 
+                href="/historique"
+                className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg sm:rounded-xl lg:rounded-2xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg sm:shadow-xl lg:shadow-2xl transform hover:-translate-y-0.5 sm:hover:-translate-y-1 lg:hover:-translate-y-1 hover:scale-105 font-semibold text-base sm:text-lg lg:text-xl"
+              >
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 mr-2 sm:mr-3 lg:mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+                <span className="hidden sm:inline">Voir l'historique</span>
+                <span className="sm:hidden">Historique</span>
+              </Link>
+              {/* Badge "Nouveau" responsive */}
+              <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 lg:-top-3 lg:-right-3 bg-red-500 text-white text-xs sm:text-sm font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 lg:px-3 lg:py-1.5 rounded-full animate-pulse">
+                <span className="hidden sm:inline">Nouveau !</span>
+                <span className="sm:hidden">Nouveau</span>
+              </div>
+            </div>
+          </div>
           
           {/* En-tête */}
           <div className="mb-8 text-center">

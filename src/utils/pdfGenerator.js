@@ -216,13 +216,19 @@ const generateInvoiceHTML = (invoiceData) => {
               <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: #eff6ff; border-radius: 8px; z-index: 1;"></div>
               <div style="position: absolute; top: 0; left: 10px; bottom: 0; width: 4px; background-color: #2563eb; border-radius: 0 2px 2px 0; z-index: 2;"></div>
               <div style="position: relative; z-index: 3; padding: 16px 16px 16px 25px; text-align: left;">
-                <div style="margin-bottom: 8px;">
-                  <strong style="color: #2563eb; font-size: 14px;">Nom de facture:</strong>
-                  <strong style="color: #2563eb; font-size: 14px; margin-left: 30px;">Date:</strong>
+                <!-- Nom de la facture -->
+                <div style="margin-bottom: 12px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <span style="color: #2563eb; font-size: 14px; font-weight: bold;">Nom:</span>
+                    <span style="color: #000; font-size: 14px; word-wrap: break-word; overflow-wrap: anywhere; hyphens: auto; text-align: right; max-width: 60%;">${invoiceData.invoice?.name || 'Facture sans nom'}</span>
+                  </div>
                 </div>
-                <div style="word-wrap: break-word; overflow-wrap: anywhere; hyphens: auto;">
-                  <span style="color: #000; font-size: 14px;">${invoiceData.invoice?.name || 'Facture sans nom'}</span>
-                  <span style="color: #000; font-size: 14px; margin-left: 30px;">${formatDate(invoiceData.invoice?.date)}</span>
+                <!-- Date de la facture -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #2563eb; font-size: 14px; font-weight: bold;">Date:</span>
+                    <span style="color: #000; font-size: 14px; text-align: right;">${formatDate(invoiceData.invoice?.date)}</span>
+                  </div>
                 </div>
               </div>
             </div>

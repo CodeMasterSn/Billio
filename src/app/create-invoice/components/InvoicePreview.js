@@ -328,10 +328,16 @@ export default function InvoicePreview({ invoiceData }) {
             </div>
           </div>
           <div className="bg-white bg-opacity-80 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-blue-200 flex-shrink-0 w-full sm:w-64 sm:max-w-none">
-            <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-2">FACTURE</div>
-            <div className="text-sm space-y-1">
-              <div className="break-words overflow-wrap-anywhere hyphens-auto text-gray-900"><strong>Nom:</strong> {invoiceData.invoice?.name || 'Facture sans nom'}</div>
-              <div><strong>Date:</strong> <span className="text-gray-900">{formatDate(invoiceData.invoice?.date)}</span></div>
+            <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-3">FACTURE</div>
+            <div className="text-sm space-y-2">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <span className="font-semibold text-gray-700">Nom:</span>
+                <span className="text-gray-900 break-words overflow-wrap-anywhere hyphens-auto">{invoiceData.invoice?.name || 'Facture sans nom'}</span>
+              </div>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <span className="font-semibold text-gray-700">Date:</span>
+                <span className="text-gray-900">{formatDate(invoiceData.invoice?.date)}</span>
+              </div>
             </div>
           </div>
         </div>

@@ -127,7 +127,7 @@ export default function ConditionsPage() {
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">2. Définitions</h2>
                     <div className="prose prose-gray max-w-none">
                       <p className="mb-4">Aux fins des présentes CGU, les termes suivants ont la signification qui leur est donnée ci-dessous :</p>
-                      <ul className="list-disc pl-6 space-y-2">
+                      <ul className="list-disc pl-6 space-y-2 text-gray-900">
                         <li><strong>"Service"</strong> : désigne la plateforme Billio permettant la création, la gestion et le téléchargement de factures en ligne.</li>
                         <li><strong>"Utilisateur"</strong> : désigne toute personne physique ou morale utilisant le Service.</li>
                         <li><strong>"Facture"</strong> : désigne tout document généré via la plateforme Billio contenant les informations de facturation.</li>
@@ -146,7 +146,7 @@ export default function ConditionsPage() {
                         Billio est une plateforme de création de factures en ligne destinée aux freelances, indépendants et petites entreprises au Sénégal.
                       </p>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">3.1 Fonctionnalités principales</h3>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li>Création de factures professionnelles</li>
                         <li>Téléchargement en format PDF</li>
                         <li>Impression directe des factures</li>
@@ -194,7 +194,7 @@ export default function ConditionsPage() {
                       </p>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">5.2 Interdictions</h3>
                       <p className="mb-4">Il est strictement interdit de :</p>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li>Utiliser le Service à des fins frauduleuses ou illégales</li>
                         <li>Créer des factures pour des transactions fictives</li>
                         <li>Contourner les limitations techniques du Service</li>
@@ -221,7 +221,7 @@ export default function ConditionsPage() {
                       <p className="mb-4">
                         Les données collectées sont utilisées exclusivement pour :
                       </p>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li>La génération des factures</li>
                         <li>La sauvegarde de l'historique local</li>
                         <li>L'amélioration du Service</li>
@@ -245,7 +245,7 @@ export default function ConditionsPage() {
                       <p className="mb-4">
                         Billio s'engage à fournir le Service avec diligence et selon les règles de l'art. Toutefois, Billio ne saurait être tenu responsable :
                       </p>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li>Des interruptions temporaires du Service</li>
                         <li>Des erreurs dans les données saisies par l'Utilisateur</li>
                         <li>De l'utilisation non conforme du Service</li>
@@ -255,7 +255,7 @@ export default function ConditionsPage() {
                       <p className="mb-4">
                         L'Utilisateur est responsable de :
                       </p>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li>L'exactitude des informations saisies</li>
                         <li>La conformité des factures aux obligations légales</li>
                         <li>L'usage conforme du Service</li>
@@ -303,7 +303,7 @@ export default function ConditionsPage() {
                       <p className="mb-4">
                         Les données personnelles sont traitées pour les finalités suivantes :
                       </p>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li>Fourniture du Service de facturation</li>
                         <li>Amélioration de l'expérience utilisateur</li>
                         <li>Support technique et client</li>
@@ -328,7 +328,7 @@ export default function ConditionsPage() {
                       <p className="mb-4">
                         Billio se réserve le droit de suspendre l'accès au Service en cas de :
                       </p>
-                      <ul className="list-disc pl-6 space-y-2 mb-4">
+                      <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
                         <li>Non-respect des présentes CGU</li>
                         <li>Utilisation frauduleuse du Service</li>
                         <li>Atteinte à la sécurité du Service</li>
