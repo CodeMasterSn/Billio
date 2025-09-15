@@ -96,6 +96,51 @@ body {
   background-color: #fef2f2 !important;
 }
 
+/* Styles ultra-spécifiques pour forcer la visibilité du texte sur toutes les pages */
+* {
+  color: inherit !important;
+}
+
+p, h1, h2, h3, h4, h5, h6, li, span, div, a, button {
+  color: #111827 !important;
+}
+
+/* Styles spécifiques pour les pages légales - Force absolue */
+.confidentialite-page,
+.confidentialite-page *,
+.conditions-page,
+.conditions-page *,
+.politique-cookies-page,
+.politique-cookies-page * {
+  color: #111827 !important;
+}
+
+/* Force la couleur sur tous les éléments de texte */
+.text-gray-900, .text-gray-800, .text-gray-700, .text-gray-600, .text-gray-500,
+.text-blue-900, .text-blue-800, .text-blue-700, .text-blue-600, .text-blue-500,
+.text-green-800, .text-green-700, .text-green-600, .text-green-500,
+.text-red-800, .text-red-700, .text-red-600, .text-red-500 {
+  color: #111827 !important;
+}
+
+/* Force la couleur sur tous les éléments de texte dans les conteneurs */
+.container p, .container h1, .container h2, .container h3, .container h4, .container h5, .container h6,
+.container li, .container span, .container div, .container a {
+  color: #111827 !important;
+}
+
+/* Force la couleur sur tous les éléments de texte dans les sections */
+section p, section h1, section h2, section h3, section h4, section h5, section h6,
+section li, section span, section div, section a {
+  color: #111827 !important;
+}
+
+/* Force la couleur sur tous les éléments de texte dans les main */
+main p, main h1, main h2, main h3, main h4, main h5, main h6,
+main li, main span, main div, main a {
+  color: #111827 !important;
+}
+
 /* Styles pour l'impression de la facture */
 @media print {
   /* Masquer les éléments non nécessaires à l'impression */

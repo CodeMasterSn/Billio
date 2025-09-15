@@ -78,7 +78,7 @@ export default function ConfidentialitePage() {
         <meta property="og:type" content="website" />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 confidentialite-page">
         <Header />
         
         {/* Banner Cookies RGPD */}

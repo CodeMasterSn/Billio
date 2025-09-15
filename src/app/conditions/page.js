@@ -45,7 +45,7 @@ export default function ConditionsPage() {
         <meta property="og:type" content="website" />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 conditions-page">
         <Header />
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
