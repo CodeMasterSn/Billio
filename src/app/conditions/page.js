@@ -48,7 +48,7 @@ export default function ConditionsPage() {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
         <Header />
         
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Breadcrumb */}
           <nav className="mb-8">
             <div className="flex items-center space-x-2 text-sm text-gray-600">
@@ -61,10 +61,10 @@ export default function ConditionsPage() {
           <div className="max-w-4xl mx-auto">
             {/* En-tête */}
             <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 Conditions d'utilisation
               </h1>
-              <p className="text-xl text-gray-600 mb-6">
+              <p className="text-lg sm:text-xl text-gray-600 mb-6">
                 Conditions générales d'utilisation de la plateforme Billio
               </p>
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 inline-block">
@@ -99,11 +99,11 @@ export default function ConditionsPage() {
 
               {/* Contenu principal */}
               <div className="lg:col-span-3">
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6 lg:p-8">
                   
                   {/* 1. PRÉAMBULE */}
                   <section id="preambule" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">1. Préambule</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">1. Préambule</h2>
                     <div className="prose prose-gray max-w-none">
                       <p className="mb-4">
                         Les présentes conditions générales d'utilisation (ci-après "CGU") régissent l'utilisation de la plateforme Billio, service de création de factures en ligne accessible à l'adresse <strong>billiosn.netlify.app</strong>.
@@ -124,7 +124,7 @@ export default function ConditionsPage() {
 
                   {/* 2. DÉFINITIONS */}
                   <section id="definitions" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">2. Définitions</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">2. Définitions</h2>
                     <div className="prose prose-gray max-w-none">
                       <p className="mb-4">Aux fins des présentes CGU, les termes suivants ont la signification qui leur est donnée ci-dessous :</p>
                       <ul className="list-disc pl-6 space-y-2 text-gray-900">
@@ -140,7 +140,7 @@ export default function ConditionsPage() {
 
                   {/* 3. DESCRIPTION DU SERVICE */}
                   <section id="service" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">3. Description du service</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">3. Description du service</h2>
                     <div className="prose prose-gray max-w-none">
                       <p className="mb-4">
                         Billio est une plateforme de création de factures en ligne destinée aux freelances, indépendants et petites entreprises au Sénégal.
@@ -167,7 +167,7 @@ export default function ConditionsPage() {
 
                   {/* 4. CONDITIONS D'ACCÈS */}
                   <section id="acces" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">4. Conditions d'accès</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">4. Conditions d'accès</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">4.1 Territoire</h3>
                       <p className="mb-4">
@@ -186,7 +186,7 @@ export default function ConditionsPage() {
 
                   {/* 5. UTILISATION DU SERVICE */}
                   <section id="utilisation" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">5. Utilisation du service</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">5. Utilisation du service</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">5.1 Usage conforme</h3>
                       <p className="mb-4">
@@ -211,7 +211,7 @@ export default function ConditionsPage() {
 
                   {/* 6. DONNÉES UTILISATEUR */}
                   <section id="donnees" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">6. Données utilisateur</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">6. Données utilisateur</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">6.1 Collecte des données</h3>
                       <p className="mb-4">
@@ -239,7 +239,7 @@ export default function ConditionsPage() {
 
                   {/* 7. RESPONSABILITÉS */}
                   <section id="responsabilites" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">7. Responsabilités</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">7. Responsabilités</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">7.1 Responsabilité de Billio</h3>
                       <p className="mb-4">
@@ -270,7 +270,7 @@ export default function ConditionsPage() {
 
                   {/* 8. PROPRIÉTÉ INTELLECTUELLE */}
                   <section id="propriete" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">8. Propriété intellectuelle</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">8. Propriété intellectuelle</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">8.1 Droits de Billio</h3>
                       <p className="mb-4">
@@ -293,7 +293,7 @@ export default function ConditionsPage() {
 
                   {/* 9. PROTECTION DES DONNÉES */}
                   <section id="protection" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">9. Protection des données</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">9. Protection des données</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">9.1 Conformité RGPD</h3>
                       <p className="mb-4">
@@ -322,7 +322,7 @@ export default function ConditionsPage() {
 
                   {/* 10. SUSPENSION/RÉSILIATION */}
                   <section id="suspension" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">10. Suspension/Résiliation</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">10. Suspension/Résiliation</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">10.1 Suspension par Billio</h3>
                       <p className="mb-4">
@@ -347,7 +347,7 @@ export default function ConditionsPage() {
 
                   {/* 11. MODIFICATION DES CONDITIONS */}
                   <section id="modification" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">11. Modification des conditions</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">11. Modification des conditions</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">11.1 Droit de modification</h3>
                       <p className="mb-4">
@@ -370,7 +370,7 @@ export default function ConditionsPage() {
 
                   {/* 12. DROIT APPLICABLE */}
                   <section id="droit" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">12. Droit applicable</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">12. Droit applicable</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">12.1 Loi applicable</h3>
                       <p className="mb-4">

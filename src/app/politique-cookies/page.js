@@ -120,7 +120,7 @@ export default function PolitiqueCookiesPage() {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
         <Header />
         
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Breadcrumb */}
           <nav className="mb-8">
             <div className="flex items-center space-x-2 text-sm text-gray-600">
@@ -133,10 +133,10 @@ export default function PolitiqueCookiesPage() {
           <div className="max-w-4xl mx-auto">
             {/* En-tête */}
             <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 Politique des cookies
               </h1>
-              <p className="text-xl text-gray-600 mb-6">
+              <p className="text-lg sm:text-xl text-gray-600 mb-6">
                 Transparence et contrôle sur l'utilisation des cookies
               </p>
               <div className="bg-green-50 border border-green-200 rounded-lg p-4 inline-block">
@@ -181,12 +181,12 @@ export default function PolitiqueCookiesPage() {
 
               {/* Contenu principal */}
               <div className="lg:col-span-3">
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6 lg:p-8">
                   
                   {/* Panneau de gestion des cookies */}
                   {showManager && (
                     <div className="mb-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
-                      <h2 className="text-2xl font-bold text-gray-900 mb-6">Gérez vos préférences cookies</h2>
+                      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Gérez vos préférences cookies</h2>
                       
                       <div className="space-y-6">
                         {/* Cookies nécessaires */}
@@ -287,7 +287,7 @@ export default function PolitiqueCookiesPage() {
 
                   {/* 1. QU'EST-CE QU'UN COOKIE ? */}
                   <section id="definition" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Qu'est-ce qu'un cookie ?</h2>
+                    <h2 className="text-xl sm:text-xl sm:text-2xl font-bold text-gray-900 mb-6">Qu'est-ce qu'un cookie ?</h2>
                     <div className="prose prose-gray max-w-none">
                       <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
                         <h3 className="font-semibold text-blue-900 mb-3">Définition simple :</h3>
@@ -324,7 +324,7 @@ export default function PolitiqueCookiesPage() {
 
                   {/* 2. COOKIES UTILISÉS PAR BILLIO */}
                   <section id="cookies-billio" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Cookies utilisés par Billio</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Cookies utilisés par Billio</h2>
                     
                     {/* Cookies strictement nécessaires */}
                     <div className="mb-8">
@@ -336,24 +336,24 @@ export default function PolitiqueCookiesPage() {
                       </div>
                       
                       <div className="overflow-x-auto">
-                        <table className="w-full border-collapse border border-gray-300">
+                        <table className="w-full border-collapse border border-gray-300 text-sm">
                           <thead>
                             <tr className="bg-gray-50">
-                              <th className="border border-gray-300 p-3 text-left font-semibold">Nom du cookie</th>
-                              <th className="border border-gray-300 p-3 text-left font-semibold">Finalité</th>
-                              <th className="border border-gray-300 p-3 text-left font-semibold">Durée</th>
-                              <th className="border border-gray-300 p-3 text-left font-semibold">Données</th>
-                              <th className="border border-gray-300 p-3 text-left font-semibold">Contrôle</th>
+                              <th className="border border-gray-300 px-3 py-3 text-left text-xs font-medium text-gray-700 uppercase">Nom du cookie</th>
+                              <th className="border border-gray-300 px-3 py-3 text-left text-xs font-medium text-gray-700 uppercase">Finalité</th>
+                              <th className="border border-gray-300 px-3 py-3 text-left text-xs font-medium text-gray-700 uppercase">Durée</th>
+                              <th className="border border-gray-300 px-3 py-3 text-left text-xs font-medium text-gray-700 uppercase">Données</th>
+                              <th className="border border-gray-300 px-3 py-3 text-left text-xs font-medium text-gray-700 uppercase">Contrôle</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody className="bg-white">
                             {necessaryCookies.map((cookie, index) => (
                               <tr key={index}>
-                                <td className="border border-gray-300 p-3 font-mono text-sm bg-gray-50">{cookie.name}</td>
-                                <td className="border border-gray-300 p-3">{cookie.purpose}</td>
-                                <td className="border border-gray-300 p-3">{cookie.duration}</td>
-                                <td className="border border-gray-300 p-3 text-sm">{cookie.data}</td>
-                                <td className="border border-gray-300 p-3">
+                                <td className="border border-gray-300 px-3 py-3 text-sm font-mono bg-gray-50">{cookie.name}</td>
+                                <td className="border border-gray-300 px-3 py-3 text-sm">{cookie.purpose}</td>
+                                <td className="border border-gray-300 px-3 py-3 text-sm">{cookie.duration}</td>
+                                <td className="border border-gray-300 px-3 py-3 text-sm">{cookie.data}</td>
+                                <td className="border border-gray-300 px-3 py-3 text-sm">
                                   <span className="px-2 py-1 bg-red-100 text-red-800 rounded text-xs">
                                     {cookie.control}
                                   </span>
@@ -375,24 +375,24 @@ export default function PolitiqueCookiesPage() {
                       </div>
                       
                       <div className="overflow-x-auto">
-                        <table className="w-full border-collapse border border-gray-300">
+                        <table className="w-full border-collapse border border-gray-300 text-sm">
                           <thead>
                             <tr className="bg-gray-50">
-                              <th className="border border-gray-300 p-3 text-left font-semibold">Nom du cookie</th>
-                              <th className="border border-gray-300 p-3 text-left font-semibold">Fournisseur</th>
-                              <th className="border border-gray-300 p-3 text-left font-semibold">Finalité</th>
-                              <th className="border border-gray-300 p-3 text-left font-semibold">Durée</th>
-                              <th className="border border-gray-300 p-3 text-left font-semibold">Contrôle</th>
+                              <th className="border border-gray-300 px-3 py-3 text-left text-xs font-medium text-gray-700 uppercase">Nom du cookie</th>
+                              <th className="border border-gray-300 px-3 py-3 text-left text-xs font-medium text-gray-700 uppercase">Fournisseur</th>
+                              <th className="border border-gray-300 px-3 py-3 text-left text-xs font-medium text-gray-700 uppercase">Finalité</th>
+                              <th className="border border-gray-300 px-3 py-3 text-left text-xs font-medium text-gray-700 uppercase">Durée</th>
+                              <th className="border border-gray-300 px-3 py-3 text-left text-xs font-medium text-gray-700 uppercase">Contrôle</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody className="bg-white">
                             {analyticsCookies.map((cookie, index) => (
                               <tr key={index}>
-                                <td className="border border-gray-300 p-3 font-mono text-sm bg-gray-50">{cookie.name}</td>
-                                <td className="border border-gray-300 p-3">{cookie.provider}</td>
-                                <td className="border border-gray-300 p-3">{cookie.purpose}</td>
-                                <td className="border border-gray-300 p-3">{cookie.duration}</td>
-                                <td className="border border-gray-300 p-3">
+                                <td className="border border-gray-300 px-3 py-3 text-sm font-mono bg-gray-50">{cookie.name}</td>
+                                <td className="border border-gray-300 px-3 py-3 text-sm">{cookie.provider}</td>
+                                <td className="border border-gray-300 px-3 py-3 text-sm">{cookie.purpose}</td>
+                                <td className="border border-gray-300 px-3 py-3 text-sm">{cookie.duration}</td>
+                                <td className="border border-gray-300 px-3 py-3 text-sm">
                                   <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">
                                     {cookie.control}
                                   </span>
@@ -425,7 +425,7 @@ export default function PolitiqueCookiesPage() {
 
                   {/* 3. FINALITÉS DÉTAILLÉES */}
                   <section id="finalites" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Finalités détaillées</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Finalités détaillées</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">Amélioration du service</h3>
                       <ul className="list-disc pl-6 space-y-2 mb-6 text-gray-900">
@@ -455,10 +455,10 @@ export default function PolitiqueCookiesPage() {
 
                   {/* 4. CONTRÔLE UTILISATEUR */}
                   <section id="controle" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Contrôle utilisateur</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Contrôle utilisateur</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">Options de contrôle</h3>
-                      <div className="grid md:grid-cols-2 gap-6 mb-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6">
                         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                           <h4 className="font-semibold text-blue-900 mb-2">Via Billio</h4>
                           <ul className="text-blue-800 text-sm space-y-1">
@@ -499,7 +499,7 @@ export default function PolitiqueCookiesPage() {
 
                   {/* 5. DONNÉES TIERS ET TRANSFERTS */}
                   <section id="tiers" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Données tiers et transferts</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Données tiers et transferts</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">Google Analytics</h3>
                       <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
@@ -531,7 +531,7 @@ export default function PolitiqueCookiesPage() {
 
                   {/* 6. VOS DROITS */}
                   <section id="droits" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Vos droits</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Vos droits</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">Droits sur les cookies</h3>
                       <div className="grid md:grid-cols-2 gap-4 mb-6">
@@ -591,7 +591,7 @@ export default function PolitiqueCookiesPage() {
 
                   {/* 7. BANNER COOKIES CONFORME */}
                   <section id="banner" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Banner cookies conforme</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Banner cookies conforme</h2>
                     <div className="prose prose-gray max-w-none">
                       <p className="mb-4">
                         Notre banner de cookies respecte les exigences RGPD et vous donne un contrôle total sur vos préférences.
@@ -628,7 +628,7 @@ export default function PolitiqueCookiesPage() {
 
                   {/* 8. MISE À JOUR ET CONTACT */}
                   <section id="contact" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Mise à jour et contact</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Mise à jour et contact</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">Évolution de la politique</h3>
                       <ul className="list-disc pl-6 space-y-2 mb-6 text-gray-900">

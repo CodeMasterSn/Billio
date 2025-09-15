@@ -111,7 +111,7 @@ export default function ConfidentialitePage() {
           </div>
         )}
         
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Breadcrumb */}
           <nav className="mb-8">
             <div className="flex items-center space-x-2 text-sm text-gray-600">
@@ -124,10 +124,10 @@ export default function ConfidentialitePage() {
           <div className="max-w-4xl mx-auto">
             {/* En-tête */}
             <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 Politique de confidentialité
               </h1>
-              <p className="text-xl text-gray-600 mb-6">
+              <p className="text-lg sm:text-xl text-gray-600 mb-6">
                 Protection des données personnelles et conformité RGPD
               </p>
               <div className="bg-green-50 border border-green-200 rounded-lg p-4 inline-block">
@@ -162,11 +162,11 @@ export default function ConfidentialitePage() {
 
               {/* Contenu principal */}
               <div className="lg:col-span-3">
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6 lg:p-8">
                   
                   {/* RÉSUMÉ EXÉCUTIF */}
                   <section id="resume" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Résumé exécutif</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Résumé exécutif</h2>
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
                       <h3 className="font-semibold text-blue-900 mb-3">En bref :</h3>
                       <ul className="text-blue-800 space-y-2">
@@ -189,7 +189,7 @@ export default function ConfidentialitePage() {
 
                   {/* 1. RESPONSABLE DU TRAITEMENT */}
                   <section id="responsable" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">1. Responsable du traitement</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">1. Responsable du traitement</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">1.1 Identification</h3>
                       <p className="mb-4">
@@ -211,7 +211,7 @@ export default function ConfidentialitePage() {
 
                   {/* 2. DONNÉES COLLECTÉES */}
                   <section id="donnees" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">2. Données collectées</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">2. Données collectées</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">2.1 Données directement fournies</h3>
                       <p className="mb-4">Vous nous fournissez directement les données suivantes :</p>
@@ -240,7 +240,7 @@ export default function ConfidentialitePage() {
 
                   {/* 3. FINALITÉS DU TRAITEMENT */}
                   <section id="finalites" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">3. Finalités du traitement</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">3. Finalités du traitement</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">3.1 Finalités principales</h3>
                       <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
@@ -268,7 +268,7 @@ export default function ConfidentialitePage() {
 
                   {/* 4. STOCKAGE ET CONSERVATION */}
                   <section id="stockage" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">4. Stockage et conservation</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">4. Stockage et conservation</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">4.1 Stockage principal</h3>
                       <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
@@ -297,7 +297,7 @@ export default function ConfidentialitePage() {
 
                   {/* 5. PARTAGE DES DONNÉES */}
                   <section id="partage" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">5. Partage des données</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">5. Partage des données</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">5.1 Prestataires techniques</h3>
                       <p className="mb-4">Nous partageons des données limitées avec :</p>
@@ -321,7 +321,7 @@ export default function ConfidentialitePage() {
 
                   {/* 6. DROITS DE L'UTILISATEUR */}
                   <section id="droits" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">6. Droits de l'utilisateur</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">6. Droits de l'utilisateur</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">6.1 Droits RGPD complets</h3>
                       <div className="grid md:grid-cols-2 gap-4 mb-6">
@@ -369,7 +369,7 @@ export default function ConfidentialitePage() {
 
                   {/* 7. SÉCURITÉ DES DONNÉES */}
                   <section id="securite" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">7. Sécurité des données</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">7. Sécurité des données</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">7.1 Mesures techniques</h3>
                       <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
@@ -397,7 +397,7 @@ export default function ConfidentialitePage() {
 
                   {/* 8. COOKIES ET TRACEURS */}
                   <section id="cookies" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">8. Cookies et traceurs</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">8. Cookies et traceurs</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">8.1 Cookies strictement nécessaires</h3>
                       <p className="mb-4">Ces cookies sont indispensables au fonctionnement :</p>
@@ -424,7 +424,7 @@ export default function ConfidentialitePage() {
 
                   {/* 9. TRANSFERTS INTERNATIONAUX */}
                   <section id="transferts" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">9. Transferts internationaux</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">9. Transferts internationaux</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">9.1 Prestataires internationaux</h3>
                       <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-900">
@@ -449,7 +449,7 @@ export default function ConfidentialitePage() {
 
                   {/* 10. NOTIFICATION VIOLATIONS */}
                   <section id="violations" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">10. Notification violations</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">10. Notification violations</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">10.1 Obligation de notification</h3>
                       <p className="mb-4">En cas de violation de données, nous nous engageons à :</p>
@@ -479,7 +479,7 @@ export default function ConfidentialitePage() {
 
                   {/* 11. DÉLÉGUÉ À LA PROTECTION */}
                   <section id="dpo" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">11. Délégué à la protection des données</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">11. Délégué à la protection des données</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">11.1 Contact DPO</h3>
                       <p className="mb-4">
@@ -503,7 +503,7 @@ export default function ConfidentialitePage() {
 
                   {/* 12. AUTORITÉ DE CONTRÔLE */}
                   <section id="autorite" className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">12. Autorité de contrôle</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">12. Autorité de contrôle</h2>
                     <div className="prose prose-gray max-w-none">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">12.1 Droit de réclamation</h3>
                       <p className="mb-4">
